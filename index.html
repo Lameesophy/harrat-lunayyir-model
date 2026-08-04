@@ -5,24 +5,26 @@
   <title>Harrat Lunayyir — Magma Sync Model</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #07090f; color: #e2eaf8; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; line-height: 1.6; }
-    .hero { background: linear-gradient(180deg, #0c1220 0%, #07090f 100%); border-bottom: 2px solid #223350; padding: 48px 20px; text-align: center; }
-    .hero h1 { font-size: 1.8rem; font-weight: 700; color: #f0621a; }
-    nav { background: rgba(12, 18, 32, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px; display: flex; gap: 20px; justify-content: center; position: sticky; top: 0; z-index: 100; }
-    nav a { color: #6b8ab0; text-decoration: none; font-size: 0.9rem; }
-    section { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-    canvas { background: #000; border: 1px solid #333; border-radius: 4px; display: block; width: 100%; max-width: 460px; margin: 0 auto 20px; }
-    .status-bar { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; background: rgba(12, 18, 32, 0.5); padding: 16px; border-radius: 6px; margin-bottom: 20px; border: 1px solid rgba(31, 184, 200, 0.2); }
-    .status-item { text-align: center; }
-    .status-value { font-size: 1.1rem; font-weight: 700; color: #f0621a; }
-    .status-label { font-size: 0.7rem; color: #6b8ab0; text-transform: uppercase; }
-    .button-group { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
-    button { background: rgba(240, 98, 26, 0.15); border: 1px solid rgba(240, 98, 26, 0.4); color: #f0621a; padding: 10px 16px; border-radius: 4px; cursor: pointer; }
-    .slider-group { margin-bottom: 16px; max-width: 600px; margin: 0 auto 16px; }
-    .slider-group label { display: block; color: #6b8ab0; font-size: 0.85rem; margin-bottom: 6px; }
+    body { background: #07090f; color: #e2eaf8; font-family: sans-serif; line-height: 1.6; }
+    .hero { background: #0c1220; padding: 40px 20px; text-align: center; border-bottom: 2px solid #223350; }
+    .hero h1 { color: #f0621a; font-size: 2rem; margin-bottom: 10px; }
+    nav { background: #0c1220; padding: 15px; display: flex; gap: 20px; justify-content: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #223350; }
+    nav a { color: #6b8ab0; text-decoration: none; font-weight: bold; }
+    section { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    .card { background: rgba(12, 18, 32, 0.5); border: 1px solid #223350; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+    canvas { background: #000; border: 1px solid #333; display: block; width: 100%; max-width: 460px; margin: 0 auto 20px; border-radius: 4px; }
+    .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
+    .status-item { background: #0c1220; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #223350; }
+    .status-val { font-size: 1.5rem; font-weight: bold; color: #f0621a; display: block; }
+    .status-lbl { font-size: 0.8rem; color: #6b8ab0; text-transform: uppercase; }
+    .controls { text-align: center; margin-bottom: 30px; }
+    button { background: #f0621a; color: #000; border: none; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-weight: bold; margin: 5px; }
+    .sliders { max-width: 500px; margin: 0 auto; }
+    .slider-item { margin-bottom: 15px; }
+    .slider-item label { display: block; color: #6b8ab0; margin-bottom: 5px; }
     input[type="range"] { width: 100%; }
-    .panel-container img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin-bottom: 20px; }
-    footer { padding: 40px; text-align: center; color: #6b8ab0; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    .panel img { width: 100%; border-radius: 8px; margin-bottom: 20px; }
+    footer { padding: 40px; text-align: center; color: #6b8ab0; border-top: 1px solid #223350; }
   </style>
 </head>
 <body>
@@ -30,91 +32,104 @@
     <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
     <p>Kuramoto Phase-Coupled Oscillator Simulation</p>
   </div>
-  <nav><a href="#event">EVENT</a><a href="#simulation">SIMULATION</a></nav>
+  <nav><a href="#event">EVENT</a><a href="#sim">SIMULATION</a><a href="#results">RESULTS</a></nav>
   <section id="event">
     <h2>The 2009 Event</h2>
-    <div class="panel-container"><img src="panel_event_new.png"></div>
+    <div class="panel"><img src="panel_event_new.png"></div>
+    <div class="card"><p>A basaltic dike intrusion in 2009 produced over 30,000 earthquakes. This model explores the synchronization between the magma column and the crust.</p></div>
+    <div class="panel"><img src="panel_translation_new.png"></div>
   </section>
-  <section id="simulation">
+  <section id="sim">
     <h2>Live Simulation</h2>
-    <div class="status-bar">
-      <div class="status-item"><div class="status-value" id="clk">t = 0 h</div><div class="status-label">Time</div></div>
-      <div class="status-item"><div class="status-value" id="sv1">r = 0.00</div><div class="status-label">Sync</div></div>
-      <div class="status-item"><div class="status-value" id="sv3">0</div><div class="status-label">Snaps</div></div>
+    <div class="status-grid">
+      <div class="status-item"><span class="status-val" id="clk">t = 0 h</span><span class="status-lbl">Elapsed Time</span></div>
+      <div class="status-item"><span class="status-val" id="sv1">r = 0.00</span><span class="status-lbl">Sync Level</span></div>
+      <div class="status-item"><span class="status-val" id="sv3">0</span><span class="status-lbl">Crack Snaps</span></div>
     </div>
-    <div class="button-group">
-      <button onclick="resetSim()">Restart</button>
-      <button onclick="applyPreset('quiet')">Weak</button>
-      <button onclick="applyPreset('near')">Near</button>
-      <button onclick="applyPreset('strong')">Strong</button>
+    <div class="controls">
+      <button onclick="resetSim()">Restart Pulse</button>
       <button onclick="togglePause()" id="btnPause">Pause</button>
     </div>
-    <div class="slider-group"><label>Coupling K: <span id="vK">0.15</span></label><input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" oninput="document.getElementById('vK').textContent=this.value"></div>
+    <div class="sliders">
+      <div class="slider-item"><label>Coupling Strength K: <span id="vK">0.15</span></label><input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" oninput="vK.textContent=this.value"></div>
+    </div>
     
-    <h3>Magma Column</h3><canvas id="cM" width="460" height="460"></canvas>
-    <h3>Dike Cross-section</h3><canvas id="cD" width="460" height="460"></canvas>
-    <h3>Brittle Crust</h3><canvas id="cS" width="460" height="460"></canvas>
-    <h3>Surface Deformation</h3><canvas id="cB" width="460" height="460"></canvas>
+    <h3>Magma Column (Master)</h3><canvas id="c1" width="460" height="460"></canvas>
+    <h3>Dike Pressure Pulses</h3><canvas id="c2" width="460" height="460"></canvas>
+    <h3>Brittle Crust (Slave)</h3><canvas id="c3" width="460" height="460"></canvas>
+    <h3>Surface Deformation</h3><canvas id="c4" width="460" height="460"></canvas>
   </section>
 
   <footer><p>Harrat Lunayyir Magma Sync Model · Lamees Felemban</p></footer>
 
   <script>
-    var th_m=0, th_c=Math.PI/4, simT=0, DT=0.5, snaps=0, paused=false;
-    var NB=14, subs=new Float32Array(NB), fls=new Float32Array(NB);
-    var S2='#111827', BD='#1a2a40', MU2='#7a90b0';
-    var CRACKS=(function(){var s=99,a=[];function r(){s=(1664525*s+1013904223)>>>0;return s/0x100000000;}for(var i=0;i<14;i++)a.push({x:r(),y:r(),l:0.05+r()*0.06,a:r()*Math.PI});return a;})();
+    var t=0, th_m=0, th_c=Math.PI/4, snaps=0, paused=false;
+    var subs = new Array(14).fill(0);
 
-    function resetSim(){ th_m=0; th_c=Math.PI/4; simT=0; snaps=0; subs.fill(0); fls.fill(0); }
-    function togglePause(){ paused=!paused; document.getElementById('btnPause').textContent=paused?'Play':'Pause'; }
-    function applyPreset(n){ var sk=document.getElementById('sK'); if(n=='quiet') sk.value=0.01; else if(n=='near') sk.value=0.03; else sk.value=0.35; document.getElementById('vK').textContent=sk.value; resetSim(); }
+    function resetSim() { t=0; th_m=0; th_c=Math.PI/4; snaps=0; subs.fill(0); }
+    function togglePause() { paused=!paused; document.getElementById('btnPause').textContent=paused?'Play':'Pause'; }
 
-    function loop(){
-      if(!paused){
-        try {
-          var K = parseFloat(document.getElementById('sK').value);
-          var om_m=0.026, om_c=0.028, c=Math.exp(-simT/1500)*(1-Math.exp(-simT/80));
-          th_m += om_m; th_c += (om_c + K*c*Math.sin(th_m-th_c)); simT += DT;
-          var r = 0.5*Math.hypot(Math.cos(th_m)+Math.cos(th_c), Math.sin(th_m)+Math.sin(th_c));
-          var lock = 0.5*(1+Math.cos(th_m-th_c));
-          for(var i=0;i<NB;i++){ fls[i]=Math.max(0,fls[i]-0.05); if(lock*c>0.6 && Math.random()<0.013){ subs[i]=Math.min(1,subs[i]+0.08); fls[i]=1; snaps++; } }
-          
-          document.getElementById('clk').textContent = 't = '+Math.round(simT)+' h';
-          document.getElementById('sv1').textContent = 'r = '+r.toFixed(2);
-          document.getElementById('sv3').textContent = snaps;
+    function loop() {
+      if(!paused) {
+        var K = parseFloat(document.getElementById('sK').value);
+        var om_m = 0.026, om_c = 0.028;
+        var c = Math.exp(-t/1500) * (1 - Math.exp(-t/80));
+        th_m += om_m;
+        th_c += (om_c + K * c * Math.sin(th_m - th_c));
+        t += 0.5;
+        
+        var r = 0.5 * Math.hypot(Math.cos(th_m)+Math.cos(th_c), Math.sin(th_m)+Math.sin(th_c));
+        var lock = 0.5 * (1 + Math.cos(th_m - th_c));
+        
+        for(var i=0; i<14; i++) {
+          if(lock * c > 0.6 && Math.random() < 0.01) { subs[i] = Math.min(1, subs[i] + 0.1); snaps++; }
+        }
 
-          draw();
-        } catch(e) { console.error(e); }
+        document.getElementById('clk').textContent = 't = ' + Math.round(t) + ' h';
+        document.getElementById('sv1').textContent = 'r = ' + r.toFixed(2);
+        document.getElementById('sv3').textContent = snaps;
+
+        draw();
       }
       requestAnimationFrame(loop);
     }
 
-    function draw(){
-      var ids=['cM','cD','cS','cB'];
-      ids.forEach(function(id){
-        var el=document.getElementById(id), ctx=el.getContext('2d'), W=el.width, H=el.height;
-        ctx.fillStyle=S2; ctx.fillRect(0,0,W,H);
-        if(id=='cM'){
-          var px=W/2,py=H*0.1,L=H*0.6,ang=Math.sin(th_m)*0.6,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L;
-          ctx.strokeStyle=MU2; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(bx,by); ctx.stroke();
-          ctx.fillStyle='#f0621a'; ctx.beginPath(); ctx.arc(bx,by,W*0.09,0,Math.PI*2); ctx.fill();
-        } else if(id=='cD'){
-          var cx=W/2,dw=W*0.09,dsp=Math.sin(th_m)*dw*0.5;
-          ctx.fillStyle='#e85a0e'; ctx.fillRect(cx-dw+dsp,0,dw*2,H);
-        } else if(id=='cS'){
-          var px=W/2,py=H*0.1,L=H*0.6,ang=Math.sin(th_c)*0.6,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L;
-          ctx.strokeStyle='#4a6080'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(bx,by); ctx.stroke();
-          ctx.fillStyle='#1fb8c8'; ctx.beginPath(); ctx.arc(bx,by,W*0.09,0,Math.PI*2); ctx.fill();
-        } else if(id=='cB'){
-          var bw=W/NB;
-          for(var i=0;i<NB;i++){
-            var h=(subs[i]*0.5 + 0.2*Math.sin(th_c+i*0.4))*H*0.5;
-            ctx.fillStyle=fls[i]>0.5?'#f5c842':'#1fb8c8';
-            ctx.fillRect(i*bw+2,H-h,bw-4,h);
-          }
-        }
-      });
+    function draw() {
+      // Canvas 1: Master
+      var ctx1 = document.getElementById('c1').getContext('2d');
+      ctx1.fillStyle = 'black'; ctx1.fillRect(0,0,460,460);
+      ctx1.fillStyle = '#f0621a';
+      var x1 = 230 + 180 * Math.sin(th_m);
+      var y1 = 230 + 180 * Math.cos(th_m);
+      ctx1.beginPath(); ctx1.arc(x1, y1, 40, 0, Math.PI*2); ctx1.fill();
+      ctx1.strokeStyle = '#6b8ab0'; ctx1.lineWidth = 3; ctx1.beginPath(); ctx1.moveTo(230,50); ctx1.lineTo(x1,y1); ctx1.stroke();
+
+      // Canvas 2: Dike
+      var ctx2 = document.getElementById('c2').getContext('2d');
+      ctx2.fillStyle = 'black'; ctx2.fillRect(0,0,460,460);
+      var dw = 40 + 20 * Math.sin(th_m);
+      ctx2.fillStyle = '#e85a0e'; ctx2.fillRect(230-dw, 0, dw*2, 460);
+
+      // Canvas 3: Slave
+      var ctx3 = document.getElementById('c3').getContext('2d');
+      ctx3.fillStyle = 'black'; ctx3.fillRect(0,0,460,460);
+      ctx3.fillStyle = '#1fb8c8';
+      var x3 = 230 + 180 * Math.sin(th_c);
+      var y3 = 230 + 180 * Math.cos(th_c);
+      ctx3.beginPath(); ctx3.arc(x3, y3, 40, 0, Math.PI*2); ctx3.fill();
+      ctx3.strokeStyle = '#6b8ab0'; ctx3.lineWidth = 3; ctx3.beginPath(); ctx3.moveTo(230,50); ctx3.lineTo(x3,y3); ctx3.stroke();
+
+      // Canvas 4: Surface
+      var ctx4 = document.getElementById('c4').getContext('2d');
+      ctx4.fillStyle = 'black'; ctx4.fillRect(0,0,460,460);
+      var bw = 460 / 14;
+      for(var i=0; i<14; i++) {
+        var h = (subs[i] * 0.5 + 0.2 * Math.sin(th_c + i * 0.5)) * 460 * 0.5;
+        ctx4.fillStyle = '#1fb8c8';
+        ctx4.fillRect(i*bw + 2, 460-h, bw-4, h);
+      }
     }
+
     loop();
   </script>
 </body>
