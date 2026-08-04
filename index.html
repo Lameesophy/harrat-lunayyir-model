@@ -12,94 +12,114 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: linear-gradient(135deg, #0c1220 0%, #1a2332 100%);
-      color: #e0e6ed;
+      background: #07090f;
+      color: #e2eaf8;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    /* Hero Section */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Hero */
     .hero {
-      background: linear-gradient(180deg, rgba(12, 18, 32, 0.95) 0%, rgba(26, 35, 50, 0.98) 100%);
-      padding: 60px 40px;
+      background: linear-gradient(180deg, #0c1220 0%, #07090f 100%);
+      border-bottom: 2px solid #223350;
+      padding: 48px 20px 40px;
       text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #2196F3 0%, #FFC107 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
     }
 
-    .hero .subtitle {
-      font-size: 1.1em;
-      color: #8fa8c8;
-      margin-bottom: 30px;
+    .hero h1 em {
+      font-style: normal;
+      color: #f0621a;
     }
 
-    .hero .description {
-      max-width: 900px;
-      margin: 0 auto 40px;
-      font-size: 1em;
-      color: #b8c5d6;
-      line-height: 1.8;
+    .hero-subtitle {
+      font-size: 0.92rem;
+      color: #6b8ab0;
+      margin-bottom: 20px;
+      font-family: monospace;
+      letter-spacing: 0.05em;
     }
 
-    /* Stats Cards */
-    .stats-grid {
+    .hero-summary {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #b8c8e0;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    .hero-stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto 40px;
-      padding: 0 40px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 680px;
+      margin: 0 auto 28px;
     }
 
-    .stat-card {
-      background: rgba(33, 150, 243, 0.08);
-      border: 1px solid rgba(33, 150, 243, 0.3);
+    @media (max-width: 540px) {
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-stat {
+      background: #0c1220;
+      border: 1px solid #1a2a40;
       border-radius: 8px;
-      padding: 25px;
-      text-align: center;
-      transition: all 0.3s ease;
+      padding: 14px 12px;
     }
 
-    .stat-card:hover {
-      background: rgba(33, 150, 243, 0.12);
-      border-color: rgba(33, 150, 243, 0.5);
-      transform: translateY(-2px);
+    .hero-stat-lbl {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b8ab0;
+      font-family: monospace;
+      margin-bottom: 4px;
     }
 
-    .stat-card .value {
-      font-size: 2em;
-      font-weight: bold;
-      color: #FFC107;
-      margin-bottom: 8px;
+    .hero-stat-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f0621a;
     }
 
-    .stat-card .label {
-      font-size: 0.9em;
-      color: #8fa8c8;
-      margin-bottom: 8px;
-    }
-
-    .stat-card .subtext {
-      font-size: 0.85em;
-      color: #5a7a9e;
+    .hero-stat-sub {
+      font-size: 0.7rem;
+      color: #6b8ab0;
+      margin-top: 3px;
+      line-height: 1.4;
     }
 
     /* Navigation */
     nav {
       background: rgba(12, 18, 32, 0.95);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 15px 40px;
+      padding: 15px 20px;
       display: flex;
-      gap: 30px;
+      gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
       position: sticky;
@@ -108,62 +128,212 @@
     }
 
     nav a {
-      color: #8fa8c8;
+      color: #6b8ab0;
       text-decoration: none;
-      font-size: 0.95em;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      color: #FFC107;
-      background: rgba(255, 193, 7, 0.1);
+      color: #f0621a;
     }
 
     /* Sections */
     section {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 60px 40px;
+      padding: 40px 20px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     section h2 {
-      font-size: 2em;
-      margin-bottom: 30px;
-      color: #e0e6ed;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #e2eaf8;
     }
 
     section h3 {
-      font-size: 1.3em;
-      margin-top: 30px;
-      margin-bottom: 15px;
-      color: #FFC107;
+      font-size: 1.1rem;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      color: #f0621a;
     }
 
-    /* Content Cards */
+    /* Content cards */
     .content-card {
-      background: rgba(33, 150, 243, 0.05);
-      border: 1px solid rgba(33, 150, 243, 0.2);
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 30px;
+      background: rgba(12, 18, 32, 0.5);
+      border: 1px solid rgba(31, 184, 200, 0.2);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
     .content-card p {
-      margin-bottom: 15px;
-      line-height: 1.8;
-      color: #b8c5d6;
+      margin-bottom: 12px;
+      color: #b8c8e0;
+      line-height: 1.7;
     }
 
-    /* Image Panels */
-    .panel-container {
-      background: rgba(33, 150, 243, 0.05);
-      border: 1px solid rgba(33, 150, 243, 0.2);
-      border-radius: 8px;
-      padding: 20px;
+    /* Canvas containers */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 20px;
       margin-bottom: 30px;
+    }
+
+    canvas {
+      background: #0a1422;
+      border: 1px solid rgba(31, 184, 200, 0.2);
+      border-radius: 4px;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: rgba(240, 98, 26, 0.15);
+      border: 1px solid rgba(240, 98, 26, 0.4);
+      color: #f0621a;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: rgba(240, 98, 26, 0.25);
+      border-color: rgba(240, 98, 26, 0.7);
+    }
+
+    button.active {
+      background: #f0621a;
+      color: #0c1220;
+      border-color: #f0621a;
+    }
+
+    /* Sliders */
+    .slider-group {
+      margin-bottom: 16px;
+    }
+
+    .slider-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #6b8ab0;
+      font-size: 0.85rem;
+    }
+
+    .slider-value {
+      color: #f0621a;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(31, 184, 200, 0.15);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #f0621a;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #f0621a;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+      background: rgba(12, 18, 32, 0.5);
+      border: 1px solid rgba(31, 184, 200, 0.2);
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .status-item {
+      text-align: center;
+    }
+
+    .status-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0621a;
+      margin-bottom: 4px;
+    }
+
+    .status-label {
+      font-size: 0.75rem;
+      color: #6b8ab0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-desc {
+      font-size: 0.8rem;
+      color: #8fa8c8;
+      margin-top: 4px;
+    }
+
+    .sc {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .sc.ok {
+      background: rgba(34, 201, 122, 0.2);
+      color: #22c97a;
+    }
+
+    .sc.warn {
+      background: rgba(245, 200, 66, 0.2);
+      color: #f5c842;
+    }
+
+    .sc.bad {
+      background: rgba(240, 98, 26, 0.2);
+      color: #f0621a;
+    }
+
+    /* Image panels */
+    .panel-container {
+      background: rgba(12, 18, 32, 0.5);
+      border: 1px solid rgba(31, 184, 200, 0.2);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 20px;
       overflow-x: auto;
     }
 
@@ -174,130 +344,40 @@
       border-radius: 4px;
     }
 
-    /* Simulation Controls */
-    .simulation-controls {
-      background: rgba(33, 150, 243, 0.05);
-      border: 1px solid rgba(33, 150, 243, 0.2);
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      background: rgba(255, 193, 7, 0.2);
-      border: 1px solid rgba(255, 193, 7, 0.5);
-      color: #FFC107;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.95em;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background: rgba(255, 193, 7, 0.3);
-      border-color: rgba(255, 193, 7, 0.8);
-      transform: translateY(-2px);
-    }
-
-    button.active {
-      background: #FFC107;
-      color: #0c1220;
-      border-color: #FFC107;
-    }
-
-    /* Sliders */
-    .slider-group {
-      margin-bottom: 20px;
-    }
-
-    .slider-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #8fa8c8;
-      font-size: 0.9em;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: rgba(33, 150, 243, 0.2);
-      outline: none;
-      -webkit-appearance: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #FFC107;
-      cursor: pointer;
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #FFC107;
-      cursor: pointer;
-      border: none;
-    }
-
-    /* Canvas */
-    canvas {
-      background: rgba(12, 18, 32, 0.8);
-      border: 1px solid rgba(33, 150, 243, 0.2);
-      border-radius: 4px;
-      display: block;
-      margin-bottom: 20px;
-      width: 100%;
-      max-width: 100%;
-    }
-
     /* Tabs */
     .tab-buttons {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(31, 184, 200, 0.2);
       flex-wrap: wrap;
-      border-bottom: 1px solid rgba(33, 150, 243, 0.2);
     }
 
-    .tab-button {
+    .tab-btn {
       background: transparent;
       border: none;
-      color: #8fa8c8;
-      padding: 12px 16px;
+      color: #6b8ab0;
+      padding: 10px 14px;
       cursor: pointer;
-      font-size: 0.95em;
+      font-size: 0.9rem;
       border-bottom: 2px solid transparent;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
-    .tab-button:hover {
-      color: #FFC107;
+    .tab-btn:hover {
+      color: #f0621a;
     }
 
-    .tab-button.active {
-      color: #FFC107;
-      border-bottom-color: #FFC107;
+    .tab-btn.active {
+      color: #f0621a;
+      border-bottom-color: #f0621a;
     }
 
-    .tab-content {
+    .tab-panel {
       display: none;
     }
 
-    .tab-content.active {
+    .tab-panel.active {
       display: block;
     }
 
@@ -305,37 +385,38 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
     }
 
     th, td {
-      padding: 12px;
+      padding: 10px;
       text-align: left;
-      border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+      border-bottom: 1px solid rgba(31, 184, 200, 0.2);
     }
 
     th {
-      background: rgba(33, 150, 243, 0.1);
-      color: #FFC107;
+      background: rgba(31, 184, 200, 0.1);
+      color: #1fb8c8;
       font-weight: 600;
     }
 
     tr:hover {
-      background: rgba(33, 150, 243, 0.05);
+      background: rgba(31, 184, 200, 0.05);
     }
 
     /* Footer */
     footer {
       background: rgba(12, 18, 32, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 40px;
+      padding: 30px 20px;
       text-align: center;
-      color: #5a7a9e;
-      font-size: 0.9em;
+      color: #6b8ab0;
+      font-size: 0.85rem;
     }
 
     footer a {
-      color: #2196F3;
+      color: #1fb8c8;
       text-decoration: none;
     }
 
@@ -345,98 +426,55 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 1.8em;
-      }
-
-      .stats-grid {
+      .canvas-grid {
         grid-template-columns: 1fr;
-        padding: 0 20px;
-      }
-
-      nav {
-        padding: 10px 20px;
-        gap: 15px;
-      }
-
-      section {
-        padding: 40px 20px;
-      }
-
-      .button-group {
-        flex-direction: column;
       }
 
       button {
-        width: 100%;
+        flex: 1;
+      }
+
+      section {
+        padding: 30px 15px;
       }
     }
 
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation: none !important;
         transition: none !important;
       }
     }
-
-    /* Status Display */
-    .status-display {
-      background: rgba(33, 150, 243, 0.05);
-      border: 1px solid rgba(33, 150, 243, 0.2);
-      border-radius: 4px;
-      padding: 15px;
-      margin-bottom: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-    }
-
-    .status-item {
-      text-align: center;
-    }
-
-    .status-item .value {
-      font-size: 1.3em;
-      color: #FFC107;
-      font-weight: bold;
-    }
-
-    .status-item .label {
-      font-size: 0.85em;
-      color: #8fa8c8;
-      margin-top: 5px;
-    }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
+  <!-- HERO -->
   <div class="hero">
-    <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
-    <p class="subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</p>
-    <div class="description">
-      This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm. It presents a two-oscillator reduction of the N-segment Kuramoto model described in the accompanying analysis, letting you see and interact with the coupling dynamics in real time.
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="value">0.0266 rad/h</div>
-        <div class="label">Critical coupling K<sub>c</sub></div>
-        <div class="subtext">threshold for synchronisation onset</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">1.86</div>
-        <div class="label">Best-fit K / K<sub>c</sub></div>
-        <div class="subtext"><strong>range 0.30–6.00</strong> across plausible inputs</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">0.40</div>
-        <div class="label">Order parameter r</div>
-        <div class="subtext">partial synchronisation</div>
+    <div class="hero-inner">
+      <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
+      <p class="hero-subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</p>
+      <p class="hero-summary">This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm. It presents a two-oscillator reduction of the N-segment Kuramoto model described in the accompanying analysis, letting you see and interact with the coupling dynamics in real time.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-lbl">Critical coupling K<sub>c</sub></div>
+          <div class="hero-stat-val">0.0266 rad/h</div>
+          <div class="hero-stat-sub">threshold for synchronisation onset</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-lbl">Best-fit K / K<sub>c</sub></div>
+          <div class="hero-stat-val">1.86</div>
+          <div class="hero-stat-sub"><strong>range 0.30–6.00</strong> across plausible inputs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-lbl">Order parameter r</div>
+          <div class="hero-stat-val">0.40</div>
+          <div class="hero-stat-sub">partial synchronisation</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Navigation -->
+  <!-- NAVIGATION -->
   <nav>
     <a href="#event">THE 2009 EVENT</a>
     <a href="#simulation">SIMULATION</a>
@@ -445,11 +483,11 @@
     <a href="#equations">EQUATIONS</a>
   </nav>
 
-  <!-- Event Section -->
+  <!-- SECTION 1: EVENT -->
   <section id="event">
     <h2>The 2009 Intrusion</h2>
     <p>In spring 2009, a dike intrusion beneath Harrat Lunayyir produced one of the most significant seismic swarms ever recorded in Saudi Arabia.</p>
-    
+
     <div class="panel-container">
       <img src="panel_event_new.png" alt="Cross-section and plan view of the 2009 Harrat Lunayyir dike intrusion showing the basaltic dike, earthquake swarm, and surface rupture.">
     </div>
@@ -457,8 +495,7 @@
     <div class="content-card">
       <p><strong>Event geometry and counts:</strong> Pallister et al. (2010). Diagram is explanatory, not a reconstruction.</p>
       <p>A crack filled with rising molten basalt — approximately <strong>10 km long</strong> with a maximum opening of <strong>2–4 m</strong>, pushing up from roughly <strong>20 km depth</strong> — produced a swarm of roughly <strong>30,000 earthquakes</strong> over several months. The largest event, on <strong>19 May 2009</strong>, reached <strong>ML 5.4 (Mw 5.7)</strong>.</p>
-      <p>More than <strong>30,000 people</strong> were evacuated from a 40 km radius, including the town of <strong>Al Ays</strong>, about 40 km southeast. Surface deformation produced a graben roughly <strong>8–10 km long</strong> and up to about <strong>1 m deep</strong>.</p>
-      <p>The earthquake count has been proposed to come in bursts — roughly 10 recognisable peaks over 3,500 hours, each approximately 275 hours apart. This pattern is speculative: the source authors (Mukhopadhyay et al. 2013) explicitly use the word "speculate" when identifying these peaks, and their preferred explanation is pore-pressure diffusion rather than oscillator coupling. This model asks: <em>if</em> those bursts are a physical oscillation, what does the coupling strength tell us?</p>
+      <p>More than <strong>30,000 people</strong> were evacuated from a 40 km radius, including the town of <strong>Al Ays</strong>. Surface deformation produced a graben roughly <strong>8–10 km long</strong> and up to about <strong>1 m deep</strong>.</p>
     </div>
 
     <h3>From geology to mathematics</h3>
@@ -478,27 +515,27 @@
         </thead>
         <tbody>
           <tr>
-            <td>Magmatic intrusion — shared forcing generated by the dike</td>
+            <td>Magmatic intrusion</td>
             <td>→</td>
-            <td>Master oscillator: θ<sub>m</sub>(t), ω<sub>m</sub></td>
+            <td>Master oscillator: θ<sub>m</sub>(t)</td>
           </tr>
           <tr>
-            <td>Crustal fault or segment — a structure capable of a time-dependent response</td>
+            <td>Crustal fault or segment</td>
             <td>→</td>
-            <td>Slave oscillator i: θ<sub>i</sub>(t), ω<sub>i</sub></td>
+            <td>Slave oscillator: θ<sub>c</sub>(t)</td>
           </tr>
           <tr>
-            <td>Response timing — where that structure is in its response cycle</td>
+            <td>Response timing</td>
             <td>→</td>
-            <td>Oscillator phase: θ<sub>i</sub> ∈ [0, 2π)</td>
+            <td>Oscillator phase: θ ∈ [0, 2π)</td>
           </tr>
           <tr>
-            <td>Stress / fluid-pressure transfer — how strongly the intrusion influences the crust</td>
+            <td>Stress / fluid-pressure transfer</td>
             <td>→</td>
             <td>Coupling strength: K</td>
           </tr>
           <tr>
-            <td>Collective alignment — whether many responses become coordinated</td>
+            <td>Collective alignment</td>
             <td>→</td>
             <td>Order parameter: r(t): 0 → 1</td>
           </tr>
@@ -507,79 +544,89 @@
     </div>
   </section>
 
-  <!-- Simulation Section -->
+  <!-- SECTION 2: SIMULATION -->
   <section id="simulation">
     <h2>Live Simulation</h2>
     <p>An interactive two-oscillator model showing how the magma column (master) can drive the brittle crust (slave) into synchronised motion — or fail to, depending on the coupling strength.</p>
-    
+
     <div class="content-card">
-      <p><strong>Note:</strong> This page simulates a <strong>two-oscillator reduction</strong> (one master magma column, one slave crust) of the N = 10 segment Kuramoto chain described in the accompanying analysis document. The master oscillator's wagging dynamics derive from the magma-wagging model (Bercovici et al. 2013); the slave coupling is an Adler-type equation derived from Kuramoto theory. The two systems are related but not identical.</p>
+      <p><strong>Note:</strong> This page simulates a <strong>two-oscillator reduction</strong> of the N-segment Kuramoto model. The master oscillator's wagging dynamics derive from Bercovici et al. (2013); the slave coupling is an Adler-type equation from Kuramoto theory.</p>
     </div>
 
-    <div class="status-display">
+    <div class="status-bar">
       <div class="status-item">
-        <div class="value" id="time-display">t = 0 h</div>
-        <div class="label">Elapsed time</div>
+        <div class="status-value" id="clk">t = 0 h</div>
+        <div class="status-label">Elapsed time</div>
       </div>
       <div class="status-item">
-        <div class="value" id="kk-display">K / K<sub>c</sub> = 0.00</div>
-        <div class="label">above 1 = crust can lock on</div>
+        <div class="status-value"><span id="sv0">0.00</span> <span class="sc" id="sc0"></span></div>
+        <div class="status-label">K / K<sub>c</sub></div>
       </div>
       <div class="status-item">
-        <div class="value" id="r-display">r = 0.00</div>
-        <div class="label">Crust synchronisation</div>
+        <div class="status-value"><span id="sv1">0.00</span> <span class="sc" id="sc1"></span></div>
+        <div class="status-label">Synchronisation r</div>
+        <div class="status-desc" id="ss1"></div>
       </div>
       <div class="status-item">
-        <div class="value" id="snaps-display">0</div>
-        <div class="label">Crack snaps (subsidence events)</div>
+        <div class="status-value" id="sv2">—</div>
+        <div class="status-label">System state</div>
+        <div class="status-desc" id="ss2"></div>
+      </div>
+      <div class="status-item">
+        <div class="status-value" id="sv3">0</div>
+        <div class="status-label">Crack snaps</div>
       </div>
     </div>
 
-    <div class="simulation-controls">
-      <div class="button-group">
-        <button id="btnRestart">⟳ Restart pulse</button>
-        <button id="btnQuiet">Weak coupling</button>
-        <button id="btnNear">Near the threshold</button>
-        <button id="btnStrong">Phase-locking possible</button>
-        <button id="btnPause">⏸ Pause</button>
-      </div>
+    <div class="button-group">
+      <button id="btnRestart">⟳ Restart pulse</button>
+      <button id="btnQuiet">Weak coupling</button>
+      <button id="btnNear">Near the threshold</button>
+      <button id="btnStrong">Phase-locking possible</button>
+      <button id="btnPause">⏸ Pause</button>
+    </div>
 
-      <div class="slider-group">
-        <label>Magma column rhythm (T, hours)</label>
-        <input type="range" id="sT" min="100" max="400" step="10" value="240">
-      </div>
+    <div class="content-card">
+      <p id="presetDesc" style="font-size: 0.9rem; color: #8fa8c8; line-height: 1.6;"></p>
+    </div>
 
-      <div class="slider-group">
-        <label>Gas content of the magma (Mach no. M)</label>
-        <input type="range" id="sM" min="0.01" max="0.2" step="0.01" value="0.05">
-      </div>
-
-      <div class="slider-group">
-        <label>Resistance from surrounding rock (damping η)</label>
-        <input type="range" id="sE" min="0.005" max="0.1" step="0.005" value="0.02">
-      </div>
-
-      <div class="slider-group">
-        <label>Grip between magma and crust (coupling K)</label>
-        <input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15">
-      </div>
-
-      <div class="slider-group">
-        <label>Mismatch in natural rhythms (detuning δ, %)</label>
-        <input type="range" id="sD" min="0" max="10" step="0.5" value="4">
-      </div>
-
-      <div class="slider-group">
-        <label>Background randomness (noise σ)</label>
-        <input type="range" id="sN" min="0" max="0.05" step="0.001" value="0.01">
-      </div>
+    <h3>Controls</h3>
+    <div class="slider-group">
+      <label>Magma column rhythm (T, hours) <span class="slider-value" id="vT">240</span></label>
+      <input type="range" id="sT" min="100" max="400" step="10" value="240" aria-label="Magma column rhythm">
+    </div>
+    <div class="slider-group">
+      <label>Gas content of the magma (M) <span class="slider-value" id="vM">0.05</span></label>
+      <input type="range" id="sM" min="0.01" max="0.2" step="0.01" value="0.05" aria-label="Gas content">
+    </div>
+    <div class="slider-group">
+      <label>Resistance from surrounding rock (η) <span class="slider-value" id="vE">0.020</span></label>
+      <input type="range" id="sE" min="0.005" max="0.1" step="0.005" value="0.02" aria-label="Damping">
+    </div>
+    <div class="slider-group">
+      <label>Grip between magma and crust (K) <span class="slider-value" id="vK">0.15</span></label>
+      <input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" aria-label="Coupling strength">
+    </div>
+    <div class="slider-group">
+      <label>Mismatch in natural rhythms (δ, %) <span class="slider-value" id="vD">4</span></label>
+      <input type="range" id="sD" min="0" max="10" step="0.5" value="4" aria-label="Detuning">
+    </div>
+    <div class="slider-group">
+      <label>Background randomness (σ) <span class="slider-value" id="vN">0.010</span></label>
+      <input type="range" id="sN" min="0" max="0.05" step="0.001" value="0.01" aria-label="Noise">
     </div>
 
     <h3>The Drummer — Magma Column</h3>
-    <canvas id="cM" width="460" height="460"></canvas>
+    <canvas id="cM" width="460" height="460" aria-label="Animation of the magma column oscillating like a pendulum"></canvas>
+
+    <h3>Dike Cross-section</h3>
+    <canvas id="cD" width="460" height="460" aria-label="Cross-section of the dike showing lateral pressure pulses"></canvas>
 
     <h3>The Drum — Brittle Crust</h3>
-    <canvas id="cS" width="460" height="460"></canvas>
+    <canvas id="cS" width="460" height="460" aria-label="Animation of the brittle crust oscillating"></canvas>
+
+    <h3>Surface Deformation & Subsidence</h3>
+    <canvas id="cB" width="460" height="460" aria-label="Bar chart showing crustal deformation"></canvas>
 
     <h3>Coupling Regimes</h3>
     <div class="panel-container">
@@ -591,272 +638,342 @@
     </div>
   </section>
 
-  <!-- Results Section -->
+  <!-- SECTION 3: RESULTS -->
   <section id="results">
     <h2>Model Results</h2>
-    <p>The Kuramoto model was fitted to a synthetic earthquake catalogue built from published constraints. These figures show the fit — and where it falls short.</p>
+    <p>The Kuramoto model was fitted to a synthetic earthquake catalogue. These figures show the fit — and where it falls short.</p>
 
     <div class="tab-buttons">
-      <button class="tab-button active" onclick="switchTab('order')">Order parameter r(t)</button>
-      <button class="tab-button" onclick="switchTab('misfit')">Misfit landscape</button>
-      <button class="tab-button" onclick="switchTab('fit')">Kuramoto fit</button>
-      <button class="tab-button" onclick="switchTab('intervals')">Interval distributions</button>
+      <button class="tab-btn active" aria-controls="panel-order" aria-selected="true">Order parameter r(t)</button>
+      <button class="tab-btn" aria-controls="panel-misfit" aria-selected="false">Misfit landscape</button>
+      <button class="tab-btn" aria-controls="panel-fit" aria-selected="false">Kuramoto fit</button>
+      <button class="tab-btn" aria-controls="panel-intervals" aria-selected="false">Interval distributions</button>
     </div>
 
-    <div id="order" class="tab-content active">
+    <div id="panel-order" class="tab-panel active">
       <div class="panel-container">
         <img src="figure_order_param_new.webp" alt="Order parameter r(t) for three coupling regimes showing phase transition.">
       </div>
-      <div class="content-card">
-        <p><strong>What this shows:</strong> The order parameter r measures how synchronised the oscillators are. Below the critical coupling (K < K<sub>c</sub>), the system stays incoherent. Above it, the oscillators progressively lock into a shared rhythm. The best-fit value for Harrat Lunayyir (K/K<sub>c</sub> = 1.86) sits in the partially synchronised regime where r ≈ 0.40.</p>
-      </div>
+      <p><strong>What this shows:</strong> The order parameter r measures synchronisation. Below critical coupling, the system stays incoherent. Above it, oscillators lock into a shared rhythm.</p>
     </div>
 
-    <div id="misfit" class="tab-content">
+    <div id="panel-misfit" class="tab-panel">
       <div class="panel-container">
         <img src="figure_misfit_new.webp" alt="Misfit landscape showing minimum at K/Kc = 1.86.">
       </div>
-      <div class="content-card">
-        <p><strong>What this shows:</strong> A grid search over coupling strength finds the best fit at K/K<sub>c</sub> = 1.86 — just above the synchronisation threshold. This is the single headline number from the model, but the sensitivity analysis (below) shows it ranges from 0.30 to 6.00 depending on uncertain inputs.</p>
-      </div>
+      <p><strong>What this shows:</strong> A grid search finds the best fit at K/K<sub>c</sub> = 1.86 — just above the synchronisation threshold.</p>
     </div>
 
-    <div id="fit" class="tab-content">
+    <div id="panel-fit" class="tab-panel">
       <div class="panel-container">
         <img src="figure_kuramoto_fit_new.webp" alt="Kuramoto model fit versus synthetic catalogue burst rate.">
       </div>
-      <div class="content-card">
-        <p><strong>What this shows:</strong> The Kuramoto model's predicted burst rate overlaid on the synthetic catalogue. The model captures the overall pattern of periodic bursts but does not reproduce every individual peak — expected, given the stochastic nature of the system.</p>
-      </div>
+      <p><strong>What this shows:</strong> The Kuramoto model's predicted burst rate overlaid on the synthetic catalogue. The model captures the overall pattern of periodic bursts.</p>
     </div>
 
-    <div id="intervals" class="tab-content">
+    <div id="panel-intervals" class="tab-panel">
       <div class="panel-container">
         <img src="figure_intervals_new.webp" alt="Inter-burst interval distributions comparing synthetic and model data.">
       </div>
-      <div class="content-card">
-        <p><strong>What this shows:</strong> The distribution of time gaps between successive burst peaks. The synthetic catalogue found 21 peaks with a mean interval of 154 h; the Kuramoto model produces a mean of 181 h. Note: the published analysis (Mukhopadhyay et al. 2013) identified only ~10 peaks at ~275 h — the discrepancy is real and reflects different detection thresholds and catalogue construction methods.</p>
-      </div>
+      <p><strong>What this shows:</strong> The distribution of time gaps between successive burst peaks. Synthetic mean: 154 h; Kuramoto model mean: 181 h.</p>
     </div>
   </section>
 
-  <!-- Sensitivity Section -->
+  <!-- SECTION 4: SENSITIVITY -->
   <section id="sensitivity">
-    <h2>Sensitivity Analysis</h2>
-    <p>The best-fit coupling K/K<sub>c</sub> = 1.86 is robust to reasonable variations in input parameters, but the range is substantial.</p>
+    <h2>Sensitivity & Limitations</h2>
+    <p>The best-fit coupling ratio (K/K<sub>c</sub> = 1.86) ranges from 0.30 to 6.00 depending on uncertain input parameters.</p>
 
     <div class="panel-container">
       <img src="panel_workflow_new.png" alt="Four-step workflow: Observe, Constrain, Compute, Test.">
     </div>
 
     <div class="content-card">
-      <p><strong>Key insight:</strong> Constraining K from real monitoring data is the outstanding work. This model demonstrates that if the bursts are a physical oscillation, the coupling strength can be estimated — but real data (earthquake catalogue, InSAR, GNSS, fault geometry) is required to move from hypothesis to evidence.</p>
+      <p><strong>Key insight:</strong> Constraining K from real monitoring data is the outstanding work. This model demonstrates that if the bursts are a physical oscillation, the coupling strength can be estimated — but real data is required to move from hypothesis to evidence.</p>
     </div>
   </section>
 
-  <!-- Equations Section -->
+  <!-- SECTION 5: EQUATIONS -->
   <section id="equations">
     <h2>Governing Equations</h2>
-    <p>The model is based on two coupled ordinary differential equations describing the master (magma) and slave (crust) oscillators.</p>
+    <p>The model is based on two coupled ordinary differential equations.</p>
 
     <div class="content-card">
       <h3>Master Oscillator (Magma Column)</h3>
-      <p>dθ<sub>m</sub>/dt = ω<sub>m</sub> + (M²/T) sin(θ<sub>m</sub>) − η ω<sub>m</sub></p>
-      <p><strong>Bernoulli forcing</strong> (proportional to M²) keeps the column wagging against viscous damping η.</p>
+      <p>dθ<sub>m</sub>/dt = ω<sub>m</sub> + ½M² sin(2θ<sub>m</sub>) − η · (dθ<sub>m</sub>/dt)<sub>prev</sub> + σ · noise</p>
+      <p style="font-size: 0.9rem; color: #8fa8c8; margin-top: 8px;">Bernoulli forcing (proportional to M²) keeps the column wagging against viscous damping η.</p>
     </div>
 
     <div class="content-card">
       <h3>Slave Oscillator (Brittle Crust)</h3>
-      <p>dθ<sub>i</sub>/dt = ω<sub>i</sub> + K sin(θ<sub>m</sub> − θ<sub>i</sub>) + σ ξ(t)</p>
-      <p><strong>Coupling strength K</strong> transmits the magma rhythm to the crust. <strong>Noise σ</strong> represents background tectonic stress and fluid migration.</p>
+      <p>dθ<sub>c</sub>/dt = ω<sub>c</sub> + K · c(t) · sin(θ<sub>m</sub> − θ<sub>c</sub>) + σ · noise</p>
+      <p style="font-size: 0.9rem; color: #8fa8c8; margin-top: 8px;">Coupling strength K transmits the magma rhythm to the crust. Pore-pressure envelope c(t) gates the coupling.</p>
     </div>
 
     <div class="content-card">
       <h3>Order Parameter</h3>
-      <p>r(t) = |Σ<sub>i</sub> exp(i θ<sub>i</sub>)| / N</p>
-      <p>Measures collective synchronisation: r = 0 (incoherent), r = 1 (fully phase-locked).</p>
+      <p>r(t) · e<sup>iψ(t)</sup> = (1/N) · Σ<sub>j</sub> e<sup>iθ<sub>j</sub>(t)</sup></p>
+      <p style="font-size: 0.9rem; color: #8fa8c8; margin-top: 8px;">Measures collective synchronisation: r = 0 (incoherent), r = 1 (fully phase-locked).</p>
     </div>
 
     <div class="content-card">
       <h3>Critical Coupling</h3>
-      <p>K<sub>c</sub> = 2σ<sub>ω</sub></p>
-      <p>The threshold for synchronisation onset in the Kuramoto model, analogous to the mean-field Ising model phase transition.</p>
+      <p>K<sub>c</sub> = 2 · σ<sub>ω</sub></p>
+      <p style="font-size: 0.9rem; color: #8fa8c8; margin-top: 8px;">The threshold for synchronisation onset in the Kuramoto model.</p>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
     <p><strong>Harrat Lunayyir — Magma Sync Model</strong></p>
-    <p>Lamees Felemban — Independent Research | MATAN Volcanic Model</p>
-    <p>Based on Pallister et al. (2010), Mukhopadhyay et al. (2013), Kuramoto (1984), Strogatz (2000), Bercovici et al. (2013), Brodsky & Farge (2026), Blanchette et al. (2025)</p>
-    <p style="margin-top: 20px; font-size: 0.85em;">This model is a research exploration, not an eruption prediction tool. It demonstrates how oscillator coupling could explain burst patterns in seismic data.</p>
+    <p>Lamees Felemban — Independent Research</p>
+    <p style="margin-top: 12px; font-size: 0.8rem;">Pallister et al. (2010) · Mukhopadhyay et al. (2013) · Kuramoto (1984) · Strogatz (2000) · Bercovici et al. (2013)</p>
+    <p style="margin-top: 12px; font-size: 0.8rem; color: #5a7a9e;">This model is a research exploration, not an eruption prediction tool.</p>
   </footer>
 
   <script>
-    // Simulation parameters
-    let T = 240, M = 0.05, E = 0.02, K = 0.15, D = 4, N = 0.01;
-    let theta_m = 0, omega_m = 2 * Math.PI / T;
-    let theta_s = 0, omega_s = omega_m * (1 - D / 100);
-    let t = 0, paused = false, snaps = 0;
-    const DT = 0.5;
-    const Kc = 0.0266;
+// ============================================================
+// Everything uses fixed canvas pixel dimensions (width/height
+// attributes on the elements). No DPR scaling. No offsetWidth.
+// This is the only reliable approach across all browsers.
+// ============================================================
 
-    function KKc() {
-      return K / Kc;
+// ---- ELAPSED TIME DISPLAY ----
+function updateClock() {
+  var el = document.getElementById('clk');
+  if (el) el.textContent = 't = ' + Math.round(simT) + ' h';
+}
+
+// Get canvas context by id
+function ctx(id) {
+  var el = document.getElementById(id);
+  var c  = el.getContext('2d');
+  var W  = el.width;
+  var H  = el.height;
+  c.clearRect(0, 0, W, H);
+  return { c: c, W: W, H: H };
+}
+
+// ---- COLOURS ----
+var OR  = '#f0621a';
+var OR2 = '#ff8c3a';
+var TL  = '#1fb8c8';
+var TL2 = '#4dd8e8';
+var GD  = '#f5c842';
+var GN  = '#22c97a';
+var MU  = '#4a6080';
+var MU2 = '#7a90b0';
+var S1  = '#0c1220';
+var S2  = '#111827';
+var S3  = '#142035';
+var BD  = '#1a2a40';
+
+// ---- STATIC CRACK POSITIONS ----
+var CRACKS = (function() {
+  var s = 99, arr = [];
+  function r() { s = (1664525 * s + 1013904223) >>> 0; return s / 0x100000000; }
+  for (var i = 0; i < 14; i++) arr.push({ x: r(), y: r(), l: 0.05 + r()*0.06, a: r()*Math.PI });
+  return arr;
+})();
+
+// ---- SIMULATION STATE ----
+var th_m    = 0;
+var th_c    = Math.PI/4;
+var dth_prv = 0;
+var simT    = 0;
+var DT      = 0.5;
+var frame   = 0;
+var NB      = 14;
+var subs    = new Float32Array(NB);
+var fls     = new Float32Array(NB);
+var snaps   = 0;
+var paused  = false;
+var animId  = null;
+
+function pore(t) {
+  return t <= 0 ? 0 : Math.exp(-t / 1500) * (1 - Math.exp(-t / 80));
+}
+
+function P() {
+  return {
+    Tw: +document.getElementById('sT').value,
+    M:  +document.getElementById('sM').value,
+    et: +document.getElementById('sE').value,
+    K:  +document.getElementById('sK').value,
+    dl: +document.getElementById('sD').value / 100,
+    sg: +document.getElementById('sN').value
+  };
+}
+
+function KKc(p) {
+  var om = 2 * Math.PI / p.Tw;
+  var oc = om * (1 + p.dl);
+  var Kc = 2 * Math.abs(oc - om);
+  return Kc > 1e-9 ? p.K / Kc : 999;
+}
+
+function step() {
+  var p   = P();
+  var om  = 2 * Math.PI / p.Tw;
+  var oc  = om * (1 + p.dl);
+  var c   = pore(simT);
+  var bern = p.M * p.M * Math.sin(2 * th_m) * 0.5;
+  var dtm  = om + bern - p.et * dth_prv + p.sg * (Math.random() - 0.5);
+  var dtc  = oc + p.K * c * Math.sin(th_m - th_c) + p.sg * 0.7 * (Math.random() - 0.5);
+  th_m    += dtm * DT;
+  th_c    += dtc * DT;
+  dth_prv  = dtm;
+  simT    += DT;
+  var lock = 0.5 * (1 + Math.cos(th_m - th_c));
+  var r    = 0.5 * Math.hypot(Math.cos(th_m) + Math.cos(th_c), Math.sin(th_m) + Math.sin(th_c));
+  var ratio = KKc(p);
+  for (var i = 0; i < NB; i++) {
+    fls[i] = Math.max(0, fls[i] - 0.055);
+    var prob = lock * c * (0.35 + 0.65 * Math.max(0, Math.sin(th_c + i * 0.38)));
+    if (prob > 0.60 && Math.random() < 0.013) {
+      subs[i] = Math.min(1, subs[i] + 0.07 + Math.random() * 0.07);
+      fls[i]  = 1.0;
+      snaps++;
     }
+  }
+  return { p: p, lock: lock, r: r, ratio: ratio, c: c };
+}
 
-    function step() {
-      if (paused) return;
+// ---- UPDATE STATUS BAR ----
+var lastStatusUpdate = 0;
+var lastStateText = '';
+function updateStatus(r, ratio) {
+  function set(vid, scid, val, cls) {
+    document.getElementById(vid).textContent = val;
+    document.getElementById(scid).className  = 'sc ' + cls;
+  }
+  var rCls = ratio >= 1.5 ? 'ok' : ratio >= 1 ? 'warn' : 'bad';
+  set('sv0', 'sc0', ratio < 99 ? ratio.toFixed(2) : '∞', rCls);
+  set('sv1', 'sc1', r.toFixed(2), r > 0.6 ? 'ok' : r > 0.3 ? 'warn' : 'bad');
+  var syncDesc = r > 0.6 ? 'Crust moving in step with the magma'
+               : r > 0.3 ? 'Partial — crust intermittently following'
+               : 'Crust responding erratically';
+  document.getElementById('ss1').textContent = syncDesc;
+  var st = ratio < 1
+    ? ['SUBCRITICAL', 'Below threshold — crust ignores the magma rhythm', 'bad']
+    : ratio < 1.5
+    ? ['NEAR-CRITICAL', 'Near threshold — intermittent locking possible', 'warn']
+    : ['SYNCHRONISED',  'Above threshold — crust locked to the magma pulse', 'ok'];
+  document.getElementById('sv2').textContent = st[0];
+  document.getElementById('ss2').textContent = st[1];
+  document.getElementById('sc2').className   = 'sc ' + st[2];
+  document.getElementById('sv3').textContent = snaps;
+  var now = Date.now();
+  var stateText = st[0] + ', r=' + r.toFixed(1) + ', snaps=' + snaps;
+  if (stateText !== lastStateText && (now - lastStatusUpdate > 3000)) {
+    lastStatusUpdate = now;
+    lastStateText = stateText;
+  }
+}
 
-      // Master oscillator
-      const M2 = M * M;
-      const dtheta_m = omega_m + (M2 / T) * Math.sin(theta_m) - E * omega_m;
-      theta_m += dtheta_m * DT;
-      theta_m = ((theta_m % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+// ---- DRAW FUNCTIONS (MINIFIED FROM ORIGINAL) ----
+function drawMaster(p){var v=ctx('cM'),c=v.c,W=v.W,H=v.H;c.fillStyle=S2;c.fillRect(0,0,W,H);var px=W/2,py=H*0.10,L=H*0.62,ang=Math.sin(th_m)*0.68,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L,R=Math.min(W,H)*0.095;c.strokeStyle='rgba(36,56,88,0.5)';c.lineWidth=0.8;c.setLineDash([3,5]);c.beginPath();c.arc(px,py,L,Math.PI/2-0.72,Math.PI/2+0.72);c.stroke();c.setLineDash([]);c.fillStyle=BD;c.fillRect(px-14,0,28,py+5);c.beginPath();c.arc(px,py,6,0,Math.PI*2);c.fillStyle='#2a3f60';c.fill();c.strokeStyle='rgba(140,170,210,0.55)';c.lineWidth=2;c.beginPath();c.moveTo(px,py);c.lineTo(bx,by);c.stroke();var gl=c.createRadialGradient(bx,by,0,bx,by,R*2.6);gl.addColorStop(0,'rgba(240,98,26,0.30)');gl.addColorStop(1,'rgba(240,98,26,0)');c.beginPath();c.arc(bx,by,R*2.6,0,Math.PI*2);c.fillStyle=gl;c.fill();var g=c.createRadialGradient(bx-R*0.32,by-R*0.32,0,bx,by,R);g.addColorStop(0,'#ffaa3a');g.addColorStop(0.5,'#d03308');g.addColorStop(1,'#6a1000');c.beginPath();c.arc(bx,by,R,0,Math.PI*2);c.fillStyle=g;c.fill();c.strokeStyle='rgba(255,100,30,0.45)';c.lineWidth=1.2;c.stroke();for(var i=0;i<6;i++){var ba=(i/6)*Math.PI*2+frame*0.05;c.beginPath();c.arc(bx+R*0.72*Math.cos(ba),by+R*0.72*Math.sin(ba),2.5,0,Math.PI*2);c.fillStyle='rgba(31,184,200,'+(0.30+0.22*Math.sin(ba+frame*0.08))+')';c.fill();}c.font='11px monospace';c.fillStyle='rgba(240,98,26,0.75)';c.textAlign='center';c.fillText('Magma Column  (Master)',W/2,H-16);c.fillStyle=MU2;c.fillText('T='+p.Tw+'h   M='+p.M.toFixed(2)+'   η='+p.et.toFixed(3),W/2,H-3);}
 
-      // Slave oscillator
-      const phase_diff = theta_m - theta_s;
-      const dtheta_s = omega_s + K * Math.sin(phase_diff) + (N * (Math.random() - 0.5));
-      theta_s += dtheta_s * DT;
-      theta_s = ((theta_s % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+function drawDike(){var v=ctx('cD'),c=v.c,W=v.W,H=v.H;c.fillStyle='#0a1422';c.fillRect(0,0,W,H);var cx=W/2,dw=W*0.09,dsp=Math.sin(th_m)*dw*0.55;c.strokeStyle='rgba(36,56,88,0.42)';c.lineWidth=0.7;CRACKS.forEach(function(cr){var x=cr.x*W,y=cr.y*H,l=cr.l*W;c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(cr.a)*l,y+Math.sin(cr.a)*l);c.stroke();});var au=c.createLinearGradient(cx-dw*3,0,cx+dw*3,0);au.addColorStop(0,'rgba(240,98,26,0)');au.addColorStop(0.42,'rgba(240,98,26,0.08)');au.addColorStop(0.58,'rgba(240,98,26,0.08)');au.addColorStop(1,'rgba(240,98,26,0)');c.fillStyle=au;c.fillRect(cx-dw*3+dsp,0,dw*6,H);var dg=c.createLinearGradient(cx-dw,0,cx+dw,0);dg.addColorStop(0,'rgba(85,16,0,0.82)');dg.addColorStop(0.5,'rgba(232,90,14,0.96)');dg.addColorStop(1,'rgba(85,16,0,0.82)');c.fillStyle=dg;c.fillRect(cx-dw+dsp,0,dw*2,H);for(var i=0;i<5;i++){var ph=((frame*0.010+i*0.20)%1),fy=H*(1-ph),al=Math.sin(ph*Math.PI)*0.82;c.strokeStyle='rgba(255,155,45,'+al+')';c.fillStyle='rgba(255,155,45,'+al+')';c.lineWidth=1.5;c.beginPath();c.moveTo(cx+dsp,fy+9);c.lineTo(cx+dsp,fy-9);c.stroke();c.beginPath();c.moveTo(cx+dsp,fy-11);c.lineTo(cx+dsp-4,fy-5);c.lineTo(cx+dsp+4,fy-5);c.closePath();c.fill();}for(var i=0;i<4;i++){var y=H*(0.12+i*0.22),puls=Math.max(0,Math.sin(th_m+i*0.6)),len=W*0.15*puls,al2=0.42+0.52*puls;c.strokeStyle='rgba(240,98,26,'+al2+')';c.fillStyle='rgba(240,98,26,'+al2+')';c.lineWidth=2;c.beginPath();c.moveTo(cx-dw+dsp,y);c.lineTo(cx-dw+dsp-len,y);c.stroke();if(len>5){c.beginPath();c.moveTo(cx-dw+dsp-len-5,y);c.lineTo(cx-dw+dsp-len+4,y-4);c.lineTo(cx-dw+dsp-len+4,y+4);c.closePath();c.fill();}c.beginPath();c.moveTo(cx+dw+dsp,y);c.lineTo(cx+dw+dsp+len,y);c.stroke();if(len>5){c.beginPath();c.moveTo(cx+dw+dsp+len+5,y);c.lineTo(cx+dw+dsp+len-4,y-4);c.lineTo(cx+dw+dsp+len-4,y+4);c.closePath();c.fill();}}c.strokeStyle='rgba(31,184,200,0.42)';c.lineWidth=1.3;[-1,1].forEach(function(s){c.beginPath();var started=false;for(var x=cx+s*(dw+2)+dsp;s===1?x<W-3:x>3;x+=s*2){var d=Math.abs(x-cx)-dw,amp=13*Math.exp(-d*0.016),y=H*0.5+amp*Math.sin(th_m*3-d*0.07);if(!started){c.moveTo(x,y);started=true;}else c.lineTo(x,y);}c.stroke();});c.font='10px monospace';c.fillStyle='rgba(240,98,26,0.60)';c.textAlign='center';c.fillText('Dike cross-section  ·  u = '+(Math.abs(dsp)/dw*100).toFixed(0)+'%',W/2,H-4);}
 
-      // Order parameter (simplified for 2 oscillators)
-      const r = Math.abs(Math.cos(phase_diff)) / 2;
+function drawSlave(r,ratio){var v=ctx('cS'),c=v.c,W=v.W,H=v.H;c.fillStyle=S2;c.fillRect(0,0,W,H);var px=W/2,py=H*0.10,L=H*0.62,ang=Math.sin(th_c)*0.68,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L,R=Math.min(W,H)*0.095,syn=ratio>=1,lck=0.5*(1+Math.cos(th_m-th_c));c.strokeStyle='rgba(36,56,88,0.5)';c.lineWidth=0.8;c.setLineDash([3,5]);c.beginPath();c.arc(px,py,L,Math.PI/2-0.72,Math.PI/2+0.72);c.stroke();c.setLineDash([]);if(syn){c.strokeStyle='rgba(34,201,122,'+(0.12+0.20*lck)+')';c.lineWidth=1;c.setLineDash([4,4]);c.beginPath();c.moveTo(0,py);c.lineTo(W,py);c.stroke();c.setLineDash([]);}c.fillStyle=BD;c.fillRect(px-14,0,28,py+5);c.beginPath();c.arc(px,py,6,0,Math.PI*2);c.fillStyle='#1a3550';c.fill();c.strokeStyle=syn?'rgba(31,184,200,0.50)':'rgba(74,96,128,0.45)';c.lineWidth=2;c.beginPath();c.moveTo(px,py);c.lineTo(bx,by);c.stroke();var gc2=c.createRadialGradient(bx,by,0,bx,by,R*2.5);gc2.addColorStop(0,syn?'rgba(31,184,200,0.28)':'rgba(74,96,128,0.16)');gc2.addColorStop(1,'rgba(0,0,0,0)');c.beginPath();c.arc(bx,by,R*2.5,0,Math.PI*2);c.fillStyle=gc2;c.fill();var g=c.createRadialGradient(bx-R*0.30,by-R*0.30,0,bx,by,R);g.addColorStop(0,syn?'rgba(77,216,232,0.95)':'rgba(100,130,170,0.85)');g.addColorStop(1,syn?'rgba(14,120,145,0.90)':'rgba(42,60,98,0.80)');c.beginPath();c.arc(bx,by,R,0,Math.PI*2);c.fillStyle=g;c.fill();c.strokeStyle=syn?'rgba(31,184,200,0.50)':'rgba(100,130,170,0.32)';c.lineWidth=1.5;c.stroke();if(syn&&lck>0.72){c.strokeStyle='rgba(245,200,66,'+((lck-0.72)*3.5)+')';c.lineWidth=1.2;for(var i=0;i<4;i++){var a=i*1.1+frame*0.04;c.beginPath();c.moveTo(bx+Math.cos(a)*R*0.28,by+Math.sin(a)*R*0.28);c.lineTo(bx+Math.cos(a)*R*0.90,by+Math.sin(a)*R*0.90);c.stroke();}}c.font='11px monospace';c.fillStyle=syn?'rgba(31,184,200,0.78)':'rgba(74,96,128,0.65)';c.textAlign='center';c.fillText('Brittle Crust  (Slave)',W/2,H-16);c.fillStyle=MU2;c.fillText('K/Kc='+ratio.toFixed(2)+'   r='+r.toFixed(2)+'   '+(syn?'PHASE-LOCKED':'drifting'),W/2,H-3);}
 
-      // Snap detection (simplified)
-      if (Math.abs(Math.sin(phase_diff)) > 0.9 && Math.random() < 0.01) {
-        snaps++;
-      }
+function drawBars(ratio){var v=ctx('cB'),c=v.c,W=v.W,H=v.H;c.fillStyle='#0a1422';c.fillRect(0,0,W,H);var pL=6,pR=6,pT=16,pB=24,pw=W-pL-pR,ph=H-pT-pB,bw=pw/NB,syn=ratio>=1;c.strokeStyle='rgba(50,75,110,0.55)';c.lineWidth=1;c.beginPath();c.moveTo(pL,pT);c.lineTo(pL+pw,pT);c.stroke();c.font='9px monospace';c.fillStyle='rgba(50,75,110,0.55)';c.textAlign='left';c.fillText('Surface',pL+2,pT-4);for(var i=0;i<NB;i++){var x=pL+i*bw+1,bwi=bw-3,phi=th_c+i*0.40*(syn?0.22:0.90),dyn=0.28+0.28*Math.max(0,Math.sin(phi)),perm=subs[i]*0.50,total=Math.min(0.94,perm+dyn*0.48),barH=total*ph,permH=perm*ph,dynH=barH-permH,yTop=pT+ph-barH;if(permH>1){var pg=c.createLinearGradient(0,pT+ph-permH,0,pT+ph);pg.addColorStop(0,syn?'rgba(8,72,92,0.88)':'rgba(36,56,90,0.72)');pg.addColorStop(1,syn?'rgba(4,36,55,0.96)':'rgba(18,32,62,0.90)');c.fillStyle=pg;c.fillRect(x,pT+ph-permH,bwi,permH);}if(dynH>1){var fl=fls[i],dc=fl>0.3?'rgba(245,200,66,'+(fl*0.85)+')':syn?'rgba(31,184,200,'+(0.32+dyn*0.45)+')':'rgba(74,96,128,'+(0.25+dyn*0.32)+')';c.fillStyle=dc;c.fillRect(x,pT+ph-barH,bwi,dynH);}if(barH>2){c.fillStyle=fls[i]>0.3?'rgba(245,200,66,'+fls[i]+')':syn?'rgba(77,216,232,0.88)':'rgba(100,130,170,0.50)';c.fillRect(x,yTop,bwi,2);}if(fls[i]>0.4){var fg=c.createRadialGradient(x+bwi/2,yTop,0,x+bwi/2,yTop,bwi*1.9);fg.addColorStop(0,'rgba(245,200,66,'+(fls[i]*0.60)+')');fg.addColorStop(1,'rgba(245,200,66,0)');c.beginPath();c.arc(x+bwi/2,yTop,bwi*1.9,0,Math.PI*2);c.fillStyle=fg;c.fill();}}c.font='9px monospace';c.fillStyle='rgba(31,184,200,0.55)';c.textAlign='center';c.fillText('bright = live oscillation   ·   dark base = permanent subsidence',W/2,H-6);c.fillStyle='rgba(245,200,66,0.65)';c.textAlign='right';c.fillText(snaps+' snaps',W-pR,H-6);}
 
-      t += DT;
+// ---- MAIN LOOP ----
+function loop() {
+  if (!paused) {
+    var s = step();
+    drawMaster(s.p);
+    drawDike();
+    drawSlave(s.r, s.ratio);
+    drawBars(s.ratio);
+    updateStatus(s.r, s.ratio);
+    updateClock();
+    frame++;
+  }
+  animId = requestAnimationFrame(loop);
+}
 
-      // Update display
-      document.getElementById('time-display').textContent = `t = ${Math.round(t)} h`;
-      document.getElementById('kk-display').textContent = `K / K<sub>c</sub> = ${KKc().toFixed(2)}`;
-      document.getElementById('r-display').textContent = `r = ${r.toFixed(2)}`;
-      document.getElementById('snaps-display').textContent = snaps;
+// ---- RESET ----
+function resetSim() {
+  th_m = 0; th_c = Math.PI/4; dth_prv = 0; simT = 0; frame = 0; snaps = 0;
+  for (var i = 0; i < NB; i++) { subs[i] = 0; fls[i] = 0; }
+  updateClock();
+}
 
-      // Draw
-      drawMaster();
-      drawSlave();
-    }
+// ---- PRESETS ----
+var PRESETS = {
+  quiet:  { sT: 120, sM: 0.04, sE: 0.040, sK: 0.01, sD: 20, sN: 0.010 },
+  near:   { sT: 120, sM: 0.05, sE: 0.025, sK: 0.02, sD: 15, sN: 0.012 },
+  strong: { sT: 280, sM: 0.08, sE: 0.010, sK: 0.35, sD: 3,  sN: 0.008 }
+};
+var PRESET_DESCS = {
+  quiet:  'Weak coupling (K/Kc = 0.48) — coupling too weak for the crust to follow the magma rhythm. The crust oscillates at its own frequency, ignoring the intrusion pulse.',
+  near:   'Near the threshold (K/Kc = 1.27) — coupling is just above critical. The crust intermittently locks on and drifts away, producing sporadic snap events.',
+  strong: 'Phase-locking possible (K/Kc = 259.95) — well above critical. The crust locks onto the magma rhythm almost immediately and subsidence accumulates with each cycle.'
+};
 
-    function drawMaster() {
-      const canvas = document.getElementById('cM');
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#0c1220';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+function applyPreset(name) {
+  var p = PRESETS[name]; if (!p) return;
+  var ids = ['sT','sM','sE','sK','sD','sN'];
+  var vids = ['vT','vM','vE','vK','vD','vN'];
+  var fmts = [function(v){return Math.round(v);},function(v){return(+v).toFixed(2);},function(v){return(+v).toFixed(3);},function(v){return(+v).toFixed(2);},function(v){return Math.round(v);},function(v){return(+v).toFixed(3);}];
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById(ids[i]);
+    el.value = p[ids[i]];
+    document.getElementById(vids[i]).textContent = fmts[i](p[ids[i]]);
+    el.setAttribute('aria-valuetext', el.getAttribute('aria-label') + ' ' + fmts[i](p[ids[i]]));
+  }
+  resetSim();
+  document.getElementById('presetDesc').textContent = PRESET_DESCS[name];
+  document.getElementById('btnQuiet').classList.toggle('active', name === 'quiet');
+  document.getElementById('btnNear').classList.toggle('active', name === 'near');
+  document.getElementById('btnStrong').classList.toggle('active', name === 'strong');
+  if (paused) togglePause();
+}
 
-      const cx = canvas.width / 2, cy = canvas.height / 2, r = 100;
-      const x = cx + r * Math.sin(theta_m);
-      const y = cy - r * Math.cos(theta_m);
+function togglePause() {
+  paused = !paused;
+  var btn = document.getElementById('btnPause');
+  btn.textContent = paused ? '▶ Play' : '⏸ Pause';
+  btn.setAttribute('aria-label', paused ? 'Resume the animation' : 'Pause the animation');
+}
 
-      // Pendulum arm
-      ctx.strokeStyle = '#2196F3';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - 20);
-      ctx.lineTo(x, y);
-      ctx.stroke();
+// ---- SLIDER LABELS ----
+var sliders = [['sT','vT',function(v){return Math.round(v);},' hours'],['sM','vM',function(v){return(+v).toFixed(2);},''],['sE','vE',function(v){return(+v).toFixed(3);},''],['sK','vK',function(v){return(+v).toFixed(2);},''],['sD','vD',function(v){return Math.round(v);},' percent'],['sN','vN',function(v){return(+v).toFixed(3);},'']];
+sliders.forEach(function(sl){var el=document.getElementById(sl[0]),dv=document.getElementById(sl[1]),fn=sl[2],unit=sl[3];if(el&&dv){el.addEventListener('input',function(){dv.textContent=fn(el.value);el.setAttribute('aria-valuetext',fn(el.value)+unit);});}});
 
-      // Bob
-      ctx.fillStyle = '#FFC107';
-      ctx.beginPath();
-      ctx.arc(x, y, 15, 0, 2 * Math.PI);
-      ctx.fill();
+// ---- BUTTON LISTENERS ----
+document.getElementById('btnRestart').addEventListener('click', function(){ resetSim(); if(paused) togglePause(); });
+document.getElementById('btnQuiet').addEventListener('click', function(){ applyPreset('quiet'); });
+document.getElementById('btnNear').addEventListener('click', function(){ applyPreset('near'); });
+document.getElementById('btnStrong').addEventListener('click', function(){ applyPreset('strong'); });
+document.getElementById('btnPause').addEventListener('click', togglePause);
 
-      // Label
-      ctx.fillStyle = '#8fa8c8';
-      ctx.font = '12px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Magma Column', cx, canvas.height - 20);
-    }
-
-    function drawSlave() {
-      const canvas = document.getElementById('cS');
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#0c1220';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const cx = canvas.width / 2, cy = canvas.height / 2, r = 100;
-      const x = cx + r * Math.sin(theta_s);
-      const y = cy - r * Math.cos(theta_s);
-
-      // Pendulum arm
-      ctx.strokeStyle = '#2196F3';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - 20);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-
-      // Bob (colour indicates sync)
-      const phase_diff = Math.abs(theta_m - theta_s);
-      ctx.fillStyle = phase_diff < Math.PI / 2 ? '#00CED1' : '#888888';
-      ctx.beginPath();
-      ctx.arc(x, y, 15, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Label
-      ctx.fillStyle = '#8fa8c8';
-      ctx.font = '12px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Brittle Crust', cx, canvas.height - 20);
-    }
-
-    function setPreset(preset) {
-      if (preset === 'quiet') {
-        T = 240; M = 0.05; E = 0.02; K = 0.05; D = 4; N = 0.01;
-      } else if (preset === 'near') {
-        T = 240; M = 0.05; E = 0.02; K = 0.15; D = 4; N = 0.01;
-      } else if (preset === 'strong') {
-        T = 240; M = 0.05; E = 0.02; K = 0.50; D = 4; N = 0.01;
-      }
-      reset();
-      updateButtons(preset);
-    }
-
-    function reset() {
-      t = 0; theta_m = 0; theta_s = 0; snaps = 0;
-      omega_m = 2 * Math.PI / T;
-      omega_s = omega_m * (1 - D / 100);
-    }
-
-    function updateButtons(active) {
-      document.querySelectorAll('.button-group button').forEach(b => b.classList.remove('active'));
-      if (active === 'quiet') document.getElementById('btnQuiet').classList.add('active');
-      else if (active === 'near') document.getElementById('btnNear').classList.add('active');
-      else if (active === 'strong') document.getElementById('btnStrong').classList.add('active');
-    }
-
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-      document.getElementById(tab).classList.add('active');
-      event.target.classList.add('active');
-    }
-
-    // Event listeners
-    document.getElementById('btnRestart').addEventListener('click', reset);
-    document.getElementById('btnQuiet').addEventListener('click', () => setPreset('quiet'));
-    document.getElementById('btnNear').addEventListener('click', () => setPreset('near'));
-    document.getElementById('btnStrong').addEventListener('click', () => setPreset('strong'));
-    document.getElementById('btnPause').addEventListener('click', function() {
-      paused = !paused;
-      this.textContent = paused ? '▶ Resume' : '⏸ Pause';
+// ---- TABS ----
+(function(){
+  var tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
     });
+  });
+})();
 
-    document.getElementById('sT').addEventListener('input', (e) => { T = parseFloat(e.target.value); omega_m = 2 * Math.PI / T; });
-    document.getElementById('sM').addEventListener('input', (e) => { M = parseFloat(e.target.value); });
-    document.getElementById('sE').addEventListener('input', (e) => { E = parseFloat(e.target.value); });
-    document.getElementById('sK').addEventListener('input', (e) => { K = parseFloat(e.target.value); });
-    document.getElementById('sD').addEventListener('input', (e) => { D = parseFloat(e.target.value); omega_s = omega_m * (1 - D / 100); });
-    document.getElementById('sN').addEventListener('input', (e) => { N = parseFloat(e.target.value); });
+// ---- REDUCED MOTION ----
+var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (reducedMotion.matches) {
+  paused = true;
+  document.getElementById('btnPause').textContent = '▶ Play';
+  document.getElementById('btnPause').setAttribute('aria-label', 'Resume the animation');
+}
 
-    // Animation loop
-    setInterval(step, 16);
-    drawMaster();
-    drawSlave();
+// START
+loop();
   </script>
 </body>
 </html>
