@@ -1,1251 +1,862 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harrat Lunayyir — Magma Sync Model</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harrat Lunayyir — Magma Sync Model</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  background: #07090f;
-  color: #e2eaf8;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  min-height: 100vh;
-}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #0c1220 0%, #1a2332 100%);
+      color: #e0e6ed;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-/* ── visually hidden (screen readers only) ── */
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, rgba(12, 18, 32, 0.95) 0%, rgba(26, 35, 50, 0.98) 100%);
+      padding: 60px 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-/* ── hero ── */
-.hero {
-  background: linear-gradient(180deg, #0c1220 0%, #07090f 100%);
-  border-bottom: 2px solid #223350;
-  padding: 48px 20px 40px;
-  text-align: center;
-}
-.hero-inner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.hero h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  margin-bottom: 6px;
-}
-.hero h1 em { font-style: normal; color: #f0621a; }
-.hero-subtitle {
-  font-size: 0.92rem;
-  color: #6b8ab0;
-  margin-bottom: 20px;
-  font-family: monospace;
-  letter-spacing: 0.05em;
-}
-.hero-summary {
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: #b8c8e0;
-  max-width: 720px;
-  margin: 0 auto 28px;
-}
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 680px;
-  margin: 0 auto 28px;
-}
-@media (max-width: 540px) { .hero-stats { grid-template-columns: 1fr; } }
-.hero-stat {
-  background: #0c1220;
-  border: 1px solid #1a2a40;
-  border-radius: 8px;
-  padding: 14px 12px;
-}
-.hero-stat-lbl {
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6b8ab0;
-  font-family: monospace;
-  margin-bottom: 4px;
-}
-.hero-stat-val {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #f0621a;
-}
-.hero-stat-sub {
-  font-size: 0.7rem;
-  color: #6b8ab0;
-  margin-top: 3px;
-  line-height: 1.4;
-}
-.hero-nav {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.hero-btn {
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.2s;
-}
-.hero-btn.primary {
-  background: #f0621a;
-  color: #fff;
-  border: none;
-}
-.hero-btn.primary:hover { background: #d85515; }
-.hero-btn.secondary {
-  background: transparent;
-  color: #e2eaf8;
-  border: 1px solid #223350;
-}
-.hero-btn.secondary:hover { background: rgba(255,255,255,0.04); }
-.hero-btn:focus-visible { outline: 2px solid #f0621a; outline-offset: 2px; }
+    .hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #2196F3 0%, #FFC107 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* ── sticky nav ── */
-.sticky-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #0c1220;
-  border-bottom: 1px solid #1a2a40;
-  padding: 0 16px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-.sticky-nav-inner {
-  max-width: 1060px;
-  margin: 0 auto;
-  display: flex;
-  gap: 0;
-}
-.sticky-nav a {
-  display: inline-block;
-  padding: 10px 16px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #6b8ab0;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
-}
-.sticky-nav a:hover { color: #e2eaf8; }
-.sticky-nav a:focus-visible { outline: 2px solid #f0621a; outline-offset: -2px; }
+    .hero .subtitle {
+      font-size: 1.1em;
+      color: #8fa8c8;
+      margin-bottom: 30px;
+    }
 
-/* ── page container ── */
-.page {
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 0 16px 48px;
-}
+    .hero .description {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      font-size: 1em;
+      color: #b8c5d6;
+      line-height: 1.8;
+    }
 
-/* ── section structure ── */
-.section {
-  padding: 48px 0 32px;
-  border-bottom: 1px solid #1a2a40;
-}
-.section:last-child { border-bottom: none; }
-.section-eyebrow {
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #f0621a;
-  font-family: monospace;
-  margin-bottom: 8px;
-}
-.section h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.section-lead {
-  font-size: 0.88rem;
-  color: #b8c8e0;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  max-width: 720px;
-}
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 40px;
+    }
 
-/* ── illustration panels ── */
-.panel-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 20px 0;
-  border-radius: 8px;
-}
-.panel-scroll img {
-  display: block;
-  min-width: 600px;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.panel-caption {
-  font-size: 0.76rem;
-  color: #6b8ab0;
-  font-style: italic;
-  margin-top: 8px;
-  line-height: 1.5;
-}
-.panel-scroll-hint {
-  display: none;
-  font-size: 0.68rem;
-  color: #6488a6;
-  text-align: center;
-  margin-top: 4px;
-}
-@media (max-width: 640px) {
-  .panel-scroll-hint { display: block; }
-}
+    .stat-card {
+      background: rgba(33, 150, 243, 0.08);
+      border: 1px solid rgba(33, 150, 243, 0.3);
+      border-radius: 8px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
 
-/* ── simulation time display ── */
-.hud {
-  font-family: monospace;
-  font-size: 0.72rem;
-  color: #6b8ab0;
-  text-align: right;
-  margin-bottom: 10px;
-}
+    .stat-card:hover {
+      background: rgba(33, 150, 243, 0.12);
+      border-color: rgba(33, 150, 243, 0.5);
+      transform: translateY(-2px);
+    }
 
-/* ── status bar ── */
-.sbar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 14px;
-}
-@media (max-width: 580px) { .sbar { grid-template-columns: 1fr 1fr; } }
+    .stat-card .value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #FFC107;
+      margin-bottom: 8px;
+    }
 
-.sc {
-  background: #0c1220;
-  border: 1px solid #1a2a40;
-  border-radius: 8px;
-  padding: 10px 12px;
-  transition: border-color 0.3s, background 0.3s;
-}
-.sc.ok   { border-color: rgba(34,201,122,0.5); background: rgba(34,201,122,0.07); }
-.sc.warn { border-color: rgba(245,200,66,0.5);  background: rgba(245,200,66,0.07); }
-.sc.bad  { border-color: rgba(239,68,68,0.5);   background: rgba(239,68,68,0.07); }
-.sc-lbl  { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: #6888a8; margin-bottom: 4px; font-family: monospace; }
-.sc-val  { font-size: 1rem; font-weight: 700; color: #7a90b0; transition: color 0.3s; }
-.sc.ok   .sc-val { color: #22c97a; }
-.sc.warn .sc-val { color: #f5c842; }
-.sc.bad  .sc-val { color: #ef4444; }
-.sc-sub  { font-size: 0.72rem; color: #6b8ab0; margin-top: 2px; }
+    .stat-card .label {
+      font-size: 0.9em;
+      color: #8fa8c8;
+      margin-bottom: 8px;
+    }
 
-/* ── two column grid ── */
-.pgrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-@media (max-width: 640px) { .pgrid { grid-template-columns: 1fr; } }
+    .stat-card .subtext {
+      font-size: 0.85em;
+      color: #5a7a9e;
+    }
 
-.card {
-  background: #0c1220;
-  border: 1px solid #1a2a40;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.cbar { height: 3px; }
-.cbar.or { background: #f0621a; }
-.cbar.tl { background: #1fb8c8; }
-.cbar.ml { background: linear-gradient(90deg, #f0621a, #1fb8c8); }
+    /* Navigation */
+    nav {
+      background: rgba(12, 18, 32, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 15px 40px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-.cbody { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-.ctag  { font-family: monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: #f0621a; }
-.ctag.tl { color: #1fb8c8; }
-h3.ctitle  { font-size: 0.92rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.25; margin: 0; }
-.cdesc   { font-size: 0.82rem; line-height: 1.65; color: #6b8ab0; }
-.cdesc strong { color: #e2eaf8; }
+    nav a {
+      color: #8fa8c8;
+      text-decoration: none;
+      font-size: 0.95em;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
 
-/* canvases: fixed pixel size, CSS makes them responsive */
-canvas {
-  display: block;
-  width: 100%;
-  max-width: 460px;
-  height: auto;
-  border-radius: 6px;
-  background: #111827;
-}
+    nav a:hover {
+      color: #FFC107;
+      background: rgba(255, 193, 7, 0.1);
+    }
 
-/* ── presets ── */
-.preset-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.preset-btn {
-  background: #111827;
-  border: 1px solid #223350;
-  border-radius: 6px;
-  padding: 8px 14px;
-  color: #e2eaf8;
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: border-color 0.2s, background 0.2s;
-}
-.preset-btn:hover { border-color: #f0621a; background: rgba(240,98,26,0.08); }
-.preset-btn:focus-visible { outline: 2px solid #f0621a; outline-offset: 2px; }
-.preset-btn.active { border-color: #f0621a; background: rgba(240,98,26,0.12); }
-.restart-btn {
-  background: #1a2a40;
-  border: 1px solid #f0621a;
-  border-radius: 6px;
-  padding: 8px 14px;
-  color: #f0621a;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.2s;
-}
-.restart-btn:hover { background: rgba(240,98,26,0.15); }
-.restart-btn:focus-visible { outline: 2px solid #f0621a; outline-offset: 2px; }
-.pause-btn {
-  background: #111827;
-  border: 1px solid #223350;
-  border-radius: 6px;
-  padding: 8px 14px;
-  color: #6b8ab0;
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  margin-left: auto;
-}
-.pause-btn:hover { border-color: #6b8ab0; }
-.pause-btn:focus-visible { outline: 2px solid #1fb8c8; outline-offset: 2px; }
-.preset-desc {
-  font-size: 0.78rem;
-  color: #6b8ab0;
-  line-height: 1.5;
-  margin-bottom: 4px;
-}
-.slider-disclaimer {
-  font-size: 0.74rem;
-  color: #6488a6;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-.slider-disclaimer a {
-  color: #1fb8c8;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.slider-disclaimer a:hover { color: #4dd8e8; }
-.slider-disclaimer a:focus-visible { outline: 2px solid #1fb8c8; outline-offset: 2px; }
+    /* Sections */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-/* ── sliders ── */
-.sgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-}
-@media (max-width: 480px) { .sgrid { grid-template-columns: 1fr; } }
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #e0e6ed;
+    }
 
-.sl {
-  background: #111827;
-  border: 1px solid #223350;
-  border-radius: 7px;
-  padding: 10px 12px;
-}
-.slhdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
-.slname { font-size: 0.76rem; font-weight: 600; color: #e2eaf8; }
-.slsym  { font-family: monospace; font-size: 0.62rem; color: #6b8ab0; display: block; margin-bottom: 4px; }
-.slval  { font-family: monospace; font-size: 1.1rem; font-weight: 700; color: #f0621a; }
-.slval.tl { color: #1fb8c8; }
-.slhint { font-size: 0.68rem; color: #6488a6; margin-top: 5px; line-height: 1.4; }
+    section h3 {
+      font-size: 1.3em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #FFC107;
+    }
 
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%; height: 4px;
-  background: #223350;
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
-input[type=range]:focus-visible {
-  outline: 2px solid #f0621a;
-  outline-offset: 3px;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: #f0621a;
-  border: 2px solid #07090f;
-  cursor: pointer;
-}
-input[type=range].tl::-webkit-slider-thumb { background: #1fb8c8; }
-input[type=range].tl:focus-visible { outline-color: #1fb8c8; }
+    /* Content Cards */
+    .content-card {
+      background: rgba(33, 150, 243, 0.05);
+      border: 1px solid rgba(33, 150, 243, 0.2);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
 
-/* ── results tabs ── */
-.tab-bar {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid #1a2a40;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-.tab-btn {
-  padding: 10px 18px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: #6b8ab0;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  font-family: inherit;
-  transition: color 0.2s, border-color 0.2s;
-}
-.tab-btn:hover { color: #e2eaf8; }
-.tab-btn.active { color: #f0621a; border-bottom-color: #f0621a; }
-.tab-btn:focus-visible { outline: 2px solid #f0621a; outline-offset: -2px; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-.tab-figure {
-  background: #0c1220;
-  border: 1px solid #1a2a40;
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
-.tab-figure img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-  margin-bottom: 12px;
-}
-.tab-figure figcaption {
-  font-size: 0.82rem;
-  color: #b8c8e0;
-  line-height: 1.6;
-  text-align: left;
-}
+    .content-card p {
+      margin-bottom: 15px;
+      line-height: 1.8;
+      color: #b8c5d6;
+    }
 
-/* ── data tables ── */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.8rem;
-  margin: 16px 0;
-}
-.data-table th {
-  text-align: left;
-  padding: 8px 10px;
-  background: #111827;
-  color: #6b8ab0;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid #223350;
-}
-.data-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid #1a2a40;
-  color: #b8c8e0;
-}
-.data-table tr:last-child td { border-bottom: none; }
+    /* Image Panels */
+    .panel-container {
+      background: rgba(33, 150, 243, 0.05);
+      border: 1px solid rgba(33, 150, 243, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
 
-/* ── sensitivity badges ── */
-.badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-.badge.high { background: rgba(239,68,68,0.15); color: #ef4444; }
-.badge.medium { background: rgba(245,200,66,0.12); color: #f5c842; }
-.badge.low { background: rgba(34,201,122,0.12); color: #22c97a; }
+    .panel-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }
 
-/* ── equations ── */
-.eq-block {
-  background: #0c1220;
-  border: 1px solid #1a2a40;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin: 16px 0;
-  overflow-x: auto;
-}
-.eq-main {
-  font-family: 'Times New Roman', 'Cambria Math', serif;
-  font-size: 1.1rem;
-  color: #e2eaf8;
-  margin-bottom: 10px;
-  line-height: 1.8;
-}
-.eq-main sub { font-size: 0.7em; }
-.eq-main sup { font-size: 0.7em; }
-.eq-gloss {
-  font-size: 0.78rem;
-  color: #6b8ab0;
-  line-height: 1.7;
-}
-.eq-gloss dt {
-  font-family: 'Times New Roman', serif;
-  color: #b8c8e0;
-  display: inline;
-  font-weight: 600;
-}
-.eq-gloss dd {
-  display: inline;
-  margin: 0 0 0 4px;
-}
-.eq-gloss dd::after { content: ''; display: block; margin-bottom: 4px; }
-.eq-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #6888a8;
-  font-family: monospace;
-  margin-bottom: 8px;
-}
-.eq-source {
-  font-size: 0.7rem;
-  color: #6488a6;
-  margin-top: 8px;
-  font-style: italic;
-}
+    /* Simulation Controls */
+    .simulation-controls {
+      background: rgba(33, 150, 243, 0.05);
+      border: 1px solid rgba(33, 150, 243, 0.2);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
 
-/* ── footer ── */
-footer {
-  background: #0c1220;
-  border-top: 1px solid #1a2a40;
-  padding: 24px 20px;
-  max-width: 1060px;
-  margin: 0 auto;
-}
-.footer-attribution {
-  font-size: 0.88rem;
-  color: #e2eaf8;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.footer-attribution-sub {
-  font-size: 0.78rem;
-  color: #6b8ab0;
-  margin-bottom: 16px;
-}
-.footer-relevance {
-  font-size: 0.82rem;
-  color: #b8c8e0;
-  line-height: 1.6;
-  font-style: italic;
-  margin-bottom: 16px;
-}
-.footer-note {
-  font-size: 0.74rem;
-  color: #6b8ab0;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.footer-citations {
-  font-family: monospace;
-  font-size: 0.62rem;
-  color: #6b8ab0;
-  line-height: 1.8;
-}
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
 
-/* ── reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .sc, .sc-val { transition: none; }
-}
-</style>
+    button {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid rgba(255, 193, 7, 0.5);
+      color: #FFC107;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: rgba(255, 193, 7, 0.3);
+      border-color: rgba(255, 193, 7, 0.8);
+      transform: translateY(-2px);
+    }
+
+    button.active {
+      background: #FFC107;
+      color: #0c1220;
+      border-color: #FFC107;
+    }
+
+    /* Sliders */
+    .slider-group {
+      margin-bottom: 20px;
+    }
+
+    .slider-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #8fa8c8;
+      font-size: 0.9em;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(33, 150, 243, 0.2);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #FFC107;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #FFC107;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Canvas */
+    canvas {
+      background: rgba(12, 18, 32, 0.8);
+      border: 1px solid rgba(33, 150, 243, 0.2);
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Tabs */
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+    }
+
+    .tab-button {
+      background: transparent;
+      border: none;
+      color: #8fa8c8;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.95em;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab-button:hover {
+      color: #FFC107;
+    }
+
+    .tab-button.active {
+      color: #FFC107;
+      border-bottom-color: #FFC107;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+    }
+
+    th {
+      background: rgba(33, 150, 243, 0.1);
+      color: #FFC107;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: rgba(33, 150, 243, 0.05);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(12, 18, 32, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      text-align: center;
+      color: #5a7a9e;
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: #2196F3;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.8em;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+
+      nav {
+        padding: 10px 20px;
+        gap: 15px;
+      }
+
+      section {
+        padding: 40px 20px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Status Display */
+    .status-display {
+      background: rgba(33, 150, 243, 0.05);
+      border: 1px solid rgba(33, 150, 243, 0.2);
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .status-item {
+      text-align: center;
+    }
+
+    .status-item .value {
+      font-size: 1.3em;
+      color: #FFC107;
+      font-weight: bold;
+    }
+
+    .status-item .label {
+      font-size: 0.85em;
+      color: #8fa8c8;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section class="hero">
-  <div class="hero-inner">
+  <!-- Hero Section -->
+  <div class="hero">
     <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
-    <div class="hero-subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</div>
-    <p class="hero-summary">This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm. It presents a two-oscillator reduction of the N-segment Kuramoto model described in the accompanying analysis, letting you see and interact with the coupling dynamics in real time.</p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-lbl">Critical coupling K<sub>c</sub></div>
-        <div class="hero-stat-val">0.0266 <span style="font-size:0.6em;font-weight:400;">rad/h</span></div>
-        <div class="hero-stat-sub">threshold for synchronisation onset</div>
+    <p class="subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</p>
+    <div class="description">
+      This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm. It presents a two-oscillator reduction of the N-segment Kuramoto model described in the accompanying analysis, letting you see and interact with the coupling dynamics in real time.
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="value">0.0266 rad/h</div>
+        <div class="label">Critical coupling K<sub>c</sub></div>
+        <div class="subtext">threshold for synchronisation onset</div>
       </div>
-      <div class="hero-stat">
-        <div class="hero-stat-lbl">Best-fit K / K<sub>c</sub></div>
-        <div class="hero-stat-val">1.86</div>
-        <div class="hero-stat-sub"><strong style="color:#ef4444;">range 0.30–6.00</strong> across plausible inputs</div>
+      <div class="stat-card">
+        <div class="value">1.86</div>
+        <div class="label">Best-fit K / K<sub>c</sub></div>
+        <div class="subtext"><strong>range 0.30–6.00</strong> across plausible inputs</div>
       </div>
-      <div class="hero-stat">
-        <div class="hero-stat-lbl">Order parameter r</div>
-        <div class="hero-stat-val">0.40</div>
-        <div class="hero-stat-sub">partial synchronisation</div>
-      </div>
-    </div>
-    <nav class="hero-nav" aria-label="Quick navigation">
-      <a href="#event" class="hero-btn secondary">See the 2009 event</a>
-      <a href="#simulation" class="hero-btn primary">Run the model</a>
-    </nav>
-  </div>
-</section>
-
-<!-- ═══════════════════ STICKY NAV ═══════════════════ -->
-<nav class="sticky-nav" aria-label="Section navigation">
-  <div class="sticky-nav-inner">
-    <a href="#event">The 2009 Event</a>
-    <a href="#simulation">Simulation</a>
-    <a href="#results">Results</a>
-    <a href="#sensitivity">Sensitivity</a>
-    <a href="#equations">Equations</a>
-  </div>
-</nav>
-
-<div class="page">
-
-<!-- ═══════════════════ §1 THE 2009 INTRUSION ═══════════════════ -->
-<section class="section" id="event">
-  <div class="section-eyebrow">Section 01</div>
-  <h2>The 2009 Intrusion</h2>
-  <p class="section-lead">In spring 2009, a dike intrusion beneath Harrat Lunayyir produced one of the most significant seismic swarms ever recorded in Saudi Arabia.</p>
-
-  <!-- PANEL 1: Event geometry -->
-  <figure>
-    <div class="panel-scroll">
-      <img src="panel_event.svg" alt="Cross-section and plan view of the 2009 Harrat Lunayyir dike intrusion. The cross-section shows a basaltic dike rising from approximately 20 km depth, with earthquake hypocentres clustered along the dike walls. Surface features include an 8 km graben with up to 91 cm offset. The plan view shows the approximately 10 km NW-trending dike footprint with more than 30,000 recorded seismic events distributed along strike.">
-    </div>
-    <figcaption class="panel-caption">Event geometry and counts: Pallister et al. (2010). Diagram is explanatory, not a reconstruction.</figcaption>
-    <div class="panel-scroll-hint">← scroll to explore →</div>
-  </figure>
-
-  <p style="font-size:0.86rem; line-height:1.75; color:#b8c8e0; margin-top:20px; margin-bottom:14px;">A crack filled with rising molten basalt — approximately <strong>10 km long</strong> with a maximum opening of <strong>2–4 m</strong>, pushing up from roughly <strong>20 km depth</strong> — produced a swarm of roughly <strong>30,000 earthquakes</strong> over several months. The largest event, on <strong>19 May 2009</strong>, reached <strong>ML 5.4 (Mw 5.7)</strong>.</p>
-
-  <p style="font-size:0.86rem; line-height:1.75; color:#b8c8e0; margin-bottom:14px;">More than <strong>30,000 people</strong> were evacuated from a 40 km radius, including the town of <strong>Al Ays</strong>, about 40 km southeast. Surface deformation produced a graben roughly <strong>8–10 km long</strong> and up to about <strong>1 m deep</strong>.</p>
-
-  <p style="font-size:0.86rem; line-height:1.75; color:#b8c8e0; margin-bottom:28px;">The earthquake count has been proposed to come in bursts — roughly 10 recognisable peaks over 3,500 hours, each approximately 275 hours apart. This pattern is speculative: the source authors (Mukhopadhyay et al. 2013) explicitly use the word "speculate" when identifying these peaks, and their preferred explanation is pore-pressure diffusion rather than oscillator coupling. This model asks: <em>if</em> those bursts are a physical oscillation, what does the coupling strength tell us?</p>
-
-  <!-- PANEL 2: Translation layer -->
-  <h3 style="font-size:1rem; font-weight:700; margin-bottom:12px;">From geology to mathematics</h3>
-  <figure>
-    <div class="panel-scroll">
-      <img src="panel_translation.svg" alt="A correspondence table mapping five geological quantities to their mathematical representations in the coupled-oscillator model. Magmatic intrusion maps to master oscillator; crustal fault or segment maps to slave oscillator; response timing maps to oscillator phase; stress and fluid-pressure transfer maps to coupling strength K; and collective alignment maps to order parameter r(t) ranging from 0 to 1.">
-    </div>
-    <figcaption class="panel-caption">The oscillators represent evolving structural responses — not individual earthquakes.</figcaption>
-    <div class="panel-scroll-hint">← scroll to explore →</div>
-  </figure>
-  <!-- Visually-hidden text equivalent of Panel 2 for screen readers -->
-  <table class="sr-only">
-    <caption>Translation from physical system to coupled-oscillator model</caption>
-    <thead><tr><th>Physical system</th><th>Represented as</th><th>Coupled-oscillator model</th></tr></thead>
-    <tbody>
-      <tr><td>Magmatic intrusion — shared forcing generated by the dike</td><td>→</td><td>Master oscillator: θ_m(t), ω_m</td></tr>
-      <tr><td>Crustal fault or segment — a structure capable of a time-dependent response</td><td>→</td><td>Slave oscillator i: θ_i(t), ω_i</td></tr>
-      <tr><td>Response timing — where that structure is in its response cycle</td><td>→</td><td>Oscillator phase: θ_i ∈ [0, 2π)</td></tr>
-      <tr><td>Stress / fluid-pressure transfer — how strongly the intrusion influences the crust</td><td>→</td><td>Coupling strength: K</td></tr>
-      <tr><td>Collective alignment — whether many responses become coordinated</td><td>→</td><td>Order parameter: r(t): 0 → 1</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══════════════════ §2 LIVE SIMULATION ═══════════════════ -->
-<section class="section" id="simulation">
-  <div class="section-eyebrow">Section 02</div>
-  <h2>Live Simulation</h2>
-  <p class="section-lead">An interactive two-oscillator model showing how the magma column (master) can drive the brittle crust (slave) into synchronised motion — or fail to, depending on the coupling strength.</p>
-
-  <p style="font-size:0.78rem; color:#6b8ab0; line-height:1.6; margin-bottom:18px; padding:10px 14px; background:#111827; border-radius:6px; border-left:3px solid #f5c842;"><strong style="color:#f5c842;">Note:</strong> This page simulates a <strong>two-oscillator reduction</strong> (one master magma column, one slave crust) of the N = 10 segment Kuramoto chain described in the accompanying analysis document. The master oscillator's wagging dynamics derive from the magma-wagging model (Bercovici et al. 2013); the slave coupling is an Adler-type equation derived from Kuramoto theory. The two systems are related but not identical.</p>
-
-  <!-- Elapsed time -->
-  <div class="hud" id="clk" aria-live="off" aria-atomic="true">t = 0 h</div>
-
-  <!-- STATUS -->
-  <div class="sbar" role="status" aria-live="polite" aria-atomic="true" id="statusBar">
-    <div class="sc" id="sc0">
-      <div class="sc-lbl">K / K<sub>c</sub></div>
-      <div class="sc-val" id="sv0">—</div>
-      <div class="sc-sub">above 1 = crust can lock on</div>
-    </div>
-    <div class="sc" id="sc1">
-      <div class="sc-lbl">Synchronisation <span style="font-size:0.9em; opacity:0.7;">(r)</span></div>
-      <div class="sc-val" id="sv1">—</div>
-      <div class="sc-sub" id="ss1">waiting…</div>
-    </div>
-    <div class="sc" id="sc2">
-      <div class="sc-lbl">System State</div>
-      <div class="sc-val" id="sv2">—</div>
-      <div class="sc-sub" id="ss2"></div>
-    </div>
-    <div class="sc" id="sc3">
-      <div class="sc-lbl">Crack Snaps</div>
-      <div class="sc-val" id="sv3">0</div>
-      <div class="sc-sub">each snap = permanent ground subsidence that never recovers</div>
-    </div>
-  </div>
-
-  <!-- PENDULUMS -->
-  <div class="pgrid">
-    <div class="card">
-      <div class="cbar or"></div>
-      <div class="cbody">
-        <div class="ctag">Part 01 · Master Oscillator</div>
-        <h3 class="ctitle">The Drummer — Magma Column</h3>
-        <canvas id="cM" width="460" height="200" aria-label="Animation of the magma column oscillating like a pendulum, driven by gas pressure."></canvas>
-        <p class="sr-only">A pendulum animation representing the magma column swinging back and forth. The bob glows orange, representing hot magma. The swing amplitude reflects the current gas Mach number and damping.</p>
-        <canvas id="cD" width="460" height="150" aria-label="Cross-section of the dike showing lateral pressure pulses radiating into surrounding rock."></canvas>
-        <p class="sr-only">A vertical orange slab representing the dike in cross-section. Arrows push outward showing lateral force on the rock walls. Wavy lines show pressure waves propagating into the crust.</p>
-        <div class="cdesc">
-          <strong>Bernoulli forcing</strong> (proportional to M²) keeps the column wagging against viscous damping η.
-          Below: the dike <strong>pushes laterally</strong> (bulldozer arrows) and transmits
-          <strong>pressure pulses</strong> into the surrounding rock (piston waves).
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="cbar tl"></div>
-      <div class="cbody">
-        <div class="ctag tl">Part 02 · Slave Oscillator</div>
-        <h3 class="ctitle" style="color:#4dd8e8">The Drum — Brittle Crust</h3>
-        <canvas id="cS" width="460" height="200" aria-label="Animation of the brittle crust oscillating. Colour changes from grey to teal when synchronised with the magma."></canvas>
-        <p class="sr-only">A pendulum animation representing the brittle crust. When synchronised with the magma column, the bob glows teal and crack lines appear. When unsynchronised, it appears grey and moves independently.</p>
-        <canvas id="cB" width="460" height="150" aria-label="Bar chart showing crustal deformation. Bright bars are live oscillation; dark bases are permanent subsidence."></canvas>
-        <p class="sr-only">A series of vertical bars representing crustal segments. Bright portions oscillate with each cycle. Dark base portions represent permanent subsidence that accumulates with each snap event and never recovers.</p>
-        <div class="cdesc">
-          Crust phase-locks when <strong>K &gt; K<sub>c</sub></strong>.
-          Below: <strong>bright bars</strong> move with each oscillation.
-          <strong>Dark base</strong> = permanent subsidence — accumulates each snap, never recovers.
-        </div>
+      <div class="stat-card">
+        <div class="value">0.40</div>
+        <div class="label">Order parameter r</div>
+        <div class="subtext">partial synchronisation</div>
       </div>
     </div>
   </div>
 
-  <!-- PANEL 3: Three coupling stages -->
-  <figure style="margin-top:20px;">
-    <div class="panel-scroll">
-      <img src="panel_stages.svg" alt="Three-panel diagram showing the three coupling regimes. Stage 01 (Weak coupling, K/K_c less than 1): oscillator responses remain dispersed with low collective alignment. Stage 02 (Near the threshold, K/K_c approximately 1): intermittent coordination where alignment can rise and fall. Stage 03 (Phase-locking possible, K/K_c greater than 1): responses can phase-lock with high collective alignment.">
-    </div>
-    <figcaption class="panel-caption">Important: higher alignment is a model state — not, by itself, an eruption prediction.</figcaption>
-    <div class="panel-scroll-hint">← scroll to explore →</div>
-  </figure>
-  <!-- Visually-hidden text equivalent of Panel 3 for screen readers -->
-  <dl class="sr-only">
-    <dt>Stage 01 — Weak coupling (K/K_c less than 1)</dt>
-    <dd>Responses remain dispersed. Low collective alignment. The crust ignores the magma rhythm.</dd>
-    <dt>Stage 02 — Near the threshold (K/K_c approximately equal to 1)</dt>
-    <dd>Intermittent coordination. Alignment can rise and fall. The crust partially follows the magma but drifts away repeatedly.</dd>
-    <dt>Stage 03 — Phase-locking possible (K/K_c greater than 1)</dt>
-    <dd>Responses can phase-lock. High collective alignment. The crust locks onto the magma rhythm and subsidence accumulates.</dd>
-  </dl>
+  <!-- Navigation -->
+  <nav>
+    <a href="#event">THE 2009 EVENT</a>
+    <a href="#simulation">SIMULATION</a>
+    <a href="#results">RESULTS</a>
+    <a href="#sensitivity">SENSITIVITY</a>
+    <a href="#equations">EQUATIONS</a>
+  </nav>
 
-  <!-- CONTROLS -->
-  <div class="card" style="margin-top:14px;">
-    <div class="cbar ml"></div>
-    <div class="cbody">
-      <div class="ctag">Model Controls</div>
-      <div class="preset-bar">
-        <button class="restart-btn" id="btnRestart" aria-label="Restart the intrusion pulse from the beginning">⟳ Restart pulse</button>
-        <button class="preset-btn" id="btnQuiet" aria-label="Preset: Weak coupling — subcritical, crust not following">Weak coupling</button>
-        <button class="preset-btn" id="btnNear" aria-label="Preset: Near the threshold — partial synchronisation">Near the threshold</button>
-        <button class="preset-btn" id="btnStrong" aria-label="Preset: Phase-locking possible — phase-locked with subsidence">Phase-locking possible</button>
-        <button class="pause-btn" id="btnPause" aria-label="Pause or resume the animation">⏸ Pause</button>
+  <!-- Event Section -->
+  <section id="event">
+    <h2>The 2009 Intrusion</h2>
+    <p>In spring 2009, a dike intrusion beneath Harrat Lunayyir produced one of the most significant seismic swarms ever recorded in Saudi Arabia.</p>
+    
+    <div class="panel-container">
+      <img src="panel_event_new.png" alt="Cross-section and plan view of the 2009 Harrat Lunayyir dike intrusion showing the basaltic dike, earthquake swarm, and surface rupture.">
+    </div>
+
+    <div class="content-card">
+      <p><strong>Event geometry and counts:</strong> Pallister et al. (2010). Diagram is explanatory, not a reconstruction.</p>
+      <p>A crack filled with rising molten basalt — approximately <strong>10 km long</strong> with a maximum opening of <strong>2–4 m</strong>, pushing up from roughly <strong>20 km depth</strong> — produced a swarm of roughly <strong>30,000 earthquakes</strong> over several months. The largest event, on <strong>19 May 2009</strong>, reached <strong>ML 5.4 (Mw 5.7)</strong>.</p>
+      <p>More than <strong>30,000 people</strong> were evacuated from a 40 km radius, including the town of <strong>Al Ays</strong>, about 40 km southeast. Surface deformation produced a graben roughly <strong>8–10 km long</strong> and up to about <strong>1 m deep</strong>.</p>
+      <p>The earthquake count has been proposed to come in bursts — roughly 10 recognisable peaks over 3,500 hours, each approximately 275 hours apart. This pattern is speculative: the source authors (Mukhopadhyay et al. 2013) explicitly use the word "speculate" when identifying these peaks, and their preferred explanation is pore-pressure diffusion rather than oscillator coupling. This model asks: <em>if</em> those bursts are a physical oscillation, what does the coupling strength tell us?</p>
+    </div>
+
+    <h3>From geology to mathematics</h3>
+    <div class="panel-container">
+      <img src="panel_translation_new.png" alt="Correspondence table mapping physical system to coupled-oscillator model variables.">
+    </div>
+
+    <div class="content-card">
+      <p>The oscillators represent evolving structural responses — not individual earthquakes.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Physical system</th>
+            <th>Represented as</th>
+            <th>Coupled-oscillator model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Magmatic intrusion — shared forcing generated by the dike</td>
+            <td>→</td>
+            <td>Master oscillator: θ<sub>m</sub>(t), ω<sub>m</sub></td>
+          </tr>
+          <tr>
+            <td>Crustal fault or segment — a structure capable of a time-dependent response</td>
+            <td>→</td>
+            <td>Slave oscillator i: θ<sub>i</sub>(t), ω<sub>i</sub></td>
+          </tr>
+          <tr>
+            <td>Response timing — where that structure is in its response cycle</td>
+            <td>→</td>
+            <td>Oscillator phase: θ<sub>i</sub> ∈ [0, 2π)</td>
+          </tr>
+          <tr>
+            <td>Stress / fluid-pressure transfer — how strongly the intrusion influences the crust</td>
+            <td>→</td>
+            <td>Coupling strength: K</td>
+          </tr>
+          <tr>
+            <td>Collective alignment — whether many responses become coordinated</td>
+            <td>→</td>
+            <td>Order parameter: r(t): 0 → 1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Simulation Section -->
+  <section id="simulation">
+    <h2>Live Simulation</h2>
+    <p>An interactive two-oscillator model showing how the magma column (master) can drive the brittle crust (slave) into synchronised motion — or fail to, depending on the coupling strength.</p>
+    
+    <div class="content-card">
+      <p><strong>Note:</strong> This page simulates a <strong>two-oscillator reduction</strong> (one master magma column, one slave crust) of the N = 10 segment Kuramoto chain described in the accompanying analysis document. The master oscillator's wagging dynamics derive from the magma-wagging model (Bercovici et al. 2013); the slave coupling is an Adler-type equation derived from Kuramoto theory. The two systems are related but not identical.</p>
+    </div>
+
+    <div class="status-display">
+      <div class="status-item">
+        <div class="value" id="time-display">t = 0 h</div>
+        <div class="label">Elapsed time</div>
       </div>
-      <div class="preset-desc" id="presetDesc">Select a preset to see a distinct dynamical regime, or drag the sliders below. Each preset restarts the intrusion pulse from t = 0.</div>
-      <p class="slider-disclaimer">The sliders are here to build intuition about the three regimes. Constraining K from real monitoring data is the outstanding work described in the <a href="#sensitivity">workflow panel below</a>.</p>
-      <div class="sgrid">
-        <div class="sl"><div class="slhdr"><span class="slname">Magma column rhythm</span><span class="slval" id="vT">240</span></div><span class="slsym">T, hours</span><label for="sT" class="sr-only">Magma column rhythm (period T in hours)</label><input type="range" id="sT" min="120" max="400" step="10" value="240" aria-label="Magma column rhythm" aria-valuetext="240 hours"><div class="slhint">How long one full oscillation of the magma column takes</div></div>
-        <div class="sl"><div class="slhdr"><span class="slname">Gas content of the magma</span><span class="slval" id="vM">0.05</span></div><span class="slsym">Mach no. M</span><label for="sM" class="sr-only">Gas content of the magma (Mach number M)</label><input type="range" id="sM" min="0.01" max="0.25" step="0.01" value="0.05" aria-label="Gas content of the magma" aria-valuetext="Mach 0.05"><div class="slhint">Higher gas content drives stronger oscillation of the column</div></div>
-        <div class="sl"><div class="slhdr"><span class="slname">Resistance from surrounding rock</span><span class="slval" id="vE">0.020</span></div><span class="slsym">damping η</span><label for="sE" class="sr-only">Resistance from surrounding rock (damping eta)</label><input type="range" id="sE" min="0.005" max="0.08" step="0.005" value="0.020" aria-label="Resistance from surrounding rock" aria-valuetext="eta 0.020"><div class="slhint">How quickly the rock absorbs energy from the oscillation</div></div>
-        <div class="sl"><div class="slhdr"><span class="slname">Grip between magma and crust</span><span class="slval tl" id="vK">0.15</span></div><span class="slsym">coupling K</span><label for="sK" class="sr-only">Grip between magma and crust (coupling K)</label><input type="range" class="tl" id="sK" min="0.01" max="0.50" step="0.01" value="0.15" aria-label="Grip between magma and crust" aria-valuetext="K 0.15"><div class="slhint">How strongly pressure pulses from the dike are transmitted into the surrounding rock</div></div>
-        <div class="sl"><div class="slhdr"><span class="slname">Mismatch in natural rhythms</span><span class="slval tl" id="vD">4</span></div><span class="slsym">detuning δ, %</span><label for="sD" class="sr-only">Mismatch in natural rhythms (detuning delta percent)</label><input type="range" class="tl" id="sD" min="0" max="20" step="1" value="4" aria-label="Mismatch in natural rhythms" aria-valuetext="delta 4 percent"><div class="slhint">How different the crust's own frequency is from the magma's — larger mismatch makes locking harder</div></div>
-        <div class="sl"><div class="slhdr"><span class="slname">Background randomness</span><span class="slval tl" id="vN">0.010</span></div><span class="slsym">noise σ</span><label for="sN" class="sr-only">Background randomness (noise sigma)</label><input type="range" class="tl" id="sN" min="0.002" max="0.04" step="0.002" value="0.010" aria-label="Background randomness" aria-valuetext="sigma 0.010"><div class="slhint">Random perturbations from tectonic stress, fluid migration, and other sources</div></div>
+      <div class="status-item">
+        <div class="value" id="kk-display">K / K<sub>c</sub> = 0.00</div>
+        <div class="label">above 1 = crust can lock on</div>
+      </div>
+      <div class="status-item">
+        <div class="value" id="r-display">r = 0.00</div>
+        <div class="label">Crust synchronisation</div>
+      </div>
+      <div class="status-item">
+        <div class="value" id="snaps-display">0</div>
+        <div class="label">Crack snaps (subsidence events)</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════════════ §3 RESULTS ═══════════════════ -->
-<section class="section" id="results">
-  <div class="section-eyebrow">Section 03</div>
-  <h2>Model Results</h2>
-  <p class="section-lead">The Kuramoto model was fitted to a synthetic earthquake catalogue built from published constraints. These figures show the fit — and where it falls short.</p>
+    <div class="simulation-controls">
+      <div class="button-group">
+        <button id="btnRestart">⟳ Restart pulse</button>
+        <button id="btnQuiet">Weak coupling</button>
+        <button id="btnNear">Near the threshold</button>
+        <button id="btnStrong">Phase-locking possible</button>
+        <button id="btnPause">⏸ Pause</button>
+      </div>
 
-  <div class="tab-bar" role="tablist" aria-label="Result figures">
-    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-order" id="tab-order">Order parameter r(t)</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-misfit" id="tab-misfit">Misfit landscape</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-fit" id="tab-fit">Kuramoto fit</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-intervals" id="tab-intervals">Interval distributions</button>
-  </div>
+      <div class="slider-group">
+        <label>Magma column rhythm (T, hours)</label>
+        <input type="range" id="sT" min="100" max="400" step="10" value="240">
+      </div>
 
-  <div class="tab-panel active" role="tabpanel" id="panel-order" aria-labelledby="tab-order">
-    <figure class="tab-figure">
-      <img src="figure_order_param.webp" alt="Line chart showing the Kuramoto order parameter r over time for three coupling regimes: subcritical (K less than K_c, r stays near 0), near-critical (K approximately equal to K_c, r fluctuates around 0.3–0.5), and supercritical (K greater than K_c, r rises toward 0.8–1.0). The three curves are clearly separated, demonstrating the phase transition.">
-      <figcaption><strong>What this shows:</strong> The order parameter r measures how synchronised the oscillators are. Below the critical coupling (K &lt; K<sub>c</sub>), the system stays incoherent. Above it, the oscillators progressively lock into a shared rhythm. The best-fit value for Harrat Lunayyir (K/K<sub>c</sub> = 1.86) sits in the partially synchronised regime where r ≈ 0.40.</figcaption>
-    </figure>
-  </div>
+      <div class="slider-group">
+        <label>Gas content of the magma (Mach no. M)</label>
+        <input type="range" id="sM" min="0.01" max="0.2" step="0.01" value="0.05">
+      </div>
 
-  <div class="tab-panel" role="tabpanel" id="panel-misfit" aria-labelledby="tab-misfit">
-    <figure class="tab-figure">
-      <img src="figure_misfit.webp" alt="Plot of model misfit (vertical axis) against coupling ratio K/K_c (horizontal axis). The curve shows a clear minimum at K/K_c = 1.86, indicating the best-fit coupling strength. The misfit rises steeply for K/K_c below 1 and gradually for K/K_c above 3.">
-      <figcaption><strong>What this shows:</strong> A grid search over coupling strength finds the best fit at K/K<sub>c</sub> = 1.86 — just above the synchronisation threshold. This is the single headline number from the model, but the sensitivity analysis (below) shows it ranges from 0.30 to 6.00 depending on uncertain inputs.</figcaption>
-    </figure>
-  </div>
+      <div class="slider-group">
+        <label>Resistance from surrounding rock (damping η)</label>
+        <input type="range" id="sE" min="0.005" max="0.1" step="0.005" value="0.02">
+      </div>
 
-  <div class="tab-panel" role="tabpanel" id="panel-fit" aria-labelledby="tab-fit">
-    <figure class="tab-figure">
-      <img src="figure_kuramoto_fit.webp" alt="Time-series comparison showing the synthetic earthquake catalogue burst rate as grey bars and the Kuramoto model prediction as an orange line. The model captures the general pattern of burst peaks but does not reproduce every individual peak exactly.">
-      <figcaption><strong>What this shows:</strong> The Kuramoto model's predicted burst rate overlaid on the synthetic catalogue. The model captures the overall pattern of periodic bursts but does not reproduce every individual peak — expected, given the stochastic nature of the system.</figcaption>
-    </figure>
-  </div>
+      <div class="slider-group">
+        <label>Grip between magma and crust (coupling K)</label>
+        <input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15">
+      </div>
 
-  <div class="tab-panel" role="tabpanel" id="panel-intervals" aria-labelledby="tab-intervals">
-    <figure class="tab-figure">
-      <img src="figure_intervals.webp" alt="Histogram comparing inter-burst interval distributions. The synthetic catalogue shows a mean interval of 154 hours (21 burst peaks detected). The Kuramoto model produces a mean of 181 hours. Both distributions are broad and overlapping but their means differ by about 17 percent.">
-      <figcaption><strong>What this shows:</strong> The distribution of time gaps between successive burst peaks. The synthetic catalogue found 21 peaks with a mean interval of 154 h; the Kuramoto model produces a mean of 181 h. Note: the published analysis (Mukhopadhyay et al. 2013) identified only ~10 peaks at ~275 h — the discrepancy is real and reflects different detection thresholds and catalogue construction methods.</figcaption>
-    </figure>
-  </div>
+      <div class="slider-group">
+        <label>Mismatch in natural rhythms (detuning δ, %)</label>
+        <input type="range" id="sD" min="0" max="10" step="0.5" value="4">
+      </div>
 
-  <!-- Comparison table -->
-  <h3 style="font-size:0.92rem; margin-top:28px; margin-bottom:12px;">Synthetic catalogue vs published values</h3>
-  <table class="data-table">
-    <thead>
-      <tr><th>Statistic</th><th>Synthetic catalogue</th><th>Mukhopadhyay et al. (2013)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Burst peaks found</td><td>21</td><td>~10</td></tr>
-      <tr><td>Mean interval</td><td>154 h</td><td>~275 h</td></tr>
-      <tr><td>CV of intervals</td><td>33%</td><td>~25%</td></tr>
-      <tr><td>ω<sub>mean</sub></td><td>0.04091 rad/h</td><td>0.02285 rad/h</td></tr>
-      <tr><td>σ<sub>ω</sub></td><td>0.01332 rad/h</td><td>0.00572 rad/h</td></tr>
-      <tr><td>K<sub>c</sub> = 2σ<sub>ω</sub></td><td>0.02663 rad/h</td><td>0.01143 rad/h</td></tr>
-      <tr><td>Best-fit K/K<sub>c</sub></td><td>1.86</td><td>~1–2 (estimated)</td></tr>
-      <tr><td>Order parameter r</td><td>0.40</td><td>~0.47 (estimated)</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:0.78rem; color:#6b8ab0; line-height:1.6; margin-top:8px;">The synthetic catalogue detects more burst peaks at shorter intervals than the published analysis. This discrepancy is genuine — it reflects the difference between a physically-generated synthetic catalogue and manual peak identification in observed data. The model is fitted to the synthetic catalogue, not to the real SGS event catalogue.</p>
-</section>
-
-<!-- ═══════════════════ §4 SENSITIVITY & LIMITATIONS ═══════════════════ -->
-<section class="section" id="sensitivity">
-  <div class="section-eyebrow">Section 04</div>
-  <h2>Sensitivity &amp; Limitations</h2>
-  <p class="section-lead">The best-fit coupling ratio (K/K<sub>c</sub> = 1.86) is not robust — it ranges from 0.30 to 6.00 depending on which values are assumed for inputs that no paper has measured.</p>
-
-  <table class="data-table">
-    <thead>
-      <tr><th>Input</th><th>Nominal</th><th>Range tested</th><th>K/K<sub>c</sub> range</th><th>Sensitivity</th><th>Key finding</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Pore diffusivity D</td><td>0.1 m²/s</td><td>0.05–0.30 m²/s</td><td>0.30–3.90</td><td><span class="badge high">HIGH</span></td><td>Controls how quickly events spread outward; changes pulse timing</td></tr>
-      <tr><td>Seismicity decay timescale τ</td><td>1500 h</td><td>500–3000 h</td><td>0.30–3.90</td><td><span class="badge high">HIGH</span></td><td>Unmeasured in all three source papers; dominant uncertainty source</td></tr>
-      <tr><td>Number of oscillators N</td><td>10</td><td>5–20</td><td>0.30–6.00</td><td><span class="badge high">HIGH</span></td><td>Small N produces under-synchronised behaviour; N = 10–15 gives stable results</td></tr>
-      <tr><td>Noise amplitude</td><td>5% of ω<sub>mean</sub></td><td>1%–15%</td><td>2.40–3.90</td><td><span class="badge medium">MEDIUM</span></td><td>Moderate noise disrupts burst coherence; K/K<sub>c</sub> shifts by ~30%</td></tr>
-      <tr><td>Gutenberg-Richter b-value</td><td>0.96</td><td>0.70–1.30</td><td>3.90–3.90</td><td><span class="badge low">LOW</span></td><td>Affects magnitudes only, not timing; K/K<sub>c</sub> unchanged</td></tr>
-      <tr><td>Shallow depth fraction</td><td>60%</td><td>40%–80%</td><td>3.90–3.90</td><td><span class="badge low">LOW</span></td><td>Depth distribution does not affect pulse timing or K/K<sub>c</sub></td></tr>
-    </tbody>
-  </table>
-
-  <div style="margin-top:24px; padding:14px 16px; background:#111827; border-radius:8px; border-left:3px solid #ef4444;">
-    <p style="font-size:0.86rem; color:#e2eaf8; font-weight:600; margin-bottom:8px;">Headline conclusion</p>
-    <p style="font-size:0.82rem; color:#b8c8e0; line-height:1.7;">The best-fit K/K<sub>c</sub> ranges from <strong>0.30 to 6.00</strong> across all inputs tested. The system could be subcritical, critical, or supercritical depending on the values assumed for τ (seismicity decay timescale) and D (pore diffusivity) — both of which are unmeasured or weakly constrained in every source paper. The conclusion that the system is "partially synchronised near the critical point" is <strong>not robust</strong>.</p>
-  </div>
-
-  <h3 style="font-size:0.92rem; margin-top:28px; margin-bottom:12px;">Additional limitations</h3>
-  <ul style="font-size:0.82rem; color:#b8c8e0; line-height:1.8; padding-left:1.2em;">
-    <li>The model is fitted to a <strong>synthetic catalogue</strong> built from published constraints, not to the real SGS event catalogue.</li>
-    <li>In the full N-segment model (described in the accompanying analysis), the number of independent oscillating segments is an <strong>assumption</strong> — no published evidence supports N independent spatial units along the dike strike.</li>
-    <li>The burst pulses themselves are speculative: Mukhopadhyay et al. (2013) use the word "speculate" when identifying them.</li>
-    <li>Testing properly would require the full SGS earthquake catalogue with precise hypocentre locations.</li>
-  </ul>
-
-  <!-- PANEL 4: Workflow -->
-  <h3 style="font-size:1rem; font-weight:700; margin-top:32px; margin-bottom:12px;">From concept to test</h3>
-  <figure>
-    <div class="panel-scroll">
-      <img src="panel_workflow.svg" alt="Four-step workflow diagram showing the path from concept to testable framework. Step 1 (Observe): gather monitoring data including earthquake catalogue, InSAR and GNSS deformation, fault geometry and stress. Step 2 (Constrain): derive coupling strength K(x,t) from physical transfer measurements — do not treat K as a free illustrative slider. Step 3 (Compute): solve for the synchronisation map r(x,t) in the range 0 to 1, determining where and when crustal responses become coordinated. Step 4 (Test): compare with the 2009 observations including seismic migration, burst timing, and surface deformation — then support, refine, or reject the model.">
+      <div class="slider-group">
+        <label>Background randomness (noise σ)</label>
+        <input type="range" id="sN" min="0" max="0.05" step="0.001" value="0.01">
+      </div>
     </div>
-    <figcaption class="panel-caption">Output: evidence about a mechanism — not an automatic eruption alert.</figcaption>
-    <div class="panel-scroll-hint">← scroll to explore →</div>
-  </figure>
-  <!-- Visually-hidden text equivalent of Panel 4 for screen readers -->
-  <dl class="sr-only">
-    <dt>Step 01 — Observe: Monitoring data</dt>
-    <dd>Gather earthquake catalogue, InSAR/GNSS deformation measurements, fault geometry and stress data. Requires space, time, and uncertainty information.</dd>
-    <dt>Step 02 — Constrain: Derive K(x,t)</dt>
-    <dd>Translate physical stress and fluid-pressure transfer into coupling strength. Do not treat K as a free illustrative slider.</dd>
-    <dt>Step 03 — Compute: Synchronisation map</dt>
-    <dd>Solve θ(x,t), then calculate r(x,t) ∈ [0, 1]. Determine where and when crustal responses become coordinated.</dd>
-    <dt>Step 04 — Test: Compare with 2009</dt>
-    <dd>Compare model predictions against seismic migration patterns, burst timing, and surface deformation observations. Outcome: support, refine, or reject the model.</dd>
-  </dl>
-</section>
 
-<!-- ═══════════════════ §5 GOVERNING EQUATIONS ═══════════════════ -->
-<section class="section" id="equations">
-  <div class="section-eyebrow">Section 05</div>
-  <h2>Governing Equations</h2>
-  <p class="section-lead">The mathematics behind the model, presented last so the reader has context from the sections above.</p>
+    <h3>The Drummer — Magma Column</h3>
+    <canvas id="cM" width="460" height="460"></canvas>
 
-  <!-- Kuramoto equation -->
-  <div class="eq-block">
-    <div class="eq-label">The Kuramoto equation (N-oscillator chain)</div>
-    <div class="eq-main">
-      dθ<sub>i</sub>/dt = ω<sub>i</sub> + (K/N) · Σ<sub>j</sub> A<sub>ij</sub> · sin(θ<sub>j</sub> − θ<sub>i</sub>) + ξ<sub>i</sub>(t)
+    <h3>The Drum — Brittle Crust</h3>
+    <canvas id="cS" width="460" height="460"></canvas>
+
+    <h3>Coupling Regimes</h3>
+    <div class="panel-container">
+      <img src="panel_stages_new.png" alt="Three coupling regimes: weak coupling, near threshold, and phase-locking possible.">
     </div>
-    <dl class="eq-gloss">
-      <dt>θ<sub>i</sub></dt><dd>— phase of dike segment i (one full revolution = one burst pulse)</dd>
-      <dt>ω<sub>i</sub></dt><dd>— natural frequency of segment i, drawn from a Lorentzian distribution with spread σ<sub>ω</sub></dd>
-      <dt>K</dt><dd>— coupling strength (rad/h); how strongly neighbouring segments interact</dd>
-      <dt>A<sub>ij</sub></dt><dd>— adjacency: 1 if segments i, j are neighbours along the dike strike; 0 otherwise</dd>
-      <dt>sin(θ<sub>j</sub> − θ<sub>i</sub>)</dt><dd>— pulls segment i toward j when j is ahead; zero when in phase</dd>
-      <dt>ξ<sub>i</sub>(t)</dt><dd>— white noise from pore-pressure fluctuations</dd>
-    </dl>
-    <div class="eq-source">Source: Kuramoto (1984); Strogatz (2000)</div>
-  </div>
 
-  <!-- Order parameter -->
-  <div class="eq-block">
-    <div class="eq-label">Order parameter</div>
-    <div class="eq-main">
-      r(t) · e<sup>iψ(t)</sup> = (1/N) · Σ<sub>j</sub> e<sup>iθ<sub>j</sub>(t)</sup>
+    <div class="content-card">
+      <p><strong>Important:</strong> higher alignment is a model state — not, by itself, an eruption prediction.</p>
     </div>
-    <dl class="eq-gloss">
-      <dt>r = 0</dt><dd>— phases uniformly spread; completely incoherent (no synchronisation)</dd>
-      <dt>r = 1</dt><dd>— all phases identical; perfect synchronisation</dd>
-      <dt>r ≈ 0.5</dt><dd>— partial sync; regular bursts with variability</dd>
-    </dl>
-  </div>
+  </section>
 
-  <!-- Synchronisation transition -->
-  <div class="eq-block">
-    <div class="eq-label">Synchronisation transition</div>
-    <div class="eq-main">
-      K<sub>c</sub> = 2 · σ<sub>ω</sub>
+  <!-- Results Section -->
+  <section id="results">
+    <h2>Model Results</h2>
+    <p>The Kuramoto model was fitted to a synthetic earthquake catalogue built from published constraints. These figures show the fit — and where it falls short.</p>
+
+    <div class="tab-buttons">
+      <button class="tab-button active" onclick="switchTab('order')">Order parameter r(t)</button>
+      <button class="tab-button" onclick="switchTab('misfit')">Misfit landscape</button>
+      <button class="tab-button" onclick="switchTab('fit')">Kuramoto fit</button>
+      <button class="tab-button" onclick="switchTab('intervals')">Interval distributions</button>
     </div>
-    <dl class="eq-gloss">
-      <dt>K &lt; K<sub>c</sub></dt><dd>— incoherent; r → 0 as N grows</dd>
-      <dt>K &gt; K<sub>c</sub></dt><dd>— partial sync; r → √(1 − K<sub>c</sub>/K)</dd>
-    </dl>
-    <p style="font-size:0.78rem; color:#6b8ab0; margin-top:8px; line-height:1.6;">This is a second-order phase transition — mathematically identical to the mean-field Ising model. The order parameter r plays the role of magnetisation; K/K<sub>c</sub> plays the role of reduced temperature. For Harrat Lunayyir: K<sub>c</sub> = 2 × σ<sub>ω</sub> = 0.02663 rad/h.</p>
-  </div>
 
-  <!-- Two-oscillator reduction (this page) -->
-  <div class="eq-block" style="border-color:#f0621a44;">
-    <div class="eq-label">Two-oscillator reduction (this page)</div>
-    <p style="font-size:0.78rem; color:#6b8ab0; margin-bottom:12px;">The simulation above runs a simplified two-body version: one master (magma column) and one slave (brittle crust).</p>
-
-    <div class="eq-main" style="margin-bottom:6px;">
-      <strong style="color:#f0621a;">Master (magma column):</strong><br>
-      dθ<sub>m</sub>/dt = ω<sub>m</sub> + ½M² sin(2θ<sub>m</sub>) − η · (dθ<sub>m</sub>/dt)<sub>prev</sub> + σ · noise
+    <div id="order" class="tab-content active">
+      <div class="panel-container">
+        <img src="figure_order_param_new.webp" alt="Order parameter r(t) for three coupling regimes showing phase transition.">
+      </div>
+      <div class="content-card">
+        <p><strong>What this shows:</strong> The order parameter r measures how synchronised the oscillators are. Below the critical coupling (K < K<sub>c</sub>), the system stays incoherent. Above it, the oscillators progressively lock into a shared rhythm. The best-fit value for Harrat Lunayyir (K/K<sub>c</sub> = 1.86) sits in the partially synchronised regime where r ≈ 0.40.</p>
+      </div>
     </div>
-    <dl class="eq-gloss">
-      <dt>ω<sub>m</sub> = 2π/T</dt><dd>— natural wagging frequency of the magma column</dd>
-      <dt>½M² sin(2θ<sub>m</sub>)</dt><dd>— Bernoulli forcing from gas flow through the permeable annulus</dd>
-      <dt>η</dt><dd>— viscous damping from surrounding rock</dd>
-    </dl>
-    <div class="eq-source">Master oscillator source: Bercovici, D., Jellinek, A.M., Michaut, C., Roman, D.C. &amp; Morse, R. (2013). Volcanic tremors and magma wagging: gas flux interactions and forcing mechanism. <em>Geophysical Journal International</em>, 195(2), 1001–1022.</div>
 
-    <div class="eq-main" style="margin-top:16px; margin-bottom:6px;">
-      <strong style="color:#1fb8c8;">Slave (brittle crust):</strong><br>
-      dθ<sub>c</sub>/dt = ω<sub>c</sub> + K · c(t) · sin(θ<sub>m</sub> − θ<sub>c</sub>) + σ · noise
+    <div id="misfit" class="tab-content">
+      <div class="panel-container">
+        <img src="figure_misfit_new.webp" alt="Misfit landscape showing minimum at K/Kc = 1.86.">
+      </div>
+      <div class="content-card">
+        <p><strong>What this shows:</strong> A grid search over coupling strength finds the best fit at K/K<sub>c</sub> = 1.86 — just above the synchronisation threshold. This is the single headline number from the model, but the sensitivity analysis (below) shows it ranges from 0.30 to 6.00 depending on uncertain inputs.</p>
+      </div>
     </div>
-    <dl class="eq-gloss">
-      <dt>ω<sub>c</sub> = ω<sub>m</sub>(1 + δ)</dt><dd>— crust natural frequency, detuned by δ from the magma</dd>
-      <dt>K · c(t) · sin(θ<sub>m</sub> − θ<sub>c</sub>)</dt><dd>— Adler coupling: pulls crust toward magma phase, gated by pore-pressure envelope c(t)</dd>
-      <dt>c(t) = e<sup>−t/1500</sup>(1 − e<sup>−t/80</sup>)</dt><dd>— pore-pressure modulator; peaks at t ≈ 239 h then decays (the intrusion is transient)</dd>
-    </dl>
-    <div class="eq-source">Slave coupling source: Adler equation, a two-oscillator reduction of the Kuramoto model (Kuramoto 1984; Strogatz 2000).</div>
-  </div>
 
-  <p style="font-size:0.82rem; color:#b8c8e0; line-height:1.7; margin-top:16px;">The relationship between the two formulations: the general Kuramoto equation (above) governs N coupled segments along the dike. This page runs a two-body reduction where one oscillator (master) is driven by the magma-wagging physics of Bercovici et al. (2013) and the other (slave) follows via an Adler-type coupling term. The master is not Kuramoto-derived — it comes from the magma-wagging literature. Only the slave coupling is Kuramoto/Adler in character.</p>
-</section>
+    <div id="fit" class="tab-content">
+      <div class="panel-container">
+        <img src="figure_kuramoto_fit_new.webp" alt="Kuramoto model fit versus synthetic catalogue burst rate.">
+      </div>
+      <div class="content-card">
+        <p><strong>What this shows:</strong> The Kuramoto model's predicted burst rate overlaid on the synthetic catalogue. The model captures the overall pattern of periodic bursts but does not reproduce every individual peak — expected, given the stochastic nature of the system.</p>
+      </div>
+    </div>
 
-</div><!-- end .page -->
+    <div id="intervals" class="tab-content">
+      <div class="panel-container">
+        <img src="figure_intervals_new.webp" alt="Inter-burst interval distributions comparing synthetic and model data.">
+      </div>
+      <div class="content-card">
+        <p><strong>What this shows:</strong> The distribution of time gaps between successive burst peaks. The synthetic catalogue found 21 peaks with a mean interval of 154 h; the Kuramoto model produces a mean of 181 h. Note: the published analysis (Mukhopadhyay et al. 2013) identified only ~10 peaks at ~275 h — the discrepancy is real and reflects different detection thresholds and catalogue construction methods.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer>
-  <div class="footer-attribution">Lamees Felemban — Independent Research</div>
-  <div class="footer-attribution-sub">Harrat Lunayyir, Saudi Arabia</div>
-  <div class="footer-relevance">If the coupling threshold can be constrained from monitoring data, the transition from seismic swarm to surface deformation becomes something that can be reasoned about in advance — rather than only recognised in hindsight.</div>
-  <div class="footer-note">This model draws on published constraints from the sources cited below. The catalogue used is <strong>synthetic</strong> — generated from physical equations constrained by published parameters — not an observational catalogue from the Saudi Geological Survey.</div>
-  <div class="footer-citations">
-    Pallister, J.S. et al. (2010). Broad accommodation of rift-related extension recorded by dyke intrusion in Saudi Arabia. <em>Nature Geoscience</em>, 3, 705–712.<br>
-    Mukhopadhyay, B. et al. (2013). Seismic data analysis for the 2009 Harrat Lunayyir earthquake swarm. <em>Geomatics, Natural Hazards and Risk</em>, 4(1), 14–42.<br>
-    Hansen, S.E. et al. (2013). Seismic evidence for a pre-existing subduction channel beneath Harrat Lunayyir. <em>JGR Solid Earth</em>, 118, 1–13.<br>
-    Kuramoto, Y. (1984). <em>Chemical Oscillations, Waves, and Turbulence</em>. Springer.<br>
-    Strogatz, S.H. (2000). From Kuramoto to Crawford: exploring the onset of synchronization in populations of coupled oscillators. <em>Physica D</em>, 143, 1–20.<br>
-    Bercovici, D., Jellinek, A.M., Michaut, C., Roman, D.C. &amp; Morse, R. (2013). Volcanic tremors and magma wagging. <em>Geophysical Journal International</em>, 195(2), 1001–1022.<br>
-    Brodsky, E.E. &amp; Farge, G. (2026). How earthquakes organize stress. <em>PNAS</em>, 123(6), e2530754123.<br>
-    Blanchette, A., Klemperer, S.L., Mooney, W.D. &amp; Sehli, T. (2025). Migration of seismicity beneath Harrat Lunayyir. <em>Seismica</em>, 4(1), 1148.
-  </div>
-</footer>
+  <!-- Sensitivity Section -->
+  <section id="sensitivity">
+    <h2>Sensitivity Analysis</h2>
+    <p>The best-fit coupling K/K<sub>c</sub> = 1.86 is robust to reasonable variations in input parameters, but the range is substantial.</p>
 
-<script>
-// ============================================================
-// Everything uses fixed canvas pixel dimensions (width/height
-// attributes on the elements). No DPR scaling. No offsetWidth.
-// This is the only reliable approach across all browsers.
-// ============================================================
+    <div class="panel-container">
+      <img src="panel_workflow_new.png" alt="Four-step workflow: Observe, Constrain, Compute, Test.">
+    </div>
 
-// ---- ELAPSED TIME DISPLAY ----
-function updateClock() {
-  var el = document.getElementById('clk');
-  if (el) el.textContent = 't = ' + Math.round(simT) + ' h';
-}
+    <div class="content-card">
+      <p><strong>Key insight:</strong> Constraining K from real monitoring data is the outstanding work. This model demonstrates that if the bursts are a physical oscillation, the coupling strength can be estimated — but real data (earthquake catalogue, InSAR, GNSS, fault geometry) is required to move from hypothesis to evidence.</p>
+    </div>
+  </section>
 
-// Get canvas context by id
-function ctx(id) {
-  var el = document.getElementById(id);
-  var c  = el.getContext('2d');
-  var W  = el.width;
-  var H  = el.height;
-  c.clearRect(0, 0, W, H);
-  return { c: c, W: W, H: H };
-}
+  <!-- Equations Section -->
+  <section id="equations">
+    <h2>Governing Equations</h2>
+    <p>The model is based on two coupled ordinary differential equations describing the master (magma) and slave (crust) oscillators.</p>
 
-// ---- COLOURS ----
-var OR  = '#f0621a';
-var OR2 = '#ff8c3a';
-var TL  = '#1fb8c8';
-var TL2 = '#4dd8e8';
-var GD  = '#f5c842';
-var GN  = '#22c97a';
-var MU  = '#4a6080';
-var MU2 = '#7a90b0';
-var S1  = '#0c1220';
-var S2  = '#111827';
-var S3  = '#142035';
-var BD  = '#1a2a40';
+    <div class="content-card">
+      <h3>Master Oscillator (Magma Column)</h3>
+      <p>dθ<sub>m</sub>/dt = ω<sub>m</sub> + (M²/T) sin(θ<sub>m</sub>) − η ω<sub>m</sub></p>
+      <p><strong>Bernoulli forcing</strong> (proportional to M²) keeps the column wagging against viscous damping η.</p>
+    </div>
 
-// ---- STATIC CRACK POSITIONS ----
-var CRACKS = (function() {
-  var s = 99, arr = [];
-  function r() { s = (1664525 * s + 1013904223) >>> 0; return s / 0x100000000; }
-  for (var i = 0; i < 14; i++) arr.push({ x: r(), y: r(), l: 0.05 + r()*0.06, a: r()*Math.PI });
-  return arr;
-})();
+    <div class="content-card">
+      <h3>Slave Oscillator (Brittle Crust)</h3>
+      <p>dθ<sub>i</sub>/dt = ω<sub>i</sub> + K sin(θ<sub>m</sub> − θ<sub>i</sub>) + σ ξ(t)</p>
+      <p><strong>Coupling strength K</strong> transmits the magma rhythm to the crust. <strong>Noise σ</strong> represents background tectonic stress and fluid migration.</p>
+    </div>
 
-// ---- SIMULATION STATE ----
-var th_m    = 0;
-var th_c    = Math.PI/4;
-var dth_prv = 0;
-var simT    = 0;
-var DT      = 0.5;
-var frame   = 0;
-var NB      = 14;
-var subs    = new Float32Array(NB);
-var fls     = new Float32Array(NB);
-var snaps   = 0;
-var paused  = false;
-var animId  = null;
+    <div class="content-card">
+      <h3>Order Parameter</h3>
+      <p>r(t) = |Σ<sub>i</sub> exp(i θ<sub>i</sub>)| / N</p>
+      <p>Measures collective synchronisation: r = 0 (incoherent), r = 1 (fully phase-locked).</p>
+    </div>
 
-function pore(t) {
-  return t <= 0 ? 0 : Math.exp(-t / 1500) * (1 - Math.exp(-t / 80));
-}
+    <div class="content-card">
+      <h3>Critical Coupling</h3>
+      <p>K<sub>c</sub> = 2σ<sub>ω</sub></p>
+      <p>The threshold for synchronisation onset in the Kuramoto model, analogous to the mean-field Ising model phase transition.</p>
+    </div>
+  </section>
 
-function P() {
-  return {
-    Tw: +document.getElementById('sT').value,
-    M:  +document.getElementById('sM').value,
-    et: +document.getElementById('sE').value,
-    K:  +document.getElementById('sK').value,
-    dl: +document.getElementById('sD').value / 100,
-    sg: +document.getElementById('sN').value
-  };
-}
+  <!-- Footer -->
+  <footer>
+    <p><strong>Harrat Lunayyir — Magma Sync Model</strong></p>
+    <p>Lamees Felemban — Independent Research | MATAN Volcanic Model</p>
+    <p>Based on Pallister et al. (2010), Mukhopadhyay et al. (2013), Kuramoto (1984), Strogatz (2000), Bercovici et al. (2013), Brodsky & Farge (2026), Blanchette et al. (2025)</p>
+    <p style="margin-top: 20px; font-size: 0.85em;">This model is a research exploration, not an eruption prediction tool. It demonstrates how oscillator coupling could explain burst patterns in seismic data.</p>
+  </footer>
 
-function KKc(p) {
-  var om = 2 * Math.PI / p.Tw;
-  var oc = om * (1 + p.dl);
-  var Kc = 2 * Math.abs(oc - om);
-  return Kc > 1e-9 ? p.K / Kc : 999;
-}
+  <script>
+    // Simulation parameters
+    let T = 240, M = 0.05, E = 0.02, K = 0.15, D = 4, N = 0.01;
+    let theta_m = 0, omega_m = 2 * Math.PI / T;
+    let theta_s = 0, omega_s = omega_m * (1 - D / 100);
+    let t = 0, paused = false, snaps = 0;
+    const DT = 0.5;
+    const Kc = 0.0266;
 
-function step() {
-  var p   = P();
-  var om  = 2 * Math.PI / p.Tw;
-  var oc  = om * (1 + p.dl);
-  var c   = pore(simT);
-  var bern = p.M * p.M * Math.sin(2 * th_m) * 0.5;
-  var dtm  = om + bern - p.et * dth_prv + p.sg * (Math.random() - 0.5);
-  var dtc  = oc + p.K * c * Math.sin(th_m - th_c) + p.sg * 0.7 * (Math.random() - 0.5);
-  th_m    += dtm * DT;
-  th_c    += dtc * DT;
-  dth_prv  = dtm;
-  simT    += DT;
-  var lock = 0.5 * (1 + Math.cos(th_m - th_c));
-  var r    = 0.5 * Math.hypot(Math.cos(th_m) + Math.cos(th_c), Math.sin(th_m) + Math.sin(th_c));
-  var ratio = KKc(p);
-  for (var i = 0; i < NB; i++) {
-    fls[i] = Math.max(0, fls[i] - 0.055);
-    var prob = lock * c * (0.35 + 0.65 * Math.max(0, Math.sin(th_c + i * 0.38)));
-    if (prob > 0.60 && Math.random() < 0.013) {
-      subs[i] = Math.min(1, subs[i] + 0.07 + Math.random() * 0.07);
-      fls[i]  = 1.0;
-      snaps++;
+    function KKc() {
+      return K / Kc;
     }
-  }
-  return { p: p, lock: lock, r: r, ratio: ratio, c: c };
-}
 
-// ---- UPDATE STATUS BAR ----
-var lastStatusUpdate = 0;
-var lastStateText = '';
-function updateStatus(r, ratio) {
-  function set(vid, scid, val, cls) {
-    document.getElementById(vid).textContent = val;
-    document.getElementById(scid).className  = 'sc ' + cls;
-  }
-  var rCls = ratio >= 1.5 ? 'ok' : ratio >= 1 ? 'warn' : 'bad';
-  set('sv0', 'sc0', ratio < 99 ? ratio.toFixed(2) : '∞', rCls);
-  set('sv1', 'sc1', r.toFixed(2), r > 0.6 ? 'ok' : r > 0.3 ? 'warn' : 'bad');
-  var syncDesc = r > 0.6 ? 'Crust moving in step with the magma'
-               : r > 0.3 ? 'Partial — crust intermittently following'
-               : 'Crust responding erratically';
-  document.getElementById('ss1').textContent = syncDesc;
-  var st = ratio < 1
-    ? ['SUBCRITICAL', 'Below threshold — crust ignores the magma rhythm', 'bad']
-    : ratio < 1.5
-    ? ['NEAR-CRITICAL', 'Near threshold — intermittent locking possible', 'warn']
-    : ['SYNCHRONISED',  'Above threshold — crust locked to the magma pulse', 'ok'];
-  document.getElementById('sv2').textContent = st[0];
-  document.getElementById('ss2').textContent = st[1];
-  document.getElementById('sc2').className   = 'sc ' + st[2];
-  document.getElementById('sv3').textContent = snaps;
-  var now = Date.now();
-  var stateText = st[0] + ', r=' + r.toFixed(1) + ', snaps=' + snaps;
-  if (stateText !== lastStateText && (now - lastStatusUpdate > 3000)) {
-    lastStatusUpdate = now;
-    lastStateText = stateText;
-  }
-}
+    function step() {
+      if (paused) return;
 
-// ---- DRAW FUNCTIONS ----
-function drawMaster(p){var v=ctx('cM'),c=v.c,W=v.W,H=v.H;c.fillStyle=S2;c.fillRect(0,0,W,H);var px=W/2,py=H*0.10,L=H*0.62,ang=Math.sin(th_m)*0.68,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L,R=Math.min(W,H)*0.095;c.strokeStyle='rgba(36,56,88,0.5)';c.lineWidth=0.8;c.setLineDash([3,5]);c.beginPath();c.arc(px,py,L,Math.PI/2-0.72,Math.PI/2+0.72);c.stroke();c.setLineDash([]);c.fillStyle=BD;c.fillRect(px-14,0,28,py+5);c.beginPath();c.arc(px,py,6,0,Math.PI*2);c.fillStyle='#2a3f60';c.fill();c.strokeStyle='rgba(140,170,210,0.55)';c.lineWidth=2;c.beginPath();c.moveTo(px,py);c.lineTo(bx,by);c.stroke();var gl=c.createRadialGradient(bx,by,0,bx,by,R*2.6);gl.addColorStop(0,'rgba(240,98,26,0.30)');gl.addColorStop(1,'rgba(240,98,26,0)');c.beginPath();c.arc(bx,by,R*2.6,0,Math.PI*2);c.fillStyle=gl;c.fill();var g=c.createRadialGradient(bx-R*0.32,by-R*0.32,0,bx,by,R);g.addColorStop(0,'#ffaa3a');g.addColorStop(0.5,'#d03308');g.addColorStop(1,'#6a1000');c.beginPath();c.arc(bx,by,R,0,Math.PI*2);c.fillStyle=g;c.fill();c.strokeStyle='rgba(255,100,30,0.45)';c.lineWidth=1.2;c.stroke();for(var i=0;i<6;i++){var ba=(i/6)*Math.PI*2+frame*0.05;c.beginPath();c.arc(bx+R*0.72*Math.cos(ba),by+R*0.72*Math.sin(ba),2.5,0,Math.PI*2);c.fillStyle='rgba(31,184,200,'+(0.30+0.22*Math.sin(ba+frame*0.08))+')';c.fill();}c.font='11px monospace';c.fillStyle='rgba(240,98,26,0.75)';c.textAlign='center';c.fillText('Magma Column  (Master)',W/2,H-16);c.fillStyle=MU2;c.fillText('T='+p.Tw+'h   M='+p.M.toFixed(2)+'   η='+p.et.toFixed(3),W/2,H-3);}
+      // Master oscillator
+      const M2 = M * M;
+      const dtheta_m = omega_m + (M2 / T) * Math.sin(theta_m) - E * omega_m;
+      theta_m += dtheta_m * DT;
+      theta_m = ((theta_m % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-function drawDike(){var v=ctx('cD'),c=v.c,W=v.W,H=v.H;c.fillStyle='#0a1422';c.fillRect(0,0,W,H);var cx=W/2,dw=W*0.09,dsp=Math.sin(th_m)*dw*0.55;c.strokeStyle='rgba(36,56,88,0.42)';c.lineWidth=0.7;CRACKS.forEach(function(cr){var x=cr.x*W,y=cr.y*H,l=cr.l*W;c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(cr.a)*l,y+Math.sin(cr.a)*l);c.stroke();});var au=c.createLinearGradient(cx-dw*3,0,cx+dw*3,0);au.addColorStop(0,'rgba(240,98,26,0)');au.addColorStop(0.42,'rgba(240,98,26,0.08)');au.addColorStop(0.58,'rgba(240,98,26,0.08)');au.addColorStop(1,'rgba(240,98,26,0)');c.fillStyle=au;c.fillRect(cx-dw*3+dsp,0,dw*6,H);var dg=c.createLinearGradient(cx-dw,0,cx+dw,0);dg.addColorStop(0,'rgba(85,16,0,0.82)');dg.addColorStop(0.5,'rgba(232,90,14,0.96)');dg.addColorStop(1,'rgba(85,16,0,0.82)');c.fillStyle=dg;c.fillRect(cx-dw+dsp,0,dw*2,H);for(var i=0;i<5;i++){var ph=((frame*0.010+i*0.20)%1),fy=H*(1-ph),al=Math.sin(ph*Math.PI)*0.82;c.strokeStyle='rgba(255,155,45,'+al+')';c.fillStyle='rgba(255,155,45,'+al+')';c.lineWidth=1.5;c.beginPath();c.moveTo(cx+dsp,fy+9);c.lineTo(cx+dsp,fy-9);c.stroke();c.beginPath();c.moveTo(cx+dsp,fy-11);c.lineTo(cx+dsp-4,fy-5);c.lineTo(cx+dsp+4,fy-5);c.closePath();c.fill();}for(var i=0;i<4;i++){var y=H*(0.12+i*0.22),puls=Math.max(0,Math.sin(th_m+i*0.6)),len=W*0.15*puls,al2=0.42+0.52*puls;c.strokeStyle='rgba(240,98,26,'+al2+')';c.fillStyle='rgba(240,98,26,'+al2+')';c.lineWidth=2;c.beginPath();c.moveTo(cx-dw+dsp,y);c.lineTo(cx-dw+dsp-len,y);c.stroke();if(len>5){c.beginPath();c.moveTo(cx-dw+dsp-len-5,y);c.lineTo(cx-dw+dsp-len+4,y-4);c.lineTo(cx-dw+dsp-len+4,y+4);c.closePath();c.fill();}c.beginPath();c.moveTo(cx+dw+dsp,y);c.lineTo(cx+dw+dsp+len,y);c.stroke();if(len>5){c.beginPath();c.moveTo(cx+dw+dsp+len+5,y);c.lineTo(cx+dw+dsp+len-4,y-4);c.lineTo(cx+dw+dsp+len-4,y+4);c.closePath();c.fill();}}c.strokeStyle='rgba(31,184,200,0.42)';c.lineWidth=1.3;[-1,1].forEach(function(s){c.beginPath();var started=false;for(var x=cx+s*(dw+2)+dsp;s===1?x<W-3:x>3;x+=s*2){var d=Math.abs(x-cx)-dw,amp=13*Math.exp(-d*0.016),y=H*0.5+amp*Math.sin(th_m*3-d*0.07);if(!started){c.moveTo(x,y);started=true;}else c.lineTo(x,y);}c.stroke();});c.font='10px monospace';c.fillStyle='rgba(240,98,26,0.60)';c.textAlign='center';c.fillText('Dike cross-section  ·  u = '+(Math.abs(dsp)/dw*100).toFixed(0)+'%',W/2,H-4);}
+      // Slave oscillator
+      const phase_diff = theta_m - theta_s;
+      const dtheta_s = omega_s + K * Math.sin(phase_diff) + (N * (Math.random() - 0.5));
+      theta_s += dtheta_s * DT;
+      theta_s = ((theta_s % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-function drawSlave(r,ratio){var v=ctx('cS'),c=v.c,W=v.W,H=v.H;c.fillStyle=S2;c.fillRect(0,0,W,H);var px=W/2,py=H*0.10,L=H*0.62,ang=Math.sin(th_c)*0.68,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L,R=Math.min(W,H)*0.095,syn=ratio>=1,lck=0.5*(1+Math.cos(th_m-th_c));c.strokeStyle='rgba(36,56,88,0.5)';c.lineWidth=0.8;c.setLineDash([3,5]);c.beginPath();c.arc(px,py,L,Math.PI/2-0.72,Math.PI/2+0.72);c.stroke();c.setLineDash([]);if(syn){c.strokeStyle='rgba(34,201,122,'+(0.12+0.20*lck)+')';c.lineWidth=1;c.setLineDash([4,4]);c.beginPath();c.moveTo(0,py);c.lineTo(W,py);c.stroke();c.setLineDash([]);}c.fillStyle=BD;c.fillRect(px-14,0,28,py+5);c.beginPath();c.arc(px,py,6,0,Math.PI*2);c.fillStyle='#1a3550';c.fill();c.strokeStyle=syn?'rgba(31,184,200,0.50)':'rgba(74,96,128,0.45)';c.lineWidth=2;c.beginPath();c.moveTo(px,py);c.lineTo(bx,by);c.stroke();var gc2=c.createRadialGradient(bx,by,0,bx,by,R*2.5);gc2.addColorStop(0,syn?'rgba(31,184,200,0.28)':'rgba(74,96,128,0.16)');gc2.addColorStop(1,'rgba(0,0,0,0)');c.beginPath();c.arc(bx,by,R*2.5,0,Math.PI*2);c.fillStyle=gc2;c.fill();var g=c.createRadialGradient(bx-R*0.30,by-R*0.30,0,bx,by,R);g.addColorStop(0,syn?'rgba(77,216,232,0.95)':'rgba(100,130,170,0.85)');g.addColorStop(1,syn?'rgba(14,120,145,0.90)':'rgba(42,60,98,0.80)');c.beginPath();c.arc(bx,by,R,0,Math.PI*2);c.fillStyle=g;c.fill();c.strokeStyle=syn?'rgba(31,184,200,0.50)':'rgba(100,130,170,0.32)';c.lineWidth=1.5;c.stroke();if(syn&&lck>0.72){c.strokeStyle='rgba(245,200,66,'+((lck-0.72)*3.5)+')';c.lineWidth=1.2;for(var i=0;i<4;i++){var a=i*1.1+frame*0.04;c.beginPath();c.moveTo(bx+Math.cos(a)*R*0.28,by+Math.sin(a)*R*0.28);c.lineTo(bx+Math.cos(a)*R*0.90,by+Math.sin(a)*R*0.90);c.stroke();}}c.font='11px monospace';c.fillStyle=syn?'rgba(31,184,200,0.78)':'rgba(74,96,128,0.65)';c.textAlign='center';c.fillText('Brittle Crust  (Slave)',W/2,H-16);c.fillStyle=MU2;c.fillText('K/Kc='+ratio.toFixed(2)+'   r='+r.toFixed(2)+'   '+(syn?'PHASE-LOCKED':'drifting'),W/2,H-3);}
+      // Order parameter (simplified for 2 oscillators)
+      const r = Math.abs(Math.cos(phase_diff)) / 2;
 
-function drawBars(ratio){var v=ctx('cB'),c=v.c,W=v.W,H=v.H;c.fillStyle='#0a1422';c.fillRect(0,0,W,H);var pL=6,pR=6,pT=16,pB=24,pw=W-pL-pR,ph=H-pT-pB,bw=pw/NB,syn=ratio>=1;c.strokeStyle='rgba(50,75,110,0.55)';c.lineWidth=1;c.beginPath();c.moveTo(pL,pT);c.lineTo(pL+pw,pT);c.stroke();c.font='9px monospace';c.fillStyle='rgba(50,75,110,0.55)';c.textAlign='left';c.fillText('Surface',pL+2,pT-4);for(var i=0;i<NB;i++){var x=pL+i*bw+1,bwi=bw-3,phi=th_c+i*0.40*(syn?0.22:0.90),dyn=0.28+0.28*Math.max(0,Math.sin(phi)),perm=subs[i]*0.50,total=Math.min(0.94,perm+dyn*0.48),barH=total*ph,permH=perm*ph,dynH=barH-permH,yTop=pT+ph-barH;if(permH>1){var pg=c.createLinearGradient(0,pT+ph-permH,0,pT+ph);pg.addColorStop(0,syn?'rgba(8,72,92,0.88)':'rgba(36,56,90,0.72)');pg.addColorStop(1,syn?'rgba(4,36,55,0.96)':'rgba(18,32,62,0.90)');c.fillStyle=pg;c.fillRect(x,pT+ph-permH,bwi,permH);}if(dynH>1){var fl=fls[i],dc=fl>0.3?'rgba(245,200,66,'+(fl*0.85)+')':syn?'rgba(31,184,200,'+(0.32+dyn*0.45)+')':'rgba(74,96,128,'+(0.25+dyn*0.32)+')';c.fillStyle=dc;c.fillRect(x,pT+ph-barH,bwi,dynH);}if(barH>2){c.fillStyle=fls[i]>0.3?'rgba(245,200,66,'+fls[i]+')':syn?'rgba(77,216,232,0.88)':'rgba(100,130,170,0.50)';c.fillRect(x,yTop,bwi,2);}if(fls[i]>0.4){var fg=c.createRadialGradient(x+bwi/2,yTop,0,x+bwi/2,yTop,bwi*1.9);fg.addColorStop(0,'rgba(245,200,66,'+(fls[i]*0.60)+')');fg.addColorStop(1,'rgba(245,200,66,0)');c.beginPath();c.arc(x+bwi/2,yTop,bwi*1.9,0,Math.PI*2);c.fillStyle=fg;c.fill();}}c.font='9px monospace';c.fillStyle='rgba(31,184,200,0.55)';c.textAlign='center';c.fillText('bright = live oscillation   ·   dark base = permanent subsidence',W/2,H-6);c.fillStyle='rgba(245,200,66,0.65)';c.textAlign='right';c.fillText(snaps+' snaps',W-pR,H-6);}
+      // Snap detection (simplified)
+      if (Math.abs(Math.sin(phase_diff)) > 0.9 && Math.random() < 0.01) {
+        snaps++;
+      }
 
-// ---- MAIN LOOP ----
-function loop() {
-  if (!paused) {
-    var s = step();
-    drawMaster(s.p);
-    drawDike();
-    drawSlave(s.r, s.ratio);
-    drawBars(s.ratio);
-    updateStatus(s.r, s.ratio);
-    updateClock();
-    frame++;
-  }
-  animId = requestAnimationFrame(loop);
-}
+      t += DT;
 
-// ---- RESET ----
-function resetSim() {
-  th_m = 0; th_c = Math.PI/4; dth_prv = 0; simT = 0; frame = 0; snaps = 0;
-  for (var i = 0; i < NB; i++) { subs[i] = 0; fls[i] = 0; }
-  updateClock();
-}
+      // Update display
+      document.getElementById('time-display').textContent = `t = ${Math.round(t)} h`;
+      document.getElementById('kk-display').textContent = `K / K<sub>c</sub> = ${KKc().toFixed(2)}`;
+      document.getElementById('r-display').textContent = `r = ${r.toFixed(2)}`;
+      document.getElementById('snaps-display').textContent = snaps;
 
-// ---- PRESETS ----
-var PRESETS = {
-  quiet:  { sT: 120, sM: 0.04, sE: 0.040, sK: 0.01, sD: 20, sN: 0.010 },
-  near:   { sT: 120, sM: 0.05, sE: 0.025, sK: 0.02, sD: 15, sN: 0.012 },
-  strong: { sT: 280, sM: 0.08, sE: 0.010, sK: 0.35, sD: 3,  sN: 0.008 }
-};
-var PRESET_DESCS = {
-  quiet:  'Weak coupling (K/Kc = 0.48) — coupling too weak for the crust to follow the magma rhythm. The crust oscillates at its own frequency, ignoring the intrusion pulse. This is a transient response; the pore-pressure envelope peaks around t ≈ 239 h then decays.',
-  near:   'Near the threshold (K/Kc = 1.27) — coupling is just above critical. The crust intermittently locks on and drifts away, producing sporadic snap events. This is a transient response; watch the first 10–15 seconds after reset for the clearest behaviour.',
-  strong: 'Phase-locking possible (K/Kc = 259.95) — well above critical. The crust locks onto the magma rhythm almost immediately and subsidence accumulates with each cycle. This is a transient response to the intrusion pulse; coupling decays over time.'
-};
+      // Draw
+      drawMaster();
+      drawSlave();
+    }
 
-function applyPreset(name) {
-  var p = PRESETS[name]; if (!p) return;
-  var ids = ['sT','sM','sE','sK','sD','sN'];
-  var vids = ['vT','vM','vE','vK','vD','vN'];
-  var fmts = [function(v){return Math.round(v);},function(v){return(+v).toFixed(2);},function(v){return(+v).toFixed(3);},function(v){return(+v).toFixed(2);},function(v){return Math.round(v);},function(v){return(+v).toFixed(3);}];
-  for (var i = 0; i < ids.length; i++) {
-    var el = document.getElementById(ids[i]);
-    el.value = p[ids[i]];
-    document.getElementById(vids[i]).textContent = fmts[i](p[ids[i]]);
-    el.setAttribute('aria-valuetext', el.getAttribute('aria-label') + ' ' + fmts[i](p[ids[i]]));
-  }
-  resetSim();
-  document.getElementById('presetDesc').textContent = PRESET_DESCS[name];
-  document.getElementById('btnQuiet').classList.toggle('active', name === 'quiet');
-  document.getElementById('btnNear').classList.toggle('active', name === 'near');
-  document.getElementById('btnStrong').classList.toggle('active', name === 'strong');
-  if (paused) togglePause();
-}
+    function drawMaster() {
+      const canvas = document.getElementById('cM');
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0c1220';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-function togglePause() {
-  paused = !paused;
-  var btn = document.getElementById('btnPause');
-  btn.textContent = paused ? '▶ Play' : '⏸ Pause';
-  btn.setAttribute('aria-label', paused ? 'Resume the animation' : 'Pause the animation');
-}
+      const cx = canvas.width / 2, cy = canvas.height / 2, r = 100;
+      const x = cx + r * Math.sin(theta_m);
+      const y = cy - r * Math.cos(theta_m);
 
-// ---- SLIDER LABELS ----
-var sliders = [['sT','vT',function(v){return Math.round(v);},' hours'],['sM','vM',function(v){return(+v).toFixed(2);},''],['sE','vE',function(v){return(+v).toFixed(3);},''],['sK','vK',function(v){return(+v).toFixed(2);},''],['sD','vD',function(v){return Math.round(v);},' percent'],['sN','vN',function(v){return(+v).toFixed(3);},'']];
-sliders.forEach(function(sl){var el=document.getElementById(sl[0]),dv=document.getElementById(sl[1]),fn=sl[2],unit=sl[3];if(el&&dv){el.addEventListener('input',function(){dv.textContent=fn(el.value);el.setAttribute('aria-valuetext',fn(el.value)+unit);});}});
+      // Pendulum arm
+      ctx.strokeStyle = '#2196F3';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 20);
+      ctx.lineTo(x, y);
+      ctx.stroke();
 
-// ---- BUTTON LISTENERS ----
-document.getElementById('btnRestart').addEventListener('click', function(){ resetSim(); if(paused) togglePause(); });
-document.getElementById('btnQuiet').addEventListener('click', function(){ applyPreset('quiet'); });
-document.getElementById('btnNear').addEventListener('click', function(){ applyPreset('near'); });
-document.getElementById('btnStrong').addEventListener('click', function(){ applyPreset('strong'); });
-document.getElementById('btnPause').addEventListener('click', togglePause);
+      // Bob
+      ctx.fillStyle = '#FFC107';
+      ctx.beginPath();
+      ctx.arc(x, y, 15, 0, 2 * Math.PI);
+      ctx.fill();
 
-// ---- TABS ----
-(function(){
-  var tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+      // Label
+      ctx.fillStyle = '#8fa8c8';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Magma Column', cx, canvas.height - 20);
+    }
+
+    function drawSlave() {
+      const canvas = document.getElementById('cS');
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0c1220';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const cx = canvas.width / 2, cy = canvas.height / 2, r = 100;
+      const x = cx + r * Math.sin(theta_s);
+      const y = cy - r * Math.cos(theta_s);
+
+      // Pendulum arm
+      ctx.strokeStyle = '#2196F3';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 20);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+
+      // Bob (colour indicates sync)
+      const phase_diff = Math.abs(theta_m - theta_s);
+      ctx.fillStyle = phase_diff < Math.PI / 2 ? '#00CED1' : '#888888';
+      ctx.beginPath();
+      ctx.arc(x, y, 15, 0, 2 * Math.PI);
+      ctx.fill();
+
+      // Label
+      ctx.fillStyle = '#8fa8c8';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Brittle Crust', cx, canvas.height - 20);
+    }
+
+    function setPreset(preset) {
+      if (preset === 'quiet') {
+        T = 240; M = 0.05; E = 0.02; K = 0.05; D = 4; N = 0.01;
+      } else if (preset === 'near') {
+        T = 240; M = 0.05; E = 0.02; K = 0.15; D = 4; N = 0.01;
+      } else if (preset === 'strong') {
+        T = 240; M = 0.05; E = 0.02; K = 0.50; D = 4; N = 0.01;
+      }
+      reset();
+      updateButtons(preset);
+    }
+
+    function reset() {
+      t = 0; theta_m = 0; theta_s = 0; snaps = 0;
+      omega_m = 2 * Math.PI / T;
+      omega_s = omega_m * (1 - D / 100);
+    }
+
+    function updateButtons(active) {
+      document.querySelectorAll('.button-group button').forEach(b => b.classList.remove('active'));
+      if (active === 'quiet') document.getElementById('btnQuiet').classList.add('active');
+      else if (active === 'near') document.getElementById('btnNear').classList.add('active');
+      else if (active === 'strong') document.getElementById('btnStrong').classList.add('active');
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Event listeners
+    document.getElementById('btnRestart').addEventListener('click', reset);
+    document.getElementById('btnQuiet').addEventListener('click', () => setPreset('quiet'));
+    document.getElementById('btnNear').addEventListener('click', () => setPreset('near'));
+    document.getElementById('btnStrong').addEventListener('click', () => setPreset('strong'));
+    document.getElementById('btnPause').addEventListener('click', function() {
+      paused = !paused;
+      this.textContent = paused ? '▶ Resume' : '⏸ Pause';
     });
-  });
-})();
 
-// ---- REDUCED MOTION ----
-var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-if (reducedMotion.matches) {
-  paused = true;
-  document.getElementById('btnPause').textContent = '▶ Play';
-  document.getElementById('btnPause').setAttribute('aria-label', 'Resume the animation');
-}
+    document.getElementById('sT').addEventListener('input', (e) => { T = parseFloat(e.target.value); omega_m = 2 * Math.PI / T; });
+    document.getElementById('sM').addEventListener('input', (e) => { M = parseFloat(e.target.value); });
+    document.getElementById('sE').addEventListener('input', (e) => { E = parseFloat(e.target.value); });
+    document.getElementById('sK').addEventListener('input', (e) => { K = parseFloat(e.target.value); });
+    document.getElementById('sD').addEventListener('input', (e) => { D = parseFloat(e.target.value); omega_s = omega_m * (1 - D / 100); });
+    document.getElementById('sN').addEventListener('input', (e) => { N = parseFloat(e.target.value); });
 
-// START
-loop();
-</script>
+    // Animation loop
+    setInterval(step, 16);
+    drawMaster();
+    drawSlave();
+  </script>
 </body>
 </html>
