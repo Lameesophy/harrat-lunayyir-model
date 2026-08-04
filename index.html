@@ -131,7 +131,7 @@
 
     function drawMaster(){
       var el=cM, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle=S2; c.fillRect(0,0,W,H);
+      c.fillStyle="white"; c.beginPath(); c.arc(W/2,H/2,100,0,Math.PI*2); c.fill();
       var px=W/2, py=H*0.1, L=H*0.6, ang=Math.sin(th_m)*0.6, bx=px+Math.sin(ang)*L, by=py+Math.cos(ang)*L;
       c.strokeStyle=MU2; c.lineWidth=2; c.beginPath(); c.moveTo(px,py); c.lineTo(bx,by); c.stroke();
       c.fillStyle='#f0621a'; c.beginPath(); c.arc(bx,by,W*0.09,0,Math.PI*2); c.fill();
@@ -146,7 +146,7 @@
 
     function drawSlave(){
       var el=cS, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle=S2; c.fillRect(0,0,W,H);
+      c.fillStyle="white"; c.beginPath(); c.arc(W/2,H/2,100,0,Math.PI*2); c.fill();
       var px=W/2, py=H*0.1, L=H*0.6, ang=Math.sin(th_c)*0.6, bx=px+Math.sin(ang)*L, by=py+Math.cos(ang)*L;
       c.strokeStyle='#4a6080'; c.lineWidth=2; c.beginPath(); c.moveTo(px,py); c.lineTo(bx,by); c.stroke();
       c.fillStyle='#1fb8c8'; c.beginPath(); c.arc(bx,by,W*0.09,0,Math.PI*2); c.fill();
