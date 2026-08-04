@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">The 2009 Harrat Lunayyir dyke intrusion</title>
+  <desc id="desc">A schematic cross-section and plan-view inset showing a shallow basaltic dyke, surrounding earthquake swarm, surface rupture, and the observed event dimensions.</desc>
+  <defs>
+    <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#17233a"/>
+      <stop offset="1" stop-color="#0a0f1a"/>
+    </linearGradient>
+    <linearGradient id="magma" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#7c240d"/>
+      <stop offset="0.55" stop-color="#f0621a"/>
+      <stop offset="1" stop-color="#f5c842"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-30%" width="260%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grain" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="7" r="1" fill="#223350" opacity="0.45"/>
+      <circle cx="20" cy="18" r="1.2" fill="#223350" opacity="0.35"/>
+    </pattern>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#f0621a"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b8ab0"/>
+    </marker>
+  </defs>
+
+  <!-- Transparent outer canvas: no full-size background rectangle. -->
+  <text x="54" y="56" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="15" letter-spacing="2.2">PHYSICAL EVENT • 2009</text>
+  <text x="54" y="91" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">What happened beneath Harrat Lunayyir?</text>
+  <text x="1146" y="58" text-anchor="end" fill="#f5c842" font-family="Consolas, monospace" font-size="13">SCHEMATIC • NOT TO SCALE</text>
+
+  <!-- Cross-section -->
+  <rect x="54" y="122" width="748" height="493" rx="16" fill="#0c1220" stroke="#1a2a40" stroke-width="2"/>
+  <rect x="55" y="243" width="746" height="371" rx="0 0 15 15" fill="url(#crust)"/>
+  <rect x="55" y="243" width="746" height="371" fill="url(#grain)"/>
+
+  <!-- Surface and volcanic field -->
+  <path d="M55 250 C120 242 165 248 218 239 C276 229 320 247 372 240 C420 234 455 237 492 232 C538 225 583 239 629 236 C687 232 738 242 801 236 L801 122 L55 122 Z" fill="#0b111e"/>
+  <path d="M55 250 C120 242 165 248 218 239 C276 229 320 247 372 240 C420 234 455 237 492 232 C538 225 583 239 629 236 C687 232 738 242 801 236" fill="none" stroke="#6b8ab0" stroke-width="2"/>
+  <path d="M128 242 L159 203 L190 241 Z" fill="#131d30" stroke="#223350"/>
+  <path d="M627 236 L665 188 L706 238 Z" fill="#131d30" stroke="#223350"/>
+  <path d="M655 201 Q666 193 678 203" fill="none" stroke="#f0621a" stroke-width="3" opacity="0.7"/>
+
+  <!-- Graben and surface rupture -->
+  <path d="M392 239 L420 252 L452 252 L480 236" fill="none" stroke="#f5c842" stroke-width="3"/>
+  <path d="M405 240 L431 290" stroke="#4dd8e8" stroke-width="3"/>
+  <path d="M468 240 L444 290" stroke="#4dd8e8" stroke-width="3"/>
+  <path d="M402 224 C421 214 449 214 472 225" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <!-- Faults -->
+  <g fill="none" stroke="#4dd8e8" stroke-width="2" opacity="0.72">
+    <path d="M175 552 L320 248"/>
+    <path d="M250 610 L357 252"/>
+    <path d="M608 610 L517 248"/>
+    <path d="M700 565 L548 246"/>
+  </g>
+
+  <!-- Dyke -->
+  <path d="M421 596 C430 548 424 498 435 452 C445 410 438 365 447 323 C454 291 445 267 452 245 L481 241 C477 280 487 314 478 354 C469 397 479 439 468 482 C457 528 464 570 453 606 Z" fill="#f0621a" opacity="0.18" filter="url(#glow)"/>
+  <path d="M428 600 C438 548 431 501 442 454 C451 414 445 368 454 327 C461 294 454 266 459 245 L473 243 C470 280 479 314 470 355 C461 397 471 438 460 480 C449 528 457 569 447 603 Z" fill="url(#magma)" stroke="#f5c842" stroke-width="1.5"/>
+  <path d="M448 540 L455 438 L461 342 L465 265" fill="none" stroke="#fff3c4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-orange)" opacity="0.86"/>
+
+  <!-- Earthquake hypocentres -->
+  <g fill="#ef4444" stroke="#ffb4a9" stroke-width="0.7">
+    <circle cx="380" cy="316" r="4"/><circle cx="409" cy="337" r="3"/><circle cx="501" cy="318" r="4"/>
+    <circle cx="393" cy="371" r="5"/><circle cx="515" cy="362" r="3"/><circle cx="362" cy="402" r="3"/>
+    <circle cx="415" cy="418" r="4"/><circle cx="495" cy="407" r="5"/><circle cx="537" cy="431" r="3"/>
+    <circle cx="372" cy="453" r="4"/><circle cx="405" cy="480" r="3"/><circle cx="504" cy="470" r="4"/>
+    <circle cx="345" cy="505" r="3"/><circle cx="393" cy="526" r="5"/><circle cx="492" cy="519" r="3"/>
+    <circle cx="531" cy="546" r="4"/><circle cx="421" cy="568" r="3"/><circle cx="489" cy="580" r="4"/>
+  </g>
+
+  <!-- Callouts -->
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <path d="M254 184 L377 184 L413 226" fill="none" stroke="#6b8ab0" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    <text x="79" y="179" fill="#e2eaf8" font-size="16" font-weight="600">Surface rupture &amp; graben</text>
+    <text x="79" y="201" fill="#6b8ab0" font-size="13">8 km rupture • up to 91 cm offset</text>
+
+    <path d="M282 372 L357 372" fill="none" stroke="#6b8ab0" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    <text x="79" y="359" fill="#e2eaf8" font-size="16" font-weight="600">Earthquake swarm</text>
+    <text x="79" y="381" fill="#6b8ab0" font-size="13">&gt;30,000 recorded events</text>
+
+    <path d="M595 438 L493 438" fill="none" stroke="#f0621a" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+    <text x="610" y="426" fill="#e2eaf8" font-size="16" font-weight="600">Basaltic dyke</text>
+    <text x="610" y="448" fill="#f0621a" font-size="13">magma intrudes upward</text>
+
+    <text x="78" y="585" fill="#6b8ab0" font-size="13">BRITTLE UPPER CRUST</text>
+  </g>
+
+  <!-- Plan-view inset -->
+  <rect x="826" y="122" width="320" height="493" rx="16" fill="#0c1220" stroke="#1a2a40" stroke-width="2"/>
+  <text x="852" y="158" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="13" letter-spacing="1.5">PLAN VIEW</text>
+  <text x="852" y="185" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="650">Observed footprint</text>
+  <path d="M877 470 C859 406 870 327 916 254 C956 194 1041 198 1099 252 C1137 289 1123 381 1096 447 C1070 510 1008 566 941 551 C904 543 888 511 877 470 Z" fill="#101a2b" stroke="#223350" stroke-width="2"/>
+  <path d="M925 488 L1049 245" stroke="#f0621a" stroke-width="17" stroke-linecap="round" opacity="0.24" filter="url(#glow)"/>
+  <path d="M925 488 L1049 245" stroke="#f0621a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M946 467 L1030 283" stroke="#f5c842" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+  <path d="M944 475 L1018 330" stroke="#ef4444" stroke-width="3" stroke-dasharray="8 7"/>
+  <g fill="#ef4444" opacity="0.9">
+    <circle cx="932" cy="471" r="4"/><circle cx="946" cy="447" r="3"/><circle cx="954" cy="418" r="4"/>
+    <circle cx="969" cy="399" r="3"/><circle cx="980" cy="370" r="4"/><circle cx="992" cy="347" r="3"/>
+    <circle cx="1009" cy="320" r="4"/><circle cx="1018" cy="295" r="3"/><circle cx="1036" cy="268" r="4"/>
+  </g>
+  <text x="1097" y="237" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="12">NW</text>
+  <text x="895" y="511" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="12">SE</text>
+  <path d="M875 211 L875 171" stroke="#6b8ab0" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="875" y="226" text-anchor="middle" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="12">N</text>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="852" y="522" width="268" height="67" rx="8" fill="#111827"/>
+    <circle cx="870" cy="543" r="4" fill="#ef4444"/>
+    <text x="885" y="548" fill="#b8c8e0" font-size="13">earthquake hypocentres</text>
+    <line x1="865" y1="570" x2="877" y2="570" stroke="#f0621a" stroke-width="5" stroke-linecap="round"/>
+    <text x="885" y="575" fill="#b8c8e0" font-size="13">~10 km NW-trending dyke</text>
+  </g>
+
+  <text x="54" y="649" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="12">Event geometry and counts: Pallister et al. (2010). Diagram is explanatory, not a reconstruction.</text>
+</svg>

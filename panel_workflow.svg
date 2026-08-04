@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">A data-calibrated and testable workflow</title>
+  <desc id="desc">A four-step workflow moves from observations through physics-derived coupling and synchronization maps to comparison with the 2009 sequence and refinement or rejection of the hypothesis.</desc>
+  <defs>
+    <marker id="arr4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6b8ab0"/></marker>
+    <linearGradient id="heat4" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#17233a"/><stop offset="0.45" stop-color="#4dd8e8"/><stop offset="0.7" stop-color="#f5c842"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+  </defs>
+  <!-- Transparent outer canvas: no full-size background rectangle. -->
+  <text x="54" y="56" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="15" letter-spacing="2.2">FROM CONCEPT TO TEST</text>
+  <text x="54" y="91" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">What the model should produce</text>
+  <text x="54" y="119" fill="#b8c8e0" font-family="Segoe UI, Arial, sans-serif" font-size="14">A route for turning the illustration into a falsifiable, data-calibrated framework.</text>
+
+  <!-- Connectors -->
+  <g fill="none" stroke="#6b8ab0" stroke-width="2" marker-end="url(#arr4)">
+    <path d="M306 341 L336 341"/><path d="M582 341 L612 341"/><path d="M858 341 L888 341"/>
+  </g>
+
+  <!-- Step cards -->
+  <g fill="#0c1220" stroke="#1a2a40" stroke-width="2">
+    <rect x="54" y="164" width="252" height="354" rx="16"/>
+    <rect x="330" y="164" width="252" height="354" rx="16"/>
+    <rect x="606" y="164" width="252" height="354" rx="16"/>
+    <rect x="882" y="164" width="264" height="354" rx="16"/>
+  </g>
+  <rect x="54" y="164" width="252" height="7" rx="4" fill="#6b8ab0"/>
+  <rect x="330" y="164" width="252" height="7" rx="4" fill="#f0621a"/>
+  <rect x="606" y="164" width="252" height="7" rx="4" fill="#4dd8e8"/>
+  <rect x="882" y="164" width="264" height="7" rx="4" fill="#f5c842"/>
+
+  <!-- Step 1 icon: observations -->
+  <g transform="translate(90 207)">
+    <path d="M0 50 C14 22 28 76 42 46 C56 17 70 71 84 40 C98 10 112 63 126 34" fill="none" stroke="#4dd8e8" stroke-width="3"/>
+    <path d="M0 75 C20 63 39 84 59 72 C79 60 98 79 126 61" fill="none" stroke="#6b8ab0" stroke-width="2"/>
+    <circle cx="28" cy="95" r="4" fill="#ef4444"/><circle cx="56" cy="86" r="4" fill="#ef4444"/><circle cx="86" cy="104" r="4" fill="#ef4444"/><circle cx="111" cy="90" r="4" fill="#ef4444"/>
+  </g>
+  <!-- Step 2 icon: derive coupling -->
+  <g transform="translate(377 217)">
+    <circle cx="32" cy="51" r="24" fill="#f0621a" opacity="0.15" stroke="#f0621a" stroke-width="2"/>
+    <circle cx="132" cy="27" r="17" fill="#4dd8e8" opacity="0.12" stroke="#4dd8e8" stroke-width="2"/>
+    <circle cx="132" cy="78" r="17" fill="#4dd8e8" opacity="0.12" stroke="#4dd8e8" stroke-width="2"/>
+    <path d="M56 45 L113 30 M56 57 L113 73" stroke="#f5c842" stroke-width="3"/>
+    <text x="81" y="41" fill="#f5c842" font-family="Consolas, monospace" font-size="13">K₁</text>
+    <text x="81" y="74" fill="#f5c842" font-family="Consolas, monospace" font-size="13">K₂</text>
+  </g>
+  <!-- Step 3 icon: synchronization map -->
+  <g transform="translate(654 205)">
+    <rect x="0" y="0" width="158" height="112" rx="8" fill="#111827" stroke="#223350"/>
+    <g>
+      <rect x="12" y="12" width="25" height="25" rx="4" fill="#17233a"/><rect x="42" y="12" width="25" height="25" rx="4" fill="#1d5265"/><rect x="72" y="12" width="25" height="25" rx="4" fill="#4dd8e8"/><rect x="102" y="12" width="25" height="25" rx="4" fill="#f5c842"/><rect x="132" y="12" width="14" height="25" rx="4" fill="#ef4444"/>
+      <rect x="12" y="42" width="25" height="25" rx="4" fill="#17233a"/><rect x="42" y="42" width="25" height="25" rx="4" fill="#223350"/><rect x="72" y="42" width="25" height="25" rx="4" fill="#1d5265"/><rect x="102" y="42" width="25" height="25" rx="4" fill="#4dd8e8"/><rect x="132" y="42" width="14" height="25" rx="4" fill="#f5c842"/>
+      <rect x="12" y="72" width="25" height="25" rx="4" fill="#17233a"/><rect x="42" y="72" width="25" height="25" rx="4" fill="#17233a"/><rect x="72" y="72" width="25" height="25" rx="4" fill="#223350"/><rect x="102" y="72" width="25" height="25" rx="4" fill="#1d5265"/><rect x="132" y="72" width="14" height="25" rx="4" fill="#4dd8e8"/>
+    </g>
+  </g>
+  <!-- Step 4 icon: compare -->
+  <g transform="translate(925 213)">
+    <path d="M0 88 L0 8 M0 88 L164 88" stroke="#6b8ab0" stroke-width="2"/>
+    <polyline points="5,72 31,65 57,69 83,43 109,48 136,22 160,29" fill="none" stroke="#4dd8e8" stroke-width="3"/>
+    <polyline points="5,78 31,70 57,61 83,52 109,39 136,30 160,24" fill="none" stroke="#f0621a" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <circle cx="136" cy="22" r="5" fill="#4dd8e8"/><circle cx="136" cy="30" r="5" fill="#f0621a"/>
+  </g>
+
+  <!-- Labels -->
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="78" y="349" fill="#6b8ab0" font-size="13" letter-spacing="1.1">01 • OBSERVE</text>
+    <text x="78" y="379" fill="#e2eaf8" font-size="20" font-weight="700">Monitoring data</text>
+    <text x="78" y="407" fill="#b8c8e0" font-size="14">• earthquake catalogue</text>
+    <text x="78" y="431" fill="#b8c8e0" font-size="14">• InSAR / GNSS deformation</text>
+    <text x="78" y="455" fill="#b8c8e0" font-size="14">• fault geometry &amp; stress</text>
+    <text x="78" y="488" fill="#6b8ab0" font-size="12">space + time + uncertainty</text>
+
+    <text x="354" y="349" fill="#f0621a" font-size="13" letter-spacing="1.1">02 • CONSTRAIN</text>
+    <text x="354" y="379" fill="#e2eaf8" font-size="20" font-weight="700">Derive K(x,t)</text>
+    <text x="354" y="407" fill="#b8c8e0" font-size="14">Translate physical transfer</text>
+    <text x="354" y="431" fill="#b8c8e0" font-size="14">into coupling strength.</text>
+    <text x="354" y="467" fill="#f5c842" font-size="13" font-weight="650">Do not treat K as a free</text>
+    <text x="354" y="488" fill="#f5c842" font-size="13" font-weight="650">illustrative slider.</text>
+
+    <text x="630" y="349" fill="#4dd8e8" font-size="13" letter-spacing="1.1">03 • COMPUTE</text>
+    <text x="630" y="379" fill="#e2eaf8" font-size="20" font-weight="700">Synchronization map</text>
+    <text x="630" y="407" fill="#b8c8e0" font-size="14">Solve θᵢ(x,t), then calculate</text>
+    <text x="630" y="431" fill="#4dd8e8" font-family="Consolas, monospace" font-size="15">R(x,t) ∈ [0,1]</text>
+    <text x="630" y="467" fill="#b8c8e0" font-size="13">Where and when do crustal</text>
+    <text x="630" y="488" fill="#b8c8e0" font-size="13">responses become coordinated?</text>
+
+    <text x="906" y="349" fill="#f5c842" font-size="13" letter-spacing="1.1">04 • TEST</text>
+    <text x="906" y="379" fill="#e2eaf8" font-size="20" font-weight="700">Compare with 2009</text>
+    <text x="906" y="407" fill="#b8c8e0" font-size="14">• seismic migration</text>
+    <text x="906" y="431" fill="#b8c8e0" font-size="14">• burst timing</text>
+    <text x="906" y="455" fill="#b8c8e0" font-size="14">• surface deformation</text>
+    <text x="906" y="488" fill="#f5c842" font-size="13" font-weight="650">support • refine • reject</text>
+  </g>
+
+  <!-- Feedback loop -->
+  <path d="M1014 533 C1000 592 493 604 456 536" fill="none" stroke="#223350" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arr4)"/>
+  <text x="738" y="582" text-anchor="middle" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="13">refine assumptions and re-estimate coupling</text>
+
+  <rect x="54" y="620" width="1092" height="35" rx="8" fill="#111827" stroke="#4dd8e8" stroke-width="1"/>
+  <text x="600" y="643" text-anchor="middle" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="14"><tspan fill="#4dd8e8" font-weight="700">Output:</tspan> evidence about a mechanism—not an automatic eruption alert.</text>
+</svg>

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">How coupling changes crustal coordination</title>
+  <desc id="desc">Three panels show weak coupling, near-threshold behavior, and phase-locking possible, pairing a geological schematic with corresponding oscillator phases.</desc>
+  <defs>
+    <linearGradient id="dyke3" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#8e2a0e"/><stop offset="1" stop-color="#f5c842"/></linearGradient>
+    <marker id="arr3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#6b8ab0"/></marker>
+  </defs>
+  <!-- Transparent outer canvas: no full-size background rectangle. -->
+  <text x="54" y="56" fill="#6b8ab0" font-family="Segoe UI, Arial, sans-serif" font-size="15" letter-spacing="2.2">DYNAMICAL INTERPRETATION</text>
+  <text x="54" y="91" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">From independent responses to coordinated motion</text>
+
+  <!-- Stage arrows -->
+  <path d="M393 352 L428 352" stroke="#6b8ab0" stroke-width="2" marker-end="url(#arr3)"/>
+  <path d="M780 352 L815 352" stroke="#6b8ab0" stroke-width="2" marker-end="url(#arr3)"/>
+
+  <!-- Cards -->
+  <g fill="#0c1220" stroke="#1a2a40" stroke-width="2">
+    <rect x="54" y="126" width="340" height="476" rx="16"/>
+    <rect x="430" y="126" width="340" height="476" rx="16"/>
+    <rect x="806" y="126" width="340" height="476" rx="16"/>
+  </g>
+
+  <!-- Header strips -->
+  <rect x="54" y="126" width="340" height="7" rx="4" fill="#6b8ab0"/>
+  <rect x="430" y="126" width="340" height="7" rx="4" fill="#f5c842"/>
+  <rect x="806" y="126" width="340" height="7" rx="4" fill="#4dd8e8"/>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="78" y="168" fill="#6b8ab0" font-size="13" letter-spacing="1.2">STAGE 01</text>
+    <text x="78" y="197" fill="#e2eaf8" font-size="21" font-weight="700">Weak coupling</text>
+    <text x="78" y="222" fill="#6b8ab0" font-family="Consolas, monospace" font-size="14">K / Kc &lt; 1</text>
+
+    <text x="454" y="168" fill="#f5c842" font-size="13" letter-spacing="1.2">STAGE 02</text>
+    <text x="454" y="197" fill="#e2eaf8" font-size="21" font-weight="700">Near the threshold</text>
+    <text x="454" y="222" fill="#f5c842" font-family="Consolas, monospace" font-size="14">K / Kc ≈ 1</text>
+
+    <text x="830" y="168" fill="#4dd8e8" font-size="13" letter-spacing="1.2">STAGE 03</text>
+    <text x="830" y="197" fill="#e2eaf8" font-size="21" font-weight="700">Phase-locking possible</text>
+    <text x="830" y="222" fill="#4dd8e8" font-family="Consolas, monospace" font-size="14">K / Kc &gt; 1</text>
+  </g>
+
+  <!-- Geological mini-scenes -->
+  <g>
+    <!-- weak -->
+    <path d="M78 306 C128 296 184 310 240 299 C289 290 338 307 370 298" fill="none" stroke="#6b8ab0" stroke-width="2"/>
+    <path d="M212 337 L221 251 L232 251 L240 337 Z" fill="url(#dyke3)"/>
+    <g stroke="#6b8ab0" stroke-width="2" opacity="0.72"><path d="M112 326 L151 279"/><path d="M162 330 L186 284"/><path d="M286 328 L263 281"/><path d="M337 326 L297 282"/></g>
+    <g fill="#6b8ab0"><circle cx="127" cy="298" r="4"/><circle cx="181" cy="307" r="4"/><circle cx="272" cy="301" r="4"/><circle cx="326" cy="309" r="4"/></g>
+    <path d="M197 275 C182 267 170 267 158 273" fill="none" stroke="#f0621a" stroke-width="1.5" stroke-dasharray="4 5"/>
+    <path d="M246 273 C261 266 276 267 290 275" fill="none" stroke="#f0621a" stroke-width="1.5" stroke-dasharray="4 5"/>
+
+    <!-- near -->
+    <path d="M454 306 C504 296 560 310 616 299 C665 290 714 307 746 298" fill="none" stroke="#6b8ab0" stroke-width="2"/>
+    <path d="M588 337 L597 251 L608 251 L616 337 Z" fill="url(#dyke3)"/>
+    <g stroke="#4dd8e8" stroke-width="2" opacity="0.74"><path d="M488 326 L527 279"/><path d="M538 330 L562 284"/><path d="M662 328 L639 281"/><path d="M713 326 L673 282"/></g>
+    <g fill="#f5c842"><circle cx="503" cy="298" r="4"/><circle cx="557" cy="307" r="4"/><circle cx="648" cy="301" r="4"/><circle cx="702" cy="309" r="4"/></g>
+    <path d="M568 275 C539 258 506 261 485 278" fill="none" stroke="#f0621a" stroke-width="2" stroke-dasharray="5 4"/>
+    <path d="M622 273 C651 257 688 261 716 280" fill="none" stroke="#f0621a" stroke-width="2" stroke-dasharray="5 4"/>
+
+    <!-- strong -->
+    <path d="M830 306 C880 296 936 310 992 299 C1041 290 1090 307 1122 298" fill="none" stroke="#6b8ab0" stroke-width="2"/>
+    <path d="M964 337 L973 251 L984 251 L992 337 Z" fill="url(#dyke3)"/>
+    <g stroke="#4dd8e8" stroke-width="2.5"><path d="M864 326 L903 279"/><path d="M914 330 L938 284"/><path d="M1038 328 L1015 281"/><path d="M1089 326 L1049 282"/></g>
+    <g fill="#4dd8e8"><circle cx="879" cy="298" r="4"/><circle cx="933" cy="307" r="4"/><circle cx="1024" cy="301" r="4"/><circle cx="1078" cy="309" r="4"/></g>
+    <path d="M944 275 C903 249 869 262 851 285" fill="none" stroke="#f0621a" stroke-width="2.5"/>
+    <path d="M998 273 C1039 250 1084 263 1103 286" fill="none" stroke="#f0621a" stroke-width="2.5"/>
+  </g>
+
+  <!-- Phase circles -->
+  <g fill="none" stroke="#223350" stroke-width="2">
+    <circle cx="224" cy="438" r="58"/><circle cx="600" cy="438" r="58"/><circle cx="976" cy="438" r="58"/>
+  </g>
+  <!-- weak dispersed -->
+  <g fill="#6b8ab0"><circle cx="224" cy="380" r="5"/><circle cx="273" cy="407" r="5"/><circle cx="264" cy="470" r="5"/><circle cx="202" cy="492" r="5"/><circle cx="168" cy="444" r="5"/><circle cx="190" cy="392" r="5"/></g>
+  <path d="M224 438 L273 407" stroke="#6b8ab0" stroke-width="3"/>
+  <!-- near clustered -->
+  <g fill="#f5c842"><circle cx="623" cy="385" r="5"/><circle cx="641" cy="395" r="5"/><circle cx="650" cy="411" r="5"/><circle cx="655" cy="429" r="5"/><circle cx="649" cy="449" r="5"/><circle cx="635" cy="465" r="5"/></g>
+  <path d="M600 438 L645 401" stroke="#f5c842" stroke-width="3"/>
+  <!-- strong aligned -->
+  <g fill="#4dd8e8"><circle cx="1019" cy="399" r="5"/><circle cx="1026" cy="406" r="5"/><circle cx="1030" cy="414" r="5"/><circle cx="1033" cy="423" r="5"/><circle cx="1034" cy="432" r="5"/><circle cx="1034" cy="441" r="5"/></g>
+  <path d="M976 438 L1027 408" stroke="#4dd8e8" stroke-width="3"/>
+
+  <g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <text x="224" y="525" fill="#e2eaf8" font-size="16" font-weight="650">Responses remain dispersed</text>
+    <text x="224" y="548" fill="#6b8ab0" font-size="13">low collective alignment</text>
+    <text x="600" y="525" fill="#e2eaf8" font-size="16" font-weight="650">Intermittent coordination</text>
+    <text x="600" y="548" fill="#f5c842" font-size="13">alignment can rise and fall</text>
+    <text x="976" y="525" fill="#e2eaf8" font-size="16" font-weight="650">Responses can phase-lock</text>
+    <text x="976" y="548" fill="#4dd8e8" font-size="13">high collective alignment</text>
+  </g>
+
+  <rect x="54" y="620" width="1092" height="35" rx="8" fill="#111827" stroke="#ef4444" stroke-width="1"/>
+  <text x="600" y="643" text-anchor="middle" fill="#e2eaf8" font-family="Segoe UI, Arial, sans-serif" font-size="14"><tspan fill="#ef4444" font-weight="700">Important:</tspan> higher alignment is a model state—not, by itself, an eruption prediction.</text>
+</svg>
