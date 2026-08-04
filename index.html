@@ -6,190 +6,101 @@
   <title>Harrat Lunayyir — Magma Sync Model</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #07090f; color: #e2eaf8; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; line-height: 1.6; }
-    .hero { background: linear-gradient(180deg, #0c1220 0%, #07090f 100%); border-bottom: 2px solid #223350; padding: 48px 20px 40px; text-align: center; }
-    .hero h1 { font-size: 1.8rem; font-weight: 700; color: #f0621a; margin-bottom: 6px; }
-    .hero-subtitle { font-size: 0.9rem; color: #6b8ab0; margin-bottom: 20px; font-family: monospace; }
-    .hero-summary { font-size: 0.9rem; color: #b8c8e0; max-width: 720px; margin: 0 auto 28px; }
-    .hero-stats { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
-    .hero-stat { background: #0c1220; border: 1px solid #1a2a40; border-radius: 8px; padding: 14px; width: 200px; }
-    .hero-stat-lbl { font-size: 0.6rem; color: #6b8ab0; text-transform: uppercase; margin-bottom: 4px; }
-    .hero-stat-val { font-size: 1.2rem; font-weight: 700; color: #f0621a; }
-    nav { background: rgba(12, 18, 32, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px; display: flex; gap: 20px; justify-content: center; position: sticky; top: 0; z-index: 100; }
+    body { background: #07090f; color: #e2eaf8; font-family: sans-serif; min-height: 100vh; line-height: 1.5; }
+    .hero { background: #0c1220; padding: 40px 20px; text-align: center; border-bottom: 2px solid #223350; }
+    .hero h1 { color: #f0621a; font-size: 1.8rem; }
+    nav { background: #0c1220; padding: 10px; display: flex; gap: 20px; justify-content: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #223350; }
     nav a { color: #6b8ab0; text-decoration: none; font-size: 0.9rem; }
-    section { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-    .content-card { background: rgba(12, 18, 32, 0.5); border: 1px solid rgba(31, 184, 200, 0.2); border-radius: 6px; padding: 20px; margin-bottom: 20px; }
-    canvas { background: #0a1422; border: 1px solid rgba(31, 184, 200, 0.2); border-radius: 4px; display: block; width: 100%; max-width: 460px; margin: 0 auto 20px; }
-    .button-group { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
-    button { background: rgba(240, 98, 26, 0.15); border: 1px solid rgba(240, 98, 26, 0.4); color: #f0621a; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
-    .slider-group { margin-bottom: 16px; max-width: 600px; margin: 0 auto 16px; }
-    .slider-group label { display: block; color: #6b8ab0; font-size: 0.85rem; margin-bottom: 4px; }
-    input[type="range"] { width: 100%; }
-    .status-bar { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; background: rgba(12, 18, 32, 0.5); padding: 16px; border-radius: 6px; margin-bottom: 20px; }
-    .status-item { text-align: center; }
-    .status-value { font-size: 1.1rem; font-weight: 700; color: #f0621a; }
-    .status-label { font-size: 0.7rem; color: #6b8ab0; text-transform: uppercase; }
-    .panel-container img { max-width: 100%; height: auto; border-radius: 4px; }
-    .tab-buttons { display: flex; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(31, 184, 200, 0.2); }
-    .tab-btn { background: none; border: none; color: #6b8ab0; padding: 10px; cursor: pointer; }
-    .tab-btn.active { color: #f0621a; border-bottom: 2px solid #f0621a; }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-    footer { padding: 40px; text-align: center; color: #6b8ab0; font-size: 0.8rem; }
+    section { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    canvas { background: #000; border: 1px solid #333; display: block; width: 100%; max-width: 400px; margin: 0 auto 20px; }
+    .status { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; font-weight: bold; color: #f0621a; }
+    .controls { text-align: center; margin-bottom: 20px; }
+    button { background: #f0621a; color: #000; border: none; padding: 8px 16px; cursor: pointer; border-radius: 4px; margin: 5px; }
+    .slider { width: 100%; max-width: 400px; margin: 10px auto; display: block; }
+    .img-box img { width: 100%; border-radius: 8px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
   <div class="hero">
-    <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
-    <p class="hero-subtitle">Kuramoto Phase-Coupled Oscillator ·  Saudi Arabia</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-lbl">Critical Kc</div><div class="hero-stat-val">0.0266</div></div>
-      <div class="hero-stat"><div class="hero-stat-lbl">Best-fit K/Kc</div><div class="hero-stat-val">1.86</div></div>
-      <div class="hero-stat"><div class="hero-stat-lbl">Order parameter r</div><div class="hero-stat-val">0.40</div></div>
-    </div>
+    <h1>Harrat Lunayyir — Magma Sync Model</h1>
+    <p>Kuramoto Oscillator Simulation</p>
   </div>
-
-  <nav><a href="#event">EVENT</a><a href="#simulation">SIMULATION</a><a href="#results">RESULTS</a></nav>
-
+  <nav><a href="#event">EVENT</a><a href="#sim">SIMULATION</a></nav>
   <section id="event">
     <h2>The 2009 Event</h2>
-    <div class="panel-container"><img src="panel_event_new.png" alt="Event Map"></div>
+    <div class="img-box"><img src="panel_event_new.png"></div>
   </section>
-
-  <section id="simulation">
+  <section id="sim">
     <h2>Live Simulation</h2>
-    <div class="status-bar">
-      <div class="status-item"><div class="status-value" id="clk">t = 0 h</div><div class="status-label">Time</div></div>
-      <div class="status-item"><div class="status-value" id="sv0">0.00</div><div class="status-label">K / Kc</div></div>
-      <div class="status-item"><div class="status-value" id="sv1">0.00</div><div class="status-label">r</div></div>
-      <div class="status-item"><div class="status-value" id="sv3">0</div><div class="status-label">Snaps</div></div>
+    <div class="status">
+      <div id="clk">t = 0 h</div>
+      <div id="sv1">r = 0.00</div>
     </div>
-
-    <div class="button-group">
+    <div class="controls">
       <button onclick="resetSim()">Restart</button>
-      <button onclick="applyPreset('quiet')">Weak</button>
-      <button onclick="applyPreset('near')">Near</button>
-      <button onclick="applyPreset('strong')">Strong</button>
-      <button id="btnPause" onclick="togglePause()">Pause</button>
+      <button onclick="togglePause()" id="btnPause">Pause</button>
     </div>
-
-    <div class="slider-group">
-      <label>Rhythm T (h): <span id="vT">240</span></label>
-      <input type="range" id="sT" min="100" max="400" value="240" oninput="vT.textContent=this.value">
-    </div>
-    <div class="slider-group">
-      <label>Gas content M: <span id="vM">0.05</span></label>
-      <input type="range" id="sM" min="0.01" max="0.2" step="0.01" value="0.05" oninput="vM.textContent=this.value">
-    </div>
-    <div class="slider-group">
-      <label>Rock Resistance η: <span id="vE">0.020</span></label>
-      <input type="range" id="sE" min="0.005" max="0.1" step="0.005" value="0.02" oninput="vE.textContent=this.value">
-    </div>
-    <div class="slider-group">
-      <label>Coupling K: <span id="vK">0.15</span></label>
-      <input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" oninput="vK.textContent=this.value">
-    </div>
-
-    <canvas id="cM" width="460" height="460"></canvas>
-    <canvas id="cD" width="460" height="460"></canvas>
-    <canvas id="cS" width="460" height="460"></canvas>
-    <canvas id="cB" width="460" height="460"></canvas>
+    <input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" class="slider">
+    <canvas id="c1" width="400" height="400"></canvas>
+    <canvas id="c2" width="400" height="400"></canvas>
+    <canvas id="c3" width="400" height="400"></canvas>
   </section>
-
-  <section id="results">
-    <h2>Results</h2>
-    <div class="tab-buttons">
-      <button class="tab-btn active" onclick="openTab(event, 'panel-order')">Order r(t)</button>
-      <button class="tab-btn" onclick="openTab(event, 'panel-misfit')">Misfit</button>
-    </div>
-    <div id="panel-order" class="tab-panel active"><img src="figure_order_param_new.webp" style="width:100%"></div>
-    <div id="panel-misfit" class="tab-panel"><img src="figure_misfit_new.webp" style="width:100%"></div>
-  </section>
-
-  <footer><p>Harrat Lunayyir Magma Sync Model · Lamees Felemban</p></footer>
 
   <script>
-    var th_m=0, th_c=Math.PI/4, dth_prv=0, simT=0, DT=0.5, frame=0, NB=14, snaps=0, paused=false;
-    var subs=new Float32Array(NB), fls=new Float32Array(NB);
-    var S2='#111827', BD='#1a2a40', MU2='#7a90b0';
+    var t=0, th_m=0, th_c=Math.PI/4, paused=false;
+    var subs = new Array(10).fill(0);
 
-    function pore(t) { return t<=0?0:Math.exp(-t/1500)*(1-Math.exp(-t/80)); }
-    function getP() { return { Tw:+sT.value, M:+sM.value, et:+sE.value, K:+sK.value, dl:0.04, sg:0.01 }; }
-    
-    function step() {
-      var p=getP(), om=2*Math.PI/p.Tw, oc=om*(1+p.dl), c=pore(simT);
-      var bern=p.M*p.M*Math.sin(2*th_m)*0.5;
-      var dtm=om+bern-p.et*dth_prv+p.sg*(Math.random()-0.5);
-      var dtc=oc+p.K*c*Math.sin(th_m-th_c)+p.sg*0.7*(Math.random()-0.5);
-      th_m+=dtm*DT; th_c+=dtc*DT; dth_prv=dtm; simT+=DT;
-      var lock=0.5*(1+Math.cos(th_m-th_c));
-      var r=0.5*Math.hypot(Math.cos(th_m)+Math.cos(th_c), Math.sin(th_m)+Math.sin(th_c));
-      var Kc=2*Math.abs(oc-om), ratio=p.K/Kc;
-      for(var i=0;i<NB;i++){ fls[i]=Math.max(0,fls[i]-0.05); if(lock*c>0.6 && Math.random()<0.01){ subs[i]=Math.min(1,subs[i]+0.1); fls[i]=1; snaps++; } }
-      return { r:r, ratio:ratio };
-    }
-
-    function drawMaster(){
-      var el=cM, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle="white"; c.beginPath(); c.arc(W/2,H/2,100,0,Math.PI*2); c.fill();
-      var px=W/2, py=H*0.1, L=H*0.6, ang=Math.sin(th_m)*0.6, bx=px+Math.sin(ang)*L, by=py+Math.cos(ang)*L;
-      c.strokeStyle=MU2; c.lineWidth=2; c.beginPath(); c.moveTo(px,py); c.lineTo(bx,by); c.stroke();
-      c.fillStyle='#f0621a'; c.beginPath(); c.arc(bx,by,W*0.09,0,Math.PI*2); c.fill();
-    }
-
-    function drawDike(){
-      var el=cD, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle='#0a1422'; c.fillRect(0,0,W,H);
-      var cx=W/2, dw=W*0.1, dsp=Math.sin(th_m)*dw*0.5;
-      c.fillStyle='#e85a0e'; c.fillRect(cx-dw+dsp,0,dw*2,H);
-    }
-
-    function drawSlave(){
-      var el=cS, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle="white"; c.beginPath(); c.arc(W/2,H/2,100,0,Math.PI*2); c.fill();
-      var px=W/2, py=H*0.1, L=H*0.6, ang=Math.sin(th_c)*0.6, bx=px+Math.sin(ang)*L, by=py+Math.cos(ang)*L;
-      c.strokeStyle='#4a6080'; c.lineWidth=2; c.beginPath(); c.moveTo(px,py); c.lineTo(bx,by); c.stroke();
-      c.fillStyle='#1fb8c8'; c.beginPath(); c.arc(bx,by,W*0.09,0,Math.PI*2); c.fill();
-    }
-
-    function drawBars(){
-      var el=cB, c=el.getContext('2d'), W=el.width, H=el.height;
-      c.fillStyle='#0a1422'; c.fillRect(0,0,W,H);
-      var bw=W/NB;
-      for(var i=0;i<NB;i++){
-        var h=(subs[i]*0.5 + 0.2*Math.sin(th_c+i))*H*0.5;
-        c.fillStyle=fls[i]>0.5?'#f5c842':'#1fb8c8';
-        c.fillRect(i*bw+2, H-h, bw-4, h);
-      }
-    }
+    function resetSim() { t=0; th_m=0; th_c=Math.PI/4; subs.fill(0); }
+    function togglePause() { paused=!paused; document.getElementById('btnPause').textContent=paused?'Play':'Pause'; }
 
     function loop() {
-      if(!paused){
-        var s=step();
-        drawMaster(); drawDike(); drawSlave(); drawBars();
-        clk.textContent='t = '+Math.round(simT)+' h';
-        sv0.textContent=s.ratio.toFixed(2);
-        sv1.textContent=s.r.toFixed(2);
-        sv3.textContent=snaps;
-        frame++;
+      if(!paused) {
+        var K = parseFloat(document.getElementById('sK').value);
+        var om_m = 0.026, om_c = 0.028;
+        var c = Math.exp(-t/1500) * (1 - Math.exp(-t/80));
+        th_m += om_m;
+        th_c += (om_c + K * c * Math.sin(th_m - th_c));
+        t += 0.5;
+        
+        var r = 0.5 * Math.hypot(Math.cos(th_m)+Math.cos(th_c), Math.sin(th_m)+Math.sin(th_c));
+        document.getElementById('clk').textContent = 't = ' + Math.round(t) + ' h';
+        document.getElementById('sv1').textContent = 'r = ' + r.toFixed(2);
+
+        draw();
       }
       requestAnimationFrame(loop);
     }
 
-    function resetSim() { th_m=0; th_c=Math.PI/4; simT=0; snaps=0; subs.fill(0); fls.fill(0); }
-    function togglePause() { paused=!paused; btnPause.textContent=paused?'Play':'Pause'; }
-    function applyPreset(n) {
-      if(n=='quiet'){ sK.value=0.01; } else if(n=='near'){ sK.value=0.03; } else { sK.value=0.3; }
-      vK.textContent=sK.value; resetSim();
-    }
-    function openTab(evt, name) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tab-panel");
-      for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
-      tablinks = document.getElementsByClassName("tab-btn");
-      for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
-      document.getElementById(name).style.display = "block";
-      evt.currentTarget.className += " active";
+    function draw() {
+      // Canvas 1: Master
+      var cv1 = document.getElementById('c1');
+      var ctx1 = cv1.getContext('2d');
+      ctx1.fillStyle = 'black'; ctx1.fillRect(0,0,400,400);
+      ctx1.fillStyle = '#f0621a';
+      var x1 = 200 + 150 * Math.sin(th_m);
+      var y1 = 200 + 150 * Math.cos(th_m);
+      ctx1.beginPath(); ctx1.arc(x1, y1, 30, 0, Math.PI*2); ctx1.fill();
+      ctx1.strokeStyle = 'white'; ctx1.beginPath(); ctx1.moveTo(200,50); ctx1.lineTo(x1,y1); ctx1.stroke();
+
+      // Canvas 2: Slave
+      var cv2 = document.getElementById('c2');
+      var ctx2 = cv2.getContext('2d');
+      ctx2.fillStyle = 'black'; ctx2.fillRect(0,0,400,400);
+      ctx2.fillStyle = '#1fb8c8';
+      var x2 = 200 + 150 * Math.sin(th_c);
+      var y2 = 200 + 150 * Math.cos(th_c);
+      ctx2.beginPath(); ctx2.arc(x2, y2, 30, 0, Math.PI*2); ctx2.fill();
+      ctx2.strokeStyle = 'white'; ctx2.beginPath(); ctx2.moveTo(200,50); ctx2.lineTo(x2,y2); ctx2.stroke();
+
+      // Canvas 3: Subsidence
+      var cv3 = document.getElementById('c3');
+      var ctx3 = cv3.getContext('2d');
+      ctx3.fillStyle = 'black'; ctx3.fillRect(0,0,400,400);
+      ctx3.fillStyle = '#f5c842';
+      for(var i=0; i<10; i++) {
+        var h = 20 + 50 * Math.sin(th_c + i);
+        ctx3.fillRect(i*40+5, 400-h, 30, h);
+      }
     }
 
     loop();
