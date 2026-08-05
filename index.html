@@ -792,50 +792,12 @@ footer {
 <section class="section" id="results">
   <div class="section-eyebrow">Section 03</div>
   <h2>Live Model Behaviour</h2>
-  <p class="section-lead">These charts track the two-oscillator simulation as it runs, with the fitted values from the analysis document shown as fixed reference markers — so you can see where the live system sits relative to the published fit.</p>
+  <p class="section-lead">This chart tracks the two-oscillator simulation as it runs, showing directly whether the brittle crust falls into step with the magma column — and whether it stays there as the intrusion pulse decays.</p>
 
-  <div class="tab-bar" role="tablist" aria-label="Result figures">
-    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-phaselock" id="tab-phaselock">Phase locking</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-order" id="tab-order">Order parameter r(t)</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-misfit" id="tab-misfit">Misfit landscape</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-fit" id="tab-fit">Kuramoto fit</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-intervals" id="tab-intervals">Interval distributions</button>
-  </div>
-
-  <div class="tab-panel active" role="tabpanel" id="panel-phaselock" aria-labelledby="tab-phaselock">
-    <figure class="tab-figure">
-      <canvas id="cPL" width="920" height="360" aria-label="Two stacked live charts. The upper chart overlays the magma column and brittle crust oscillations as two coloured waves. The lower chart shows the difference between their phases: a flat line means the two are locked together, a sloping line means the crust is drifting relative to the magma."></canvas>
-      <figcaption><strong>Phase locking, live:</strong> The upper panel shows both oscillators as waves — magma column in orange, brittle crust in teal. The lower panel shows the gap between their phases. <strong>A flat line means locked; a sloping line means drifting.</strong> Because the intrusion pulse peaks near t = 239 h and then fades, a strongly coupled run can capture the crust, hold it, and then lose it again as the pulse decays.</figcaption>
-    </figure>
-  </div>
-
-  <div class="tab-panel" role="tabpanel" id="panel-order" aria-labelledby="tab-order">
-    <figure class="tab-figure">
-      <canvas id="cR" width="920" height="320" aria-label="Live order parameter r(t) time series driven by the current simulation state."></canvas>
-      <figcaption><strong>Live r(t):</strong> The order parameter r measures how synchronised the two oscillators are. r = 0 is incoherent; r = 1 is perfect phase-lock. The orange line is the live value; the dashed line marks the PDF's best-fit r = 0.40. Resets with each preset or Restart.</figcaption>
-    </figure>
-  </div>
-
-  <div class="tab-panel" role="tabpanel" id="panel-misfit" aria-labelledby="tab-misfit">
-    <figure class="tab-figure">
-      <canvas id="cKR" width="920" height="320" aria-label="Live K/K_c gauge showing the current coupling ratio relative to the synchronisation threshold and the PDF sensitivity range."></canvas>
-      <figcaption><strong>Live K/K<sub>c</sub> locator:</strong> Where the current slider settings sit relative to the critical threshold (K<sub>c</sub> = 2σ<sub>ω</sub> = 0.02663 rad/h). The PDF sensitivity analysis found K/K<sub>c</sub> ranges from 0.30 to 6.00 across plausible inputs; the best-fit is 1.86.</figcaption>
-    </figure>
-  </div>
-
-  <div class="tab-panel" role="tabpanel" id="panel-fit" aria-labelledby="tab-fit">
-    <figure class="tab-figure">
-      <canvas id="cBR" width="920" height="320" aria-label="Live burst rate trace showing snap events per unit time as the simulation runs."></canvas>
-      <figcaption><strong>Live burst rate:</strong> Snap events per 50-hour bin as the simulation runs. The PDF's synthetic catalogue produced ~21 burst peaks over 3500 h with a mean interval of 154 h. Compare the live trace with those statistics.</figcaption>
-    </figure>
-  </div>
-
-  <div class="tab-panel" role="tabpanel" id="panel-intervals" aria-labelledby="tab-intervals">
-    <figure class="tab-figure">
-      <canvas id="cIV" width="920" height="320" aria-label="Live histogram of inter-snap intervals accumulated during the simulation run."></canvas>
-      <figcaption><strong>Live interval distribution:</strong> Histogram of time gaps between successive crack-snap events. The PDF found a mean inter-burst interval of 154 h (synthetic catalogue) vs 181 h (Kuramoto model). This live version accumulates intervals as snaps occur.</figcaption>
-    </figure>
-  </div>
+  <figure class="tab-figure">
+    <canvas id="cPL" width="920" height="360" aria-label="A live phase-locking chart in two parts. The upper part overlays the magma column and brittle crust oscillations as two coloured waves. The lower part is a bar whose height rises toward one as the two oscillators fall into step, and whose colour turns teal when they are locked together."></canvas>
+    <figcaption><strong>Phase locking, live:</strong> The upper panel shows both oscillators as waves — magma column in orange, brittle crust in teal. The bar below rises toward 1 as the two fall into step and <strong>turns teal when they are locked</strong>. Because the intrusion pulse peaks near t = 239 h and then fades, a strongly coupled run can capture the crust, hold it, and then lose it again as the pulse decays.</figcaption>
+  </figure>
 
   <!-- Comparison table -->
   <h3 style="font-size:0.92rem; margin-top:28px; margin-bottom:12px;">Synthetic catalogue vs published values</h3>
@@ -1256,7 +1218,6 @@ function drawPhaseLock() {
   c.strokeStyle = '#1b2740';
   c.beginPath();
   c.moveTo(pL, topA + phA / 2); c.lineTo(pL + pw, topA + phA / 2);
-  c.moveTo(pL, topB + phB / 2); c.lineTo(pL + pw, topB + phB / 2);
   c.stroke();
 
   // ---- axis labels ----
@@ -1264,14 +1225,13 @@ function drawPhaseLock() {
   c.fillText('+1', pL - 6, topA + 4);
   c.fillText('0',  pL - 6, topA + phA / 2 + 4);
   c.fillText('-1', pL - 6, topA + phA + 4);
-  c.fillText('+p', pL - 6, topB + 4);
-  c.fillText('0',  pL - 6, topB + phB / 2 + 4);
-  c.fillText('-p', pL - 6, topB + phB + 4);
+  c.fillText('1', pL - 6, topB + 4);
+  c.fillText('0', pL - 6, topB + phB + 4);
 
   c.textAlign = 'left'; c.font = '11px monospace';
   c.fillStyle = '#f0621a'; c.fillText('magma column', pL + 4, topA - 8);
   c.fillStyle = '#2ec8c8'; c.fillText('brittle crust', pL + 110, topA - 8);
-  c.fillStyle = '#8fa8c8'; c.fillText('phase difference', pL + 4, topB - 5);
+  c.fillStyle = '#8fa8c8'; c.fillText('how closely they are moving together', pL + 4, topB - 6);
 
   c.textAlign = 'center';
   c.fillText('Simulation time (hours)', pL + pw / 2, H - 6);
@@ -1298,38 +1258,44 @@ function drawPhaseLock() {
   trace(smHistory, '#f0621a', topA, phA);
   trace(scHistory, '#2ec8c8', topA, phA);
 
-  // ---- lower: wrapped phase difference (break the line on wrap jumps) ----
-  c.strokeStyle = '#d8e4f4'; c.lineWidth = 2; c.beginPath();
-  var pen = false;
-  for (var j = 0; j < dPhiHistory.length; j++) {
-    var y2 = topB + (1 - dPhiHistory[j] / Math.PI) * phB / 2;
-    if (j > 0 && Math.abs(dPhiHistory[j] - dPhiHistory[j - 1]) > Math.PI) pen = false;
-    if (!pen) { c.moveTo(xPos(j), y2); pen = true; } else { c.lineTo(xPos(j), y2); }
-  }
-  c.stroke();
-
-  // ---- time ticks ----
+  // time ticks under the wave panel
   c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'center';
   var tstep = Math.max(50, Math.round((tMax - tMin) / 5 / 50) * 50);
   for (var t = Math.ceil(tMin / tstep) * tstep; t <= tMax; t += tstep) {
     var xt = pL + ((t - tMin) / (tMax - tMin)) * pw;
-    c.fillText(t + 'h', xt, topB + phB + 15);
+    c.fillText(t + 'h', xt, topA + phA + 13);
   }
 
-  // ---- verdict: is the phase difference holding steady? ----
+  // ---- lower: sync level bar ----
+  // Height = current phase coherence (0 = opposed, 1 = perfectly in step).
+  var lockNow = 0.5 * (1 + Math.cos(dPhiHistory[dPhiHistory.length - 1]));
+
+  // Is the phase difference holding steady? (averaged drift over recent samples)
   var n = dPhiHistory.length, look = Math.min(120, n);
-  var drift = 0;
+  var drift = 0, counted = 0;
   for (var k = n - look + 1; k < n; k++) {
     var d = dPhiHistory[k] - dPhiHistory[k - 1];
     if (Math.abs(d) > Math.PI) continue;   // ignore wrap steps
-    drift += Math.abs(d);
+    drift += Math.abs(d); counted++;
   }
-  drift = look > 1 ? drift / (look - 1) : 0;
-  var locked = drift < 0.004;
+  drift = counted > 0 ? drift / counted : 1;
+  var locked = drift < 0.004 && lockNow > 0.5;
+
+  var barH = Math.max(1, lockNow * phB);
+  var barCol = locked ? '#2ec8c8' : (lockNow > 0.5 ? '#c8a03c' : '#4a6080');
+  c.fillStyle = barCol;
+  c.fillRect(pL + 1, topB + phB - barH, pw - 2, barH);
+
+  // bar outline and value
+  c.strokeStyle = '#1b2740'; c.lineWidth = 1;
+  c.strokeRect(pL, topB, pw, phB);
+  c.fillStyle = '#0a1020'; c.font = 'bold 13px monospace'; c.textAlign = 'left';
+  if (lockNow > 0.35) c.fillText(lockNow.toFixed(2), pL + 10, topB + phB - 10);
+
   c.textAlign = 'right'; c.font = 'bold 12px monospace';
   c.fillStyle = locked ? '#2ec8c8' : '#8fa8c8';
-  c.fillText(locked ? 'phase difference steady — locked'
-                    : 'phase difference drifting — not locked', pL + pw, topB - 5);
+  c.fillText(locked ? 'locked — moving in step' : 'not locked — drifting apart',
+             pL + pw, topB - 6);
 }
 
 function drawLiveKRatio(ratio) {
@@ -1591,10 +1557,6 @@ function loop() {
     // Draw live plots every 3rd frame for performance
     if (frame % 3 === 0) {
       drawPhaseLock();
-      drawLiveR();
-      drawLiveKRatio(s.ratio);
-      drawLiveBurstRate();
-      drawLiveIntervals();
     }
     frame++;
   }
