@@ -802,29 +802,29 @@ footer {
 
   <div class="tab-panel active" role="tabpanel" id="panel-order" aria-labelledby="tab-order">
     <figure class="tab-figure">
-      <img src="figure_order_param.webp" alt="Line chart showing the Kuramoto order parameter r over time for three coupling regimes: subcritical (K less than K_c, r stays near 0), near-critical (K approximately equal to K_c, r fluctuates around 0.3–0.5), and supercritical (K greater than K_c, r rises toward 0.8–1.0). The three curves are clearly separated, demonstrating the phase transition.">
-      <figcaption><strong>What this shows:</strong> The order parameter r measures how synchronised the oscillators are. Below the critical coupling (K &lt; K<sub>c</sub>), the system stays incoherent. Above it, the oscillators progressively lock into a shared rhythm. The best-fit value for Harrat Lunayyir (K/K<sub>c</sub> = 1.86) sits in the partially synchronised regime where r ≈ 0.40.</figcaption>
+      <canvas id="cR" width="920" height="320" aria-label="Live order parameter r(t) time series driven by the current simulation state."></canvas>
+      <figcaption><strong>Live r(t):</strong> The order parameter r measures how synchronised the two oscillators are. r = 0 is incoherent; r = 1 is perfect phase-lock. The orange line is the live value; the dashed line marks the PDF's best-fit r = 0.40. Resets with each preset or Restart.</figcaption>
     </figure>
   </div>
 
   <div class="tab-panel" role="tabpanel" id="panel-misfit" aria-labelledby="tab-misfit">
     <figure class="tab-figure">
-      <img src="figure_misfit.webp" alt="Plot of model misfit (vertical axis) against coupling ratio K/K_c (horizontal axis). The curve shows a clear minimum at K/K_c = 1.86, indicating the best-fit coupling strength. The misfit rises steeply for K/K_c below 1 and gradually for K/K_c above 3.">
-      <figcaption><strong>What this shows:</strong> A grid search over coupling strength finds the best fit at K/K<sub>c</sub> = 1.86 — just above the synchronisation threshold. This is the single headline number from the model, but the sensitivity analysis (below) shows it ranges from 0.30 to 6.00 depending on uncertain inputs.</figcaption>
+      <canvas id="cKR" width="920" height="320" aria-label="Live K/K_c gauge showing the current coupling ratio relative to the synchronisation threshold and the PDF sensitivity range."></canvas>
+      <figcaption><strong>Live K/K<sub>c</sub> locator:</strong> Where the current slider settings sit relative to the critical threshold (K<sub>c</sub> = 2σ<sub>ω</sub> = 0.02663 rad/h). The PDF sensitivity analysis found K/K<sub>c</sub> ranges from 0.30 to 6.00 across plausible inputs; the best-fit is 1.86.</figcaption>
     </figure>
   </div>
 
   <div class="tab-panel" role="tabpanel" id="panel-fit" aria-labelledby="tab-fit">
     <figure class="tab-figure">
-      <img src="figure_kuramoto_fit.webp" alt="Time-series comparison showing the synthetic earthquake catalogue burst rate as grey bars and the Kuramoto model prediction as an orange line. The model captures the general pattern of burst peaks but does not reproduce every individual peak exactly.">
-      <figcaption><strong>What this shows:</strong> The Kuramoto model's predicted burst rate overlaid on the synthetic catalogue. The model captures the overall pattern of periodic bursts but does not reproduce every individual peak — expected, given the stochastic nature of the system.</figcaption>
+      <canvas id="cBR" width="920" height="320" aria-label="Live burst rate trace showing snap events per unit time as the simulation runs."></canvas>
+      <figcaption><strong>Live burst rate:</strong> Snap events per 50-hour bin as the simulation runs. The PDF's synthetic catalogue produced ~21 burst peaks over 3500 h with a mean interval of 154 h. Compare the live trace with those statistics.</figcaption>
     </figure>
   </div>
 
   <div class="tab-panel" role="tabpanel" id="panel-intervals" aria-labelledby="tab-intervals">
     <figure class="tab-figure">
-      <img src="figure_intervals.webp" alt="Histogram comparing inter-burst interval distributions. The synthetic catalogue shows a mean interval of 154 hours (21 burst peaks detected). The Kuramoto model produces a mean of 181 hours. Both distributions are broad and overlapping but their means differ by about 17 percent.">
-      <figcaption><strong>What this shows:</strong> The distribution of time gaps between successive burst peaks. The synthetic catalogue found 21 peaks with a mean interval of 154 h; the Kuramoto model produces a mean of 181 h. Note: the published analysis (Mukhopadhyay et al. 2013) identified only ~10 peaks at ~275 h — the discrepancy is real and reflects different detection thresholds and catalogue construction methods.</figcaption>
+      <canvas id="cIV" width="920" height="320" aria-label="Live histogram of inter-snap intervals accumulated during the simulation run."></canvas>
+      <figcaption><strong>Live interval distribution:</strong> Histogram of time gaps between successive crack-snap events. The PDF found a mean inter-burst interval of 154 h (synthetic catalogue) vs 181 h (Kuramoto model). This live version accumulates intervals as snaps occur.</figcaption>
     </figure>
   </div>
 
@@ -1062,6 +1062,16 @@ var snaps   = 0;
 var paused  = false;
 var animId  = null;
 
+// ---- LIVE PLOT DATA ----
+var R_HISTORY_MAX = 600; // store last 600 samples (~300 model-hours at DT=0.5)
+var rHistory = [];
+var tHistory = [];
+var snapTimes = [];   // simT of each snap event
+var snapIntervals = []; // time gaps between consecutive snaps
+var lastSnapT = -1;
+var burstBins = new Float32Array(70); // 70 bins of 50h each = 3500h
+var burstBinWidth = 50; // hours per bin
+
 function pore(t) {
   return t <= 0 ? 0 : Math.exp(-t / 1500) * (1 - Math.exp(-t / 80));
 }
@@ -1152,7 +1162,266 @@ function drawSlave(r,ratio){var v=ctx('cS'),c=v.c,W=v.W,H=v.H;c.fillStyle=S2;c.f
 
 function drawBars(ratio){var v=ctx('cB'),c=v.c,W=v.W,H=v.H;c.fillStyle='#0a1422';c.fillRect(0,0,W,H);var pL=6,pR=6,pT=16,pB=24,pw=W-pL-pR,ph=H-pT-pB,bw=pw/NB,syn=ratio>=1;c.strokeStyle='rgba(50,75,110,0.55)';c.lineWidth=1;c.beginPath();c.moveTo(pL,pT);c.lineTo(pL+pw,pT);c.stroke();c.font='9px monospace';c.fillStyle='rgba(50,75,110,0.55)';c.textAlign='left';c.fillText('Surface',pL+2,pT-4);for(var i=0;i<NB;i++){var x=pL+i*bw+1,bwi=bw-3,phi=th_c+i*0.40*(syn?0.22:0.90),dyn=0.28+0.28*Math.max(0,Math.sin(phi)),perm=subs[i]*0.50,total=Math.min(0.94,perm+dyn*0.48),barH=total*ph,permH=perm*ph,dynH=barH-permH,yTop=pT+ph-barH;if(permH>1){var pg=c.createLinearGradient(0,pT+ph-permH,0,pT+ph);pg.addColorStop(0,syn?'rgba(8,72,92,0.88)':'rgba(36,56,90,0.72)');pg.addColorStop(1,syn?'rgba(4,36,55,0.96)':'rgba(18,32,62,0.90)');c.fillStyle=pg;c.fillRect(x,pT+ph-permH,bwi,permH);}if(dynH>1){var fl=fls[i],dc=fl>0.3?'rgba(245,200,66,'+(fl*0.85)+')':syn?'rgba(31,184,200,'+(0.32+dyn*0.45)+')':'rgba(74,96,128,'+(0.25+dyn*0.32)+')';c.fillStyle=dc;c.fillRect(x,pT+ph-barH,bwi,dynH);}if(barH>2){c.fillStyle=fls[i]>0.3?'rgba(245,200,66,'+fls[i]+')':syn?'rgba(77,216,232,0.88)':'rgba(100,130,170,0.50)';c.fillRect(x,yTop,bwi,2);}if(fls[i]>0.4){var fg=c.createRadialGradient(x+bwi/2,yTop,0,x+bwi/2,yTop,bwi*1.9);fg.addColorStop(0,'rgba(245,200,66,'+(fls[i]*0.60)+')');fg.addColorStop(1,'rgba(245,200,66,0)');c.beginPath();c.arc(x+bwi/2,yTop,bwi*1.9,0,Math.PI*2);c.fillStyle=fg;c.fill();}}c.font='9px monospace';c.fillStyle='rgba(31,184,200,0.55)';c.textAlign='center';c.fillText('bright = live oscillation   ·   dark base = permanent subsidence',W/2,H-6);c.fillStyle='rgba(245,200,66,0.65)';c.textAlign='right';c.fillText(snaps+' snaps',W-pR,H-6);}
 
+// ---- LIVE RESULT PLOT DRAWING ----
+function drawLiveR() {
+  var cv = document.getElementById('cR');
+  if (!cv) return;
+  var c = cv.getContext('2d'), W = cv.width, H = cv.height;
+  var pL = 50, pR = 16, pT = 24, pB = 36;
+  var pw = W - pL - pR, ph = H - pT - pB;
+  c.fillStyle = '#0a1020'; c.fillRect(0, 0, W, H);
+  // Grid
+  c.strokeStyle = '#1a2a40'; c.lineWidth = 0.7;
+  for (var i = 0; i <= 4; i++) {
+    var y = pT + (i / 4) * ph;
+    c.beginPath(); c.moveTo(pL, y); c.lineTo(pL + pw, y); c.stroke();
+  }
+  // Axis labels
+  c.fillStyle = '#6b8ab0'; c.font = '11px monospace'; c.textAlign = 'right';
+  c.fillText('1.0', pL - 6, pT + 4);
+  c.fillText('0.5', pL - 6, pT + ph / 2 + 4);
+  c.fillText('0.0', pL - 6, pT + ph + 4);
+  c.textAlign = 'center';
+  c.fillText('Simulation time (hours)', pL + pw / 2, H - 4);
+  c.save(); c.translate(12, pT + ph / 2); c.rotate(-Math.PI / 2);
+  c.fillText('Order parameter r(t)', 0, 0); c.restore();
+  // Reference line: r = 0.40 (PDF best-fit)
+  var refY = pT + (1 - 0.40) * ph;
+  c.setLineDash([5, 4]); c.strokeStyle = '#6b8ab0'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(pL, refY); c.lineTo(pL + pw, refY); c.stroke();
+  c.setLineDash([]);
+  c.fillStyle = '#6b8ab0'; c.textAlign = 'left'; c.font = '10px monospace';
+  c.fillText('PDF best-fit r=0.40', pL + pw - 120, refY - 5);
+  // K_c = 1 line label
+  // Draw r(t) trace
+  if (rHistory.length > 1) {
+    var tMin = tHistory[0], tMax = tHistory[tHistory.length - 1];
+    if (tMax <= tMin) tMax = tMin + 1;
+    c.strokeStyle = '#f0621a'; c.lineWidth = 2; c.beginPath();
+    for (var i = 0; i < rHistory.length; i++) {
+      var x = pL + ((tHistory[i] - tMin) / (tMax - tMin)) * pw;
+      var y = pT + (1 - rHistory[i]) * ph;
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    c.stroke();
+    // Time axis ticks
+    c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'center';
+    var step = Math.max(50, Math.round((tMax - tMin) / 5 / 50) * 50);
+    for (var t = Math.ceil(tMin / step) * step; t <= tMax; t += step) {
+      var x = pL + ((t - tMin) / (tMax - tMin)) * pw;
+      c.fillText(t + 'h', x, pT + ph + 16);
+    }
+  }
+  // Current value label
+  if (rHistory.length > 0) {
+    var rNow = rHistory[rHistory.length - 1];
+    c.fillStyle = '#f0621a'; c.font = 'bold 13px monospace'; c.textAlign = 'right';
+    c.fillText('r = ' + rNow.toFixed(3), pL + pw, pT - 6);
+  }
+}
+
+function drawLiveKRatio(ratio) {
+  var cv = document.getElementById('cKR');
+  if (!cv) return;
+  var c = cv.getContext('2d'), W = cv.width, H = cv.height;
+  c.fillStyle = '#0a1020'; c.fillRect(0, 0, W, H);
+  var pL = 50, pR = 50, pT = 60, pB = 50;
+  var pw = W - pL - pR, ph = H - pT - pB;
+  // Log scale from 0.1 to 1000
+  var logMin = Math.log10(0.1), logMax = Math.log10(1000);
+  function xPos(val) { return pL + (Math.log10(Math.max(0.1, val)) - logMin) / (logMax - logMin) * pw; }
+  // Background zones
+  var xKc = xPos(1.0);
+  c.fillStyle = 'rgba(240,98,26,0.06)'; c.fillRect(pL, pT, xKc - pL, ph); // subcritical
+  c.fillStyle = 'rgba(31,184,200,0.06)'; c.fillRect(xKc, pT, pL + pw - xKc, ph); // supercritical
+  // Axis line
+  c.strokeStyle = '#1a2a40'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(pL, pT + ph); c.lineTo(pL + pw, pT + ph); c.stroke();
+  // Tick marks
+  c.fillStyle = '#6b8ab0'; c.font = '11px monospace'; c.textAlign = 'center';
+  [0.1, 0.3, 1, 1.86, 3, 6, 10, 100, 1000].forEach(function(v) {
+    var x = xPos(v);
+    c.beginPath(); c.moveTo(x, pT + ph); c.lineTo(x, pT + ph + 6); c.stroke();
+    c.fillText(v <= 10 ? v.toString() : v.toString(), x, pT + ph + 20);
+  });
+  // K_c = 1 vertical line
+  c.setLineDash([4, 3]); c.strokeStyle = '#f5c842'; c.lineWidth = 1.5;
+  c.beginPath(); c.moveTo(xKc, pT); c.lineTo(xKc, pT + ph); c.stroke();
+  c.setLineDash([]);
+  c.fillStyle = '#f5c842'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText('K/Kc = 1 (threshold)', xKc, pT - 8);
+  // PDF best-fit marker at 1.86
+  var xBest = xPos(1.86);
+  c.setLineDash([3, 3]); c.strokeStyle = '#6b8ab0'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(xBest, pT); c.lineTo(xBest, pT + ph); c.stroke();
+  c.setLineDash([]);
+  c.fillStyle = '#6b8ab0'; c.font = '10px monospace';
+  c.fillText('PDF best-fit 1.86', xBest, pT + ph + 34);
+  // Sensitivity range bar [0.30, 6.00]
+  var xLo = xPos(0.30), xHi = xPos(6.00);
+  c.fillStyle = 'rgba(31,184,200,0.18)';
+  c.fillRect(xLo, pT + ph * 0.4, xHi - xLo, ph * 0.2);
+  c.strokeStyle = '#1fb8c8'; c.lineWidth = 1;
+  c.strokeRect(xLo, pT + ph * 0.4, xHi - xLo, ph * 0.2);
+  c.fillStyle = '#1fb8c8'; c.font = '10px monospace'; c.textAlign = 'left';
+  c.fillText('Sensitivity range 0.30–6.00', xLo + 4, pT + ph * 0.4 - 5);
+  // Current value marker
+  var xCur = xPos(Math.min(999, ratio));
+  c.fillStyle = '#f0621a';
+  c.beginPath(); c.arc(xCur, pT + ph * 0.5, 10, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#fff'; c.font = 'bold 9px monospace'; c.textAlign = 'center';
+  c.fillText(ratio < 99 ? ratio.toFixed(1) : '\u221e', xCur, pT + ph * 0.5 + 3);
+  // Label
+  c.fillStyle = '#f0621a'; c.font = 'bold 14px monospace'; c.textAlign = 'left';
+  c.fillText('Current K/Kc = ' + (ratio < 99 ? ratio.toFixed(2) : '\u221e'), pL, pT - 20);
+  // Zone labels
+  c.fillStyle = '#f0621a'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText('SUBCRITICAL', (pL + xKc) / 2, pT + 16);
+  c.fillStyle = '#1fb8c8';
+  c.fillText('SUPERCRITICAL', (xKc + pL + pw) / 2, pT + 16);
+  // X-axis label
+  c.fillStyle = '#6b8ab0'; c.textAlign = 'center'; c.font = '11px monospace';
+  c.fillText('K / Kc  (log scale)', pL + pw / 2, H - 8);
+}
+
+function drawLiveBurstRate() {
+  var cv = document.getElementById('cBR');
+  if (!cv) return;
+  var c = cv.getContext('2d'), W = cv.width, H = cv.height;
+  var pL = 50, pR = 16, pT = 24, pB = 36;
+  var pw = W - pL - pR, ph = H - pT - pB;
+  c.fillStyle = '#0a1020'; c.fillRect(0, 0, W, H);
+  // Grid
+  c.strokeStyle = '#1a2a40'; c.lineWidth = 0.7;
+  for (var i = 0; i <= 4; i++) {
+    var y = pT + (i / 4) * ph;
+    c.beginPath(); c.moveTo(pL, y); c.lineTo(pL + pw, y); c.stroke();
+  }
+  // Find max bin value for scaling
+  var maxBin = 1;
+  for (var i = 0; i < burstBins.length; i++) { if (burstBins[i] > maxBin) maxBin = burstBins[i]; }
+  // Draw bars
+  var barW = pw / burstBins.length;
+  for (var i = 0; i < burstBins.length; i++) {
+    if (burstBins[i] === 0) continue;
+    var barH = (burstBins[i] / maxBin) * ph;
+    var x = pL + i * barW;
+    var y = pT + ph - barH;
+    var isCurrent = (simT >= i * burstBinWidth && simT < (i + 1) * burstBinWidth);
+    c.fillStyle = isCurrent ? '#f0621a' : '#1fb8c8';
+    c.fillRect(x + 1, y, barW - 2, barH);
+  }
+  // Pore envelope overlay
+  c.strokeStyle = 'rgba(245,200,66,0.5)'; c.lineWidth = 1.5; c.beginPath();
+  for (var i = 0; i < burstBins.length; i++) {
+    var tMid = (i + 0.5) * burstBinWidth;
+    var pv = pore(tMid);
+    var x = pL + (i + 0.5) * barW;
+    var y = pT + (1 - pv) * ph;
+    if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+  }
+  c.stroke();
+  // Axis labels
+  c.fillStyle = '#6b8ab0'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText('Time bin (hours)', pL + pw / 2, H - 4);
+  c.save(); c.translate(12, pT + ph / 2); c.rotate(-Math.PI / 2);
+  c.fillText('Snap events per bin', 0, 0); c.restore();
+  // X ticks
+  c.textAlign = 'center'; c.font = '10px monospace';
+  for (var i = 0; i < burstBins.length; i += 10) {
+    var x = pL + (i + 0.5) * barW;
+    c.fillText((i * burstBinWidth) + '', x, pT + ph + 16);
+  }
+  // Legend
+  c.fillStyle = 'rgba(245,200,66,0.7)'; c.font = '10px monospace'; c.textAlign = 'right';
+  c.fillText('yellow = pore envelope', pL + pw, pT + 14);
+  c.fillStyle = '#f0621a'; c.fillText('orange = current bin', pL + pw, pT + 28);
+  // Stats
+  c.fillStyle = '#e2eaf8'; c.font = 'bold 12px monospace'; c.textAlign = 'left';
+  c.fillText('Total snaps: ' + snaps + '   t = ' + Math.round(simT) + ' h', pL + 4, pT - 6);
+}
+
+function drawLiveIntervals() {
+  var cv = document.getElementById('cIV');
+  if (!cv) return;
+  var c = cv.getContext('2d'), W = cv.width, H = cv.height;
+  var pL = 50, pR = 16, pT = 24, pB = 50;
+  var pw = W - pL - pR, ph = H - pT - pB;
+  c.fillStyle = '#0a1020'; c.fillRect(0, 0, W, H);
+  if (snapIntervals.length < 2) {
+    c.fillStyle = '#6b8ab0'; c.font = '14px monospace'; c.textAlign = 'center';
+    c.fillText('Waiting for snap events to accumulate...', W / 2, H / 2 - 10);
+    c.fillText('(' + snapIntervals.length + ' intervals so far, need at least 2)', W / 2, H / 2 + 14);
+    return;
+  }
+  // Build histogram of intervals
+  var minI = Infinity, maxI = 0, sum = 0;
+  for (var i = 0; i < snapIntervals.length; i++) {
+    if (snapIntervals[i] < minI) minI = snapIntervals[i];
+    if (snapIntervals[i] > maxI) maxI = snapIntervals[i];
+    sum += snapIntervals[i];
+  }
+  var mean = sum / snapIntervals.length;
+  var nBins = Math.min(20, Math.max(5, Math.floor(snapIntervals.length / 2)));
+  var binW = (maxI - minI) / nBins;
+  if (binW < 0.5) binW = 0.5;
+  var bins = new Array(nBins).fill(0);
+  for (var i = 0; i < snapIntervals.length; i++) {
+    var idx = Math.min(nBins - 1, Math.floor((snapIntervals[i] - minI) / binW));
+    bins[idx]++;
+  }
+  var maxCount = 1;
+  for (var i = 0; i < nBins; i++) { if (bins[i] > maxCount) maxCount = bins[i]; }
+  // Grid
+  c.strokeStyle = '#1a2a40'; c.lineWidth = 0.7;
+  for (var i = 0; i <= 4; i++) {
+    var y = pT + (i / 4) * ph;
+    c.beginPath(); c.moveTo(pL, y); c.lineTo(pL + pw, y); c.stroke();
+  }
+  // Draw histogram bars
+  var bw = pw / nBins;
+  for (var i = 0; i < nBins; i++) {
+    if (bins[i] === 0) continue;
+    var barH = (bins[i] / maxCount) * ph;
+    var x = pL + i * bw;
+    c.fillStyle = '#1fb8c8';
+    c.fillRect(x + 1, pT + ph - barH, bw - 2, barH);
+  }
+  // Mean line
+  var meanX = pL + ((mean - minI) / (maxI - minI)) * pw;
+  c.setLineDash([4, 3]); c.strokeStyle = '#f0621a'; c.lineWidth = 2;
+  c.beginPath(); c.moveTo(meanX, pT); c.lineTo(meanX, pT + ph); c.stroke();
+  c.setLineDash([]);
+  // PDF reference: mean = 154 h
+  var pdfMeanX = pL + ((154 - minI) / (maxI - minI)) * pw;
+  if (pdfMeanX >= pL && pdfMeanX <= pL + pw) {
+    c.setLineDash([3, 3]); c.strokeStyle = '#6b8ab0'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(pdfMeanX, pT); c.lineTo(pdfMeanX, pT + ph); c.stroke();
+    c.setLineDash([]);
+    c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'center';
+    c.fillText('PDF: 154h', pdfMeanX, pT - 5);
+  }
+  // Axis labels
+  c.fillStyle = '#6b8ab0'; c.font = '11px monospace'; c.textAlign = 'center';
+  c.fillText('Inter-snap interval (hours)', pL + pw / 2, H - 4);
+  c.save(); c.translate(12, pT + ph / 2); c.rotate(-Math.PI / 2);
+  c.fillText('Count', 0, 0); c.restore();
+  // X ticks
+  c.font = '10px monospace'; c.textAlign = 'center';
+  for (var i = 0; i <= nBins; i += Math.max(1, Math.floor(nBins / 5))) {
+    var val = minI + i * binW;
+    var x = pL + i * bw;
+    c.fillText(val.toFixed(0) + 'h', x, pT + ph + 16);
+  }
+  // Stats
+  c.fillStyle = '#f0621a'; c.font = 'bold 12px monospace'; c.textAlign = 'left';
+  c.fillText('Mean interval: ' + mean.toFixed(1) + ' h  (n=' + snapIntervals.length + ')', pL + 4, pT - 6);
+  c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'right';
+  c.fillText('PDF synthetic: 154 h | PDF model: 181 h', pL + pw, pT - 6);
+}
+
 // ---- MAIN LOOP ----
+var prevSnaps = 0;
 function loop() {
   if (!paused) {
     var s = step();
@@ -1162,6 +1431,30 @@ function loop() {
     drawBars(s.ratio);
     updateStatus(s.r, s.ratio);
     updateClock();
+    // Record live plot data
+    rHistory.push(s.r);
+    tHistory.push(simT);
+    if (rHistory.length > R_HISTORY_MAX) { rHistory.shift(); tHistory.shift(); }
+    // Track snap events for burst rate and intervals
+    if (snaps > prevSnaps) {
+      var newSnaps = snaps - prevSnaps;
+      for (var ns = 0; ns < newSnaps; ns++) {
+        snapTimes.push(simT);
+        if (lastSnapT >= 0) { snapIntervals.push(simT - lastSnapT); }
+        lastSnapT = simT;
+        // Add to burst bin
+        var binIdx = Math.floor(simT / burstBinWidth);
+        if (binIdx < burstBins.length) burstBins[binIdx]++;
+      }
+      prevSnaps = snaps;
+    }
+    // Draw live plots every 3rd frame for performance
+    if (frame % 3 === 0) {
+      drawLiveR();
+      drawLiveKRatio(s.ratio);
+      drawLiveBurstRate();
+      drawLiveIntervals();
+    }
     frame++;
   }
   animId = requestAnimationFrame(loop);
@@ -1171,6 +1464,11 @@ function loop() {
 function resetSim() {
   th_m = 0; th_c = Math.PI/4; dth_prv = 0; simT = 0; frame = 0; snaps = 0;
   for (var i = 0; i < NB; i++) { subs[i] = 0; fls[i] = 0; }
+  // Reset live plot data
+  rHistory = []; tHistory = [];
+  snapTimes = []; snapIntervals = []; lastSnapT = -1;
+  burstBins = new Float32Array(70);
+  prevSnaps = 0;
   updateClock();
 }
 
