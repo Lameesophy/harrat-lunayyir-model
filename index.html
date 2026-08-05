@@ -589,7 +589,7 @@ footer {
 <section class="hero">
   <div class="hero-inner">
     <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
-    <div class="hero-subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</div>
+    <div class="hero-subtitle">Coupled-Oscillator Model · 2009 Dike Intrusion · Saudi Arabia</div>
     <p class="hero-summary">This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm. It presents a two-oscillator reduction of the N-segment Kuramoto model described in the accompanying analysis, letting you see and interact with the coupling dynamics in real time.</p>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -791,8 +791,8 @@ footer {
 <!-- ═══════════════════ §3 RESULTS ═══════════════════ -->
 <section class="section" id="results">
   <div class="section-eyebrow">Section 03</div>
-  <h2>Model Results</h2>
-  <p class="section-lead">The Kuramoto model was fitted to a synthetic earthquake catalogue built from published constraints. These figures show the fit — and where it falls short.</p>
+  <h2>Live Model Behaviour</h2>
+  <p class="section-lead">These charts track the two-oscillator simulation as it runs, with the fitted values from the analysis document shown as fixed reference markers — so you can see where the live system sits relative to the published fit.</p>
 
   <div class="tab-bar" role="tablist" aria-label="Result figures">
     <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-order" id="tab-order">Order parameter r(t)</button>
@@ -994,13 +994,13 @@ footer {
   <div class="footer-note">This model draws on published constraints from the sources cited below. The catalogue used is <strong>synthetic</strong> — generated from physical equations constrained by published parameters — not an observational catalogue from the Saudi Geological Survey.</div>
   <div class="footer-citations">
     Pallister, J.S. et al. (2010). Broad accommodation of rift-related extension recorded by dyke intrusion in Saudi Arabia. <em>Nature Geoscience</em>, 3, 705–712.<br>
-    Mukhopadhyay, B. et al. (2013). Seismic data analysis for the 2009 Harrat Lunayyir earthquake swarm. <em>Geomatics, Natural Hazards and Risk</em>, 4(1), 14–42.<br>
-    Hansen, S.E. et al. (2013). Seismic evidence for a pre-existing subduction channel beneath Harrat Lunayyir. <em>JGR Solid Earth</em>, 118, 1–13.<br>
+    Mukhopadhyay, B., Mogren, S., Mukhopadhyay, M. &amp; Dasgupta, S. (2013). Incipient status of dyke intrusion in top crust – evidences from the Al-Ays 2009 earthquake swarm, Harrat Lunayyir, SW Saudi Arabia. <em>Geomatics, Natural Hazards and Risk</em>, 4(1), 30–48.<br>
+    Hansen, S.E., DeShon, H.R., Moore-Driskell, M.M. &amp; Al-Amri, A.M.S. (2013). Investigating the P wave velocity structure beneath Harrat Lunayyir, northwestern Saudi Arabia, using double-difference tomography and earthquakes from the 2009 seismic swarm. <em>Journal of Geophysical Research: Solid Earth</em>, 118(9), 4814–4826.<br>
     Kuramoto, Y. (1984). <em>Chemical Oscillations, Waves, and Turbulence</em>. Springer.<br>
     Strogatz, S.H. (2000). From Kuramoto to Crawford: exploring the onset of synchronization in populations of coupled oscillators. <em>Physica D</em>, 143, 1–20.<br>
-    Bercovici, D., Jellinek, A.M., Michaut, C., Roman, D.C. &amp; Morse, R. (2013). Volcanic tremors and magma wagging. <em>Geophysical Journal International</em>, 195(2), 1001–1022.<br>
+    Bercovici, D., Jellinek, A.M., Michaut, C., Roman, D.C. &amp; Morse, R. (2013). Volcanic tremors and magma wagging: gas flux interactions and forcing mechanism. <em>Geophysical Journal International</em>, 195(2), 1001–1022.<br>
     Brodsky, E.E. &amp; Farge, G. (2026). How earthquakes organize stress. <em>PNAS</em>, 123(6), e2530754123.<br>
-    Blanchette, A., Klemperer, S.L., Mooney, W.D. &amp; Sehli, T. (2025). Migration of seismicity beneath Harrat Lunayyir. <em>Seismica</em>, 4(1), 1148.
+    Blanchette, A., Klemperer, S.L., Mooney, W.D. &amp; Sehli, T. (2025). Migration of seismicity from the mantle to the upper crust beneath Harrat Lunayyir volcanic field, Saudi Arabia. <em>Seismica</em>, 4(1), 1148.
   </div>
 </footer>
 
@@ -1192,7 +1192,7 @@ function drawLiveR() {
   c.beginPath(); c.moveTo(pL, refY); c.lineTo(pL + pw, refY); c.stroke();
   c.setLineDash([]);
   c.fillStyle = '#6b8ab0'; c.textAlign = 'left'; c.font = '10px monospace';
-  c.fillText('PDF best-fit r=0.40', pL + pw - 120, refY - 5);
+  c.fillText('fitted value r=0.40', pL + pw - 120, refY - 5);
   // K_c = 1 line label
   // Draw r(t) trace
   if (rHistory.length > 1) {
@@ -1265,7 +1265,7 @@ function drawLiveKRatio(ratio) {
   c.strokeStyle = '#1fb8c8'; c.lineWidth = 1;
   c.strokeRect(xLo, pT + ph * 0.4, xHi - xLo, ph * 0.2);
   c.fillStyle = '#1fb8c8'; c.font = '10px monospace'; c.textAlign = 'left';
-  c.fillText('Sensitivity range 0.30–6.00', xLo + 4, pT + ph * 0.4 - 5);
+  c.fillText('range across plausible inputs: 0.30–6.00', xLo + 4, pT + ph * 0.4 - 5);
   // Current value marker
   var xCur = xPos(Math.min(999, ratio));
   c.fillStyle = '#f0621a';
@@ -1333,6 +1333,16 @@ function drawLiveBurstRate() {
     var x = pL + (i + 0.5) * barW;
     c.fillText((i * burstBinWidth) + '', x, pT + ph + 16);
   }
+  // Reference: ~21 peaks over 3500h = mean rate of 0.3 snaps per 50h bin
+  var refRate = 21 / 70; // 21 peaks across 70 bins
+  if (maxBin > 1) {
+    var refY = pT + (1 - refRate / maxBin) * ph;
+    c.setLineDash([5, 4]); c.strokeStyle = '#6b8ab0'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(pL, refY); c.lineTo(pL + pw, refY); c.stroke();
+    c.setLineDash([]);
+    c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'left';
+    c.fillText('fitted ref: ~21 peaks / 154 h mean', pL + 4, refY - 5);
+  }
   // Legend
   c.fillStyle = 'rgba(245,200,66,0.7)'; c.font = '10px monospace'; c.textAlign = 'right';
   c.fillText('yellow = pore envelope', pL + pw, pT + 14);
@@ -1393,14 +1403,22 @@ function drawLiveIntervals() {
   c.setLineDash([4, 3]); c.strokeStyle = '#f0621a'; c.lineWidth = 2;
   c.beginPath(); c.moveTo(meanX, pT); c.lineTo(meanX, pT + ph); c.stroke();
   c.setLineDash([]);
-  // PDF reference: mean = 154 h
+  // Reference markers: synthetic 154h and Kuramoto model 181h
   var pdfMeanX = pL + ((154 - minI) / (maxI - minI)) * pw;
   if (pdfMeanX >= pL && pdfMeanX <= pL + pw) {
     c.setLineDash([3, 3]); c.strokeStyle = '#6b8ab0'; c.lineWidth = 1;
     c.beginPath(); c.moveTo(pdfMeanX, pT); c.lineTo(pdfMeanX, pT + ph); c.stroke();
     c.setLineDash([]);
     c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'center';
-    c.fillText('PDF: 154h', pdfMeanX, pT - 5);
+    c.fillText('synthetic: 154h', pdfMeanX, pT - 5);
+  }
+  var modelMeanX = pL + ((181 - minI) / (maxI - minI)) * pw;
+  if (modelMeanX >= pL && modelMeanX <= pL + pw) {
+    c.setLineDash([3, 3]); c.strokeStyle = '#22c97a'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(modelMeanX, pT); c.lineTo(modelMeanX, pT + ph); c.stroke();
+    c.setLineDash([]);
+    c.fillStyle = '#22c97a'; c.font = '10px monospace'; c.textAlign = 'center';
+    c.fillText('model: 181h', modelMeanX, pT + ph + 30);
   }
   // Axis labels
   c.fillStyle = '#6b8ab0'; c.font = '11px monospace'; c.textAlign = 'center';
@@ -1418,7 +1436,7 @@ function drawLiveIntervals() {
   c.fillStyle = '#f0621a'; c.font = 'bold 12px monospace'; c.textAlign = 'left';
   c.fillText('Mean interval: ' + mean.toFixed(1) + ' h  (n=' + snapIntervals.length + ')', pL + 4, pT - 6);
   c.fillStyle = '#6b8ab0'; c.font = '10px monospace'; c.textAlign = 'right';
-  c.fillText('PDF synthetic: 154 h | PDF model: 181 h', pL + pw, pT - 6);
+  c.fillText('fitted refs: synthetic 154 h | Kuramoto model 181 h', pL + pw, pT - 6);
 }
 
 // ---- MAIN LOOP ----
