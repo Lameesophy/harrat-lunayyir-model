@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harrat Lunayyir — Magma Sync Model</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #07090f; color: #e2eaf8; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; line-height: 1.6; }
+    .hero { background: linear-gradient(180deg, #0c1220 0%, #07090f 100%); border-bottom: 2px solid #223350; padding: 48px 20px; text-align: center; }
+    .hero h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
+    .hero h1 em { font-style: normal; color: #f0621a; }
+    .hero-subtitle { font-size: 0.9rem; color: #6b8ab0; margin-bottom: 20px; font-family: monospace; letter-spacing: 0.05em; }
+    .hero-summary { font-size: 0.9rem; color: #b8c8e0; max-width: 720px; margin: 0 auto 28px; }
+    .hero-stats { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+    .hero-stat { background: #0c1220; border: 1px solid #1a2a40; border-radius: 8px; padding: 14px; width: 200px; }
+    .hero-stat-lbl { font-size: 0.6rem; color: #6b8ab0; text-transform: uppercase; margin-bottom: 4px; }
+    .hero-stat-val { font-size: 1.2rem; font-weight: 700; color: #f0621a; }
+    nav { background: rgba(12, 18, 32, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px; display: flex; gap: 20px; justify-content: center; position: sticky; top: 0; z-index: 100; }
+    nav a { color: #6b8ab0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    nav a:hover { color: #f0621a; }
+    section { max-width: 1000px; margin: 0 auto; padding: 40px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    section h2 { font-size: 1.5rem; margin-bottom: 20px; color: #e2eaf8; }
+    section h3 { font-size: 1.1rem; margin-top: 25px; margin-bottom: 12px; color: #f0621a; }
+    .content-card { background: rgba(12, 18, 32, 0.5); border: 1px solid rgba(31, 184, 200, 0.2); border-radius: 6px; padding: 20px; margin-bottom: 20px; }
+    canvas { background: #0a1422; border: 1px solid rgba(31, 184, 200, 0.2); border-radius: 4px; display: block; width: 100%; max-width: 460px; margin: 0 auto 20px; }
+    .button-group { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+    button { background: rgba(240, 98, 26, 0.15); border: 1px solid rgba(240, 98, 26, 0.4); color: #f0621a; padding: 10px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+    button:hover { background: rgba(240, 98, 26, 0.25); }
+    button.active { background: #f0621a; color: #0c1220; border-color: #f0621a; }
+    .slider-group { margin-bottom: 16px; max-width: 600px; margin: 0 auto 16px; }
+    .slider-group label { display: block; color: #6b8ab0; font-size: 0.85rem; margin-bottom: 6px; }
+    input[type="range"] { width: 100%; height: 5px; border-radius: 3px; background: rgba(31, 184, 200, 0.15); outline: none; -webkit-appearance: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #f0621a; cursor: pointer; }
+    .status-bar { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; background: rgba(12, 18, 32, 0.5); padding: 16px; border-radius: 6px; margin-bottom: 20px; border: 1px solid rgba(31, 184, 200, 0.2); }
+    .status-item { text-align: center; }
+    .status-value { font-size: 1.1rem; font-weight: 700; color: #f0621a; }
+    .status-label { font-size: 0.7rem; color: #6b8ab0; text-transform: uppercase; }
+    .panel-container img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin-bottom: 20px; }
+    .tab-buttons { display: flex; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(31, 184, 200, 0.2); }
+    .tab-btn { background: none; border: none; color: #6b8ab0; padding: 10px; cursor: pointer; transition: all 0.3s; border-bottom: 2px solid transparent; }
+    .tab-btn.active { color: #f0621a; border-bottom-color: #f0621a; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    footer { padding: 40px; text-align: center; color: #6b8ab0; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Harrat <em>Lunayyir</em> — Magma Sync Model</h1>
+    <p class="hero-subtitle">Kuramoto Phase-Coupled Oscillator · 2009 Dike Intrusion · Saudi Arabia</p>
+    <p class="hero-summary">This page explores whether earthquake bursts during the 2009 Harrat Lunayyir dike intrusion show signs of synchronisation — the magma column and brittle crust falling into a shared rhythm.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-lbl">Critical coupling K<sub>c</sub></div><div class="hero-stat-val">0.0266 rad/h</div></div>
+      <div class="hero-stat"><div class="hero-stat-lbl">Best-fit K / K<sub>c</sub></div><div class="hero-stat-val">1.86</div></div>
+      <div class="hero-stat"><div class="hero-stat-lbl">Order parameter r</div><div class="hero-stat-val">0.40</div></div>
+    </div>
+  </div>
+
+  <nav><a href="#event">THE 2009 EVENT</a><a href="#simulation">SIMULATION</a><a href="#results">RESULTS</a><a href="#sensitivity">SENSITIVITY</a></nav>
+
+  <section id="event">
+    <h2>The 2009 Intrusion</h2>
+    <div class="panel-container"><img src="panel_event_new.svg" alt="Cross-section and plan view of the 2009 Harrat Lunayyir dike intrusion"></div>
+    <div class="content-card"><p>A crack filled with rising molten basalt — approximately 10 km long with a maximum opening of 2–4 m, pushing up from roughly 20 km depth — produced a swarm of roughly 30,000 earthquakes over several months.</p></div>
+    <h3>From geology to mathematics</h3>
+    <div class="panel-container"><img src="panel_translation_new.svg" alt="Correspondence table mapping physical system to model variables"></div>
+  </section>
+
+  <section id="simulation">
+    <h2>Live Simulation</h2>
+    <div class="status-bar">
+      <div class="status-item"><div class="status-value" id="clk">t = 0 h</div><div class="status-label">Elapsed time</div></div>
+      <div class="status-item"><div class="status-value" id="sv0">0.00</div><div class="status-label">K / K<sub>c</sub></div></div>
+      <div class="status-item"><div class="status-value" id="sv1">0.00</div><div class="status-label">Synchronisation r</div></div>
+      <div class="status-item"><div class="status-value" id="sv3">0</div><div class="status-label">Crack snaps</div></div>
+    </div>
+
+    <div class="button-group">
+      <button onclick="resetSim()">⟳ Restart pulse</button>
+      <button onclick="applyPreset('quiet')" id="btnQuiet">Weak coupling</button>
+      <button onclick="applyPreset('near')" id="btnNear">Near the threshold</button>
+      <button onclick="applyPreset('strong')" id="btnStrong">Phase-locking possible</button>
+      <button onclick="togglePause()" id="btnPause">⏸ Pause</button>
+    </div>
+
+    <div class="slider-group"><label>Magma column rhythm (T, hours) <span id="vT">240</span></label><input type="range" id="sT" min="100" max="400" value="240" oninput="document.getElementById('vT').textContent=this.value"></div>
+    <div class="slider-group"><label>Gas content of the magma (M) <span id="vM">0.05</span></label><input type="range" id="sM" min="0.01" max="0.2" step="0.01" value="0.05" oninput="document.getElementById('vM').textContent=this.value"></div>
+    <div class="slider-group"><label>Resistance from rock (η) <span id="vE">0.020</span></label><input type="range" id="sE" min="0.005" max="0.1" step="0.005" value="0.02" oninput="document.getElementById('vE').textContent=this.value"></div>
+    <div class="slider-group"><label>Grip between magma and crust (K) <span id="vK">0.15</span></label><input type="range" id="sK" min="0.01" max="1" step="0.01" value="0.15" oninput="document.getElementById('vK').textContent=this.value"></div>
+    <div class="slider-group"><label>Mismatch in rhythms (δ, %) <span id="vD">4</span></label><input type="range" id="sD" min="0" max="10" step="0.5" value="4" oninput="document.getElementById('vD').textContent=this.value"></div>
+
+    <h3>Magma Column (Master)</h3><canvas id="cM" width="460" height="460"></canvas>
+    <h3>Dike Cross-section</h3><canvas id="cD" width="460" height="460"></canvas>
+    <h3>Brittle Crust (Slave)</h3><canvas id="cS" width="460" height="460"></canvas>
+    <h3>Surface Deformation & Subsidence</h3><canvas id="cB" width="460" height="460"></canvas>
+
+    <div class="panel-container"><img src="panel_stages_new.svg" alt="Three coupling regimes"></div>
+  </section>
+
+  <section id="results">
+    <h2>Model Results</h2>
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="openTab(event, 'panel-order')">Order parameter r(t)</button>
+      <button class="tab-btn" onclick="openTab(event, 'panel-misfit')">Misfit landscape</button>
+      <button class="tab-btn" onclick="openTab(event, 'panel-fit')">Kuramoto fit</button>
+    </div>
+    <div id="panel-order" class="tab-panel active"><div class="panel-container"><img src="figure_order_param_new.webp"></div></div>
+    <div id="panel-misfit" class="tab-panel"><div class="panel-container"><img src="figure_misfit_new.webp"></div></div>
+    <div id="panel-fit" class="tab-panel"><div class="panel-container"><img src="figure_kuramoto_fit_new.webp"></div></div>
+  </section>
+
+  <section id="sensitivity">
+    <h2>Sensitivity Analysis</h2>
+    <div class="panel-container"><img src="panel_workflow_new.svg" alt="Four-step workflow"></div>
+  </section>
+
+  <footer><p><strong>Harrat Lunayyir — Magma Sync Model</strong></p><p>Lamees Felemban — Independent Research</p></footer>
+
+  <script>
+    var th_m=0, th_c=Math.PI/4, dth_prv=0, simT=0, DT=0.5, frame=0, NB=14, snaps=0, paused=false;
+    var subs=new Float32Array(NB), fls=new Float32Array(NB);
+    var S2='#111827', BD='#1a2a40', MU2='#7a90b0';
+    var CRACKS=(function(){var s=99,a=[];function r(){s=(1664525*s+1013904223)>>>0;return s/0x100000000;}for(var i=0;i<14;i++)a.push({x:r(),y:r(),l:0.05+r()*0.06,a:r()*Math.PI});return a;})();
+
+    function pore(t){return t<=0?0:Math.exp(-t/1500)*(1-Math.exp(-t/80));}
+    function getP(){return {Tw:+document.getElementById('sT').value,M:+document.getElementById('sM').value,et:+document.getElementById('sE').value,K:+document.getElementById('sK').value,dl:+document.getElementById('sD').value/100,sg:0.01};}
+    
+    function step(){
+      var p=getP(),om=2*Math.PI/p.Tw,oc=om*(1+p.dl),c=pore(simT);
+      var bern=p.M*p.M*Math.sin(2*th_m)*0.5;
+      var dtm=om+bern-p.et*dth_prv+0.01*(Math.random()-0.5);
+      var dtc=oc+p.K*c*Math.sin(th_m-th_c)+0.007*(Math.random()-0.5);
+      th_m+=dtm*DT; th_c+=dtc*DT; dth_prv=dtm; simT+=DT;
+      var lock=0.5*(1+Math.cos(th_m-th_c)), r=0.5*Math.hypot(Math.cos(th_m)+Math.cos(th_c),Math.sin(th_m)+Math.sin(th_c));
+      var Kc=2*Math.abs(oc-om),ratio=Kc>1e-9?p.K/Kc:999;
+      for(var i=0;i<NB;i++){fls[i]=Math.max(0,fls[i]-0.05);if(lock*c>0.6 && Math.random()<0.013){subs[i]=Math.min(1,subs[i]+0.08);fls[i]=1;snaps++;}}
+      return {r:r,ratio:ratio};
+    }
+
+    function draw(){
+      var c1=document.getElementById('cM').getContext('2d'),W1=460,H1=460;
+      c1.fillStyle=S2;c1.fillRect(0,0,W1,H1);
+      var px=230,py=46,L=285,ang=Math.sin(th_m)*0.68,bx=px+Math.sin(ang)*L,by=py+Math.cos(ang)*L,R=43;
+      c1.strokeStyle=MU2;c1.lineWidth=2;c1.beginPath();c1.moveTo(px,py);c1.lineTo(bx,by);c1.stroke();
+      c1.fillStyle='#f0621a';c1.beginPath();c1.arc(bx,by,R,0,Math.PI*2);c1.fill();
+
+      var c2=document.getElementById('cD').getContext('2d');
+      c2.fillStyle='#0a1422';c2.fillRect(0,0,460,460);
+      var cx=230,dw=41,dsp=Math.sin(th_m)*dw*0.55;
+      c2.fillStyle='#e85a0e';c2.fillRect(cx-dw+dsp,0,dw*2,460);
+      for(var i=0;i<4;i++){var y=460*(0.12+i*0.22),puls=Math.max(0,Math.sin(th_m+i*0.6)),len=69*puls;c2.strokeStyle='rgba(240,98,26,0.6)';c2.lineWidth=2;c2.beginPath();c2.moveTo(cx-dw+dsp,y);c2.lineTo(cx-dw+dsp-len,y);c2.stroke();c2.beginPath();c2.moveTo(cx+dw+dsp,y);c2.lineTo(cx+dw+dsp+len,y);c2.stroke();}
+
+      var c3=document.getElementById('cS').getContext('2d');
+      c3.fillStyle=S2;c3.fillRect(0,0,460,460);
+      var ang3=Math.sin(th_c)*0.68,bx3=px+Math.sin(ang3)*L,by3=py+Math.cos(ang3)*L;
+      c3.strokeStyle='#4a6080';c3.lineWidth=2;c3.beginPath();c3.moveTo(px,py);c3.lineTo(bx3,by3);c3.stroke();
+      c3.fillStyle='#1fb8c8';c3.beginPath();c3.arc(bx3,by3,R,0,Math.PI*2);c3.fill();
+
+      var c4=document.getElementById('cB').getContext('2d');
+      c4.fillStyle='#0a1422';c4.fillRect(0,0,460,460);
+      var bw=460/NB;
+      for(var i=0;i<NB;i++){
+        var h=(subs[i]*0.5 + 0.2*Math.sin(th_c+i*0.4))*230;
+        c4.fillStyle=fls[i]>0.5?'#f5c842':'#1fb8c8';
+        c4.fillRect(i*bw+2,460-h,bw-4,h);
+      }
+    }
+
+    function loop(){
+      if(!paused){
+        var s=step();draw();
+        document.getElementById('clk').textContent='t = '+Math.round(simT)+' h';
+        document.getElementById('sv0').textContent=s.ratio.toFixed(2);
+        document.getElementById('sv1').textContent=s.r.toFixed(2);
+        document.getElementById('sv3').textContent=snaps;
+      }
+      requestAnimationFrame(loop);
+    }
+
+    function resetSim(){th_m=0;th_c=Math.PI/4;simT=0;snaps=0;subs.fill(0);fls.fill(0);}
+    function togglePause(){paused=!paused;document.getElementById('btnPause').textContent=paused?'▶ Play':'⏸ Pause';}
+    function applyPreset(n){
+      var sk=document.getElementById('sK'), st=document.getElementById('sT');
+      if(n=='quiet'){sk.value=0.01;st.value=120;}else if(n=='near'){sk.value=0.02;st.value=120;}else{sk.value=0.35;st.value=280;}
+      document.getElementById('vK').textContent=sk.value;document.getElementById('vT').textContent=st.value;resetSim();
+    }
+    function openTab(e,n){
+      var i,tc=document.getElementsByClassName("tab-panel"),tl=document.getElementsByClassName("tab-btn");
+      for(i=0;i<tc.length;i++)tc[i].style.display="none";
+      for(i=0;i<tl.length;i++)tl[i].className=tl[i].className.replace(" active","");
+      document.getElementById(n).style.display="block";e.currentTarget.className+=" active";
+    }
+    loop();
+  </script>
+</body>
+</html>
