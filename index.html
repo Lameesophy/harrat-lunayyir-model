@@ -771,6 +771,7 @@ footer {
         <button class="preset-btn" id="btnQuiet" aria-label="Preset: Weak coupling — subcritical, crust not following">Weak coupling</button>
         <button class="preset-btn" id="btnNear" aria-label="Preset: Near the threshold — partial synchronisation">Near the threshold</button>
         <button class="preset-btn" id="btnStrong" aria-label="Preset: Phase-locking possible — phase-locked with subsidence">Phase-locking possible</button>
+        <button class="preset-btn" id="btnDefault" aria-label="Reset all sliders to their default values and restart">Default settings</button>
         <button class="pause-btn" id="btnPause" aria-label="Pause or resume the animation">⏸ Pause</button>
       </div>
       <div class="preset-desc" id="presetDesc">Select a preset to see a distinct dynamical regime, or drag the sliders below. Each preset restarts the intrusion pulse from t = 0.</div>
@@ -1519,6 +1520,24 @@ document.getElementById('btnRestart').addEventListener('click', function(){ rese
 document.getElementById('btnQuiet').addEventListener('click', function(){ applyPreset('quiet'); });
 document.getElementById('btnNear').addEventListener('click', function(){ applyPreset('near'); });
 document.getElementById('btnStrong').addEventListener('click', function(){ applyPreset('strong'); });
+document.getElementById('btnDefault').addEventListener('click', function(){
+  var defaults = { sT: 240, sM: 0.05, sE: 0.020, sK: 0.15, sD: 4, sN: 0.010 };
+  var ids  = ['sT','sM','sE','sK','sD','sN'];
+  var vids = ['vT','vM','vE','vK','vD','vN'];
+  var fmts = [function(v){return Math.round(v);},function(v){return(+v).toFixed(2);},function(v){return(+v).toFixed(3);},function(v){return(+v).toFixed(2);},function(v){return Math.round(v);},function(v){return(+v).toFixed(3);}];
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById(ids[i]);
+    el.value = defaults[ids[i]];
+    document.getElementById(vids[i]).textContent = fmts[i](defaults[ids[i]]);
+    el.setAttribute('aria-valuetext', el.getAttribute('aria-label') + ' ' + fmts[i](defaults[ids[i]]));
+  }
+  document.getElementById('btnQuiet').classList.remove('active');
+  document.getElementById('btnNear').classList.remove('active');
+  document.getElementById('btnStrong').classList.remove('active');
+  document.getElementById('presetDesc').textContent = 'Default settings restored. Sliders are at their original values.';
+  resetSim();
+  if (paused) togglePause();
+});
 document.getElementById('btnPause').addEventListener('click', togglePause);
 
 // ---- TABS ----
